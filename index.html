@@ -1,1 +1,1906 @@
-.
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Chicken Strike NPC - Beta v1.5.1</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            user-select: none;
+            touch-action: none;
+        }
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: #000;
+            font-family: 'Arial Black', sans-serif;
+        }
+        #game-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+        }
+        #stage {
+            position: absolute;
+            width: 600vw;
+            height: 100vh;
+            left: 0;
+            background-image: url('Fondo.PNG');
+            background-size: repeat-x;
+            background-position: center;
+            will-change: transform;
+        }
+        /* PANTALLA DE BIENVENIDA Y MENÚ PRINCIPAL */
+        #welcome-screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-image: url('Fondo.PNG'); 
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            z-index: 100;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            overflow-y: auto; 
+            touch-action: pan-y; 
+        }
+        #welcome-screen::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.45);
+            z-index: -1;
+        }
+        #welcome-screen h1 {
+            color: #ffcc00;
+            font-size: 34px;
+            margin-top: 50px;
+            margin-bottom: 5px;
+            text-shadow: 3px 3px #000;
+            letter-spacing: 1px;
+        }
+        #version-tag {
+            background: #ff3333;
+            color: #fff;
+            padding: 4px 12px;
+            font-size: 14px;
+            font-family: Arial, sans-serif;
+            font-weight: bold;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            box-shadow: 0 0 10px rgba(255, 51, 51, 0.6);
+            border: 1px solid #fff;
+        }
+        #welcome-screen p {
+            font-size: 16px;
+            max-width: 85%;
+            line-height: 1.4;
+            margin-bottom: 20px;
+            color: #fff;
+            text-shadow: 2px 2px 4px #000;
+        }
+
+        /* BILLETERA GLOBAL EN EL MENÚ */
+        .menu-wallet {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+            z-index: 102;
+        }
+        .menu-wallet-box {
+            background: rgba(0, 0, 0, 0.75);
+            padding: 6px 12px;
+            border-radius: 15px;
+            border: 2px solid #ffcc00;
+            color: #fff;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            text-shadow: 1px 1px #000;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+        .menu-wallet-box.purple-wallet {
+            border-color: #b026ff;
+        }
+        .menu-wallet-box img {
+            width: 18px;
+            height: 18px;
+        }
+        .menu-wallet-box .coin-spin {
+            animation: spin 4s linear infinite;
+        }
+        
+        /* REGISTRO DE NOMBRE DE USUARIO */
+        #user-setup {
+            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+        #user-setup label {
+            font-size: 14px;
+            color: #00ff00;
+            text-shadow: 1px 1px #000;
+        }
+        #username-input {
+            background: #222;
+            border: 3px solid #ffcc00;
+            color: #fff;
+            padding: 10px 15px;
+            font-size: 16px;
+            border-radius: 10px;
+            text-align: center;
+            font-family: 'Arial', sans-serif;
+            font-weight: bold;
+            pointer-events: auto;
+            width: 220px;
+        }
+        #username-input:focus {
+            outline: none;
+            border-color: #00ff00;
+        }
+
+        /* SECCIÓN DE VERIFICACIÓN (ESTOY LISTO) */
+        #ready-container {
+            background: rgba(0, 0, 0, 0.6);
+            border: 2px solid #ffcc00;
+            padding: 12px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            pointer-events: auto;
+        }
+        #ready-checkbox {
+            width: 22px;
+            height: 22px;
+            cursor: pointer;
+        }
+        #ready-label {
+            font-size: 16px;
+            color: #fff;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* BOTONES DEL MENÚ PRINCIPAL */
+        .menu-btn {
+            color: #000;
+            border: 4px solid #fff;
+            padding: 12px 35px;
+            font-size: 20px;
+            font-family: 'Arial Black', sans-serif;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: transform 0.1s ease;
+            pointer-events: auto;
+            margin-bottom: 12px;
+            width: 260px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+        }
+        .menu-btn:active {
+            transform: scale(0.95);
+        }
+        #start-button {
+            background: #00ff00;
+            box-shadow: 0 5px 15px rgba(0,255,0,0.4);
+            opacity: 0.5; 
+            pointer-events: none;
+        }
+        #exit-button {
+            background: #ff3333;
+            box-shadow: 0 5px 15px rgba(255,51,51,0.4);
+        }
+
+        /* MENÚ INTERMEDIO DE JUEGO */
+        #play-menu-screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-image: linear-gradient(to bottom, #00bfff, #b0e0e6);
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 110;
+            text-align: center;
+            padding: 20px;
+        }
+        #play-menu-screen h1 {
+            color: #ffcc00;
+            font-size: 42px;
+            margin-bottom: 15px;
+            text-shadow: 4px 4px #000;
+            letter-spacing: 1px;
+        }
+        .large-game-btn {
+            width: 85%;
+            max-width: 340px;
+            padding: 18px;
+            font-size: 28px;
+            font-family: 'Arial Black', sans-serif;
+            border-radius: 20px;
+            border: 4px solid #fff;
+            cursor: pointer;
+            margin-bottom: 15px;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.4);
+            transition: transform 0.1s ease;
+            pointer-events: auto;
+        }
+        .large-game-btn:active {
+            transform: scale(0.95);
+        }
+        #jugar-main-btn {
+            background: #00ff00;
+            color: #000;
+        }
+        #tienda-main-btn {
+            background: #ffcc00;
+            color: #000;
+            box-shadow: 0 5px 15px rgba(255,204,0,0.4);
+        }
+        #salir-main-btn {
+            background: #ff3333;
+            color: #fff;
+            font-size: 22px;
+            padding: 12px;
+        }
+
+        /* PANEL DE LA TIENDA OFICIAL TIMECHICKEN */
+        #shop-screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(10, 10, 10, 0.95);
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 130;
+            padding: 20px;
+        }
+        #shop-screen h2 {
+            color: #ffcc00;
+            font-size: 36px;
+            margin-bottom: 5px;
+            text-shadow: 3px 3px #000;
+        }
+        #shop-screen p.shop-subtitle {
+            color: #fff;
+            font-size: 14px;
+            margin-bottom: 10px;
+            font-family: sans-serif;
+        }
+        .shop-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            width: 100%;
+            max-width: 380px;
+            margin-bottom: 20px;
+        }
+        .shop-item {
+            background: #222;
+            border: 3px solid #ffcc00;
+            border-radius: 12px;
+            padding: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+        }
+        .shop-item-info {
+            text-align: left;
+        }
+        .shop-item-title {
+            color: #00ff00;
+            font-size: 16px;
+            margin-bottom: 4px;
+        }
+        .shop-item-desc {
+            color: #ccc;
+            font-size: 11px;
+            font-family: sans-serif;
+            line-height: 1.3;
+        }
+        .shop-buy-btn {
+            background: #b026ff;
+            color: #fff;
+            border: 2px solid #fff;
+            font-family: 'Arial Black', sans-serif;
+            font-size: 12px;
+            padding: 10px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            min-width: 125px;
+            text-align: center;
+        }
+        .shop-buy-btn.owned {
+            background: #555;
+            color: #888;
+            border-color: #444;
+            cursor: not-allowed;
+        }
+        
+        #reset-shop-btn {
+            background: #ff9900;
+            color: #000;
+            border: 3px solid #fff;
+            padding: 8px 20px;
+            font-size: 14px;
+            font-family: 'Arial Black', sans-serif;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 8px rgba(255,153,0,0.3);
+            transition: transform 0.1s;
+        }
+        #reset-shop-btn:active {
+            transform: scale(0.95);
+        }
+
+        #close-shop-btn {
+            background: #ff3333;
+            color: #fff;
+            border: 3px solid #fff;
+            padding: 10px 30px;
+            font-size: 18px;
+            border-radius: 12px;
+            cursor: pointer;
+        }
+
+        /* PANEL DE SELECCIÓN DE NIVEL DE 10 NIVELES (Grid Mejorado) */
+        #level-selection-screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.9);
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 120;
+            padding: 20px;
+            overflow-y: auto;
+        }
+        #level-selection-screen h2 {
+            color: #ffcc00;
+            font-size: 28px;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px #000;
+        }
+        .levels-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 145px);
+            gap: 12px;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .level-select-btn {
+            background: #333;
+            color: #fff;
+            border: 3px solid #ffcc00;
+            padding: 12px;
+            font-size: 14px;
+            font-family: 'Arial Black', sans-serif;
+            border-radius: 12px;
+            cursor: pointer;
+            pointer-events: auto;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            transition: all 0.2s ease;
+        }
+        .level-select-btn span {
+            display: block;
+            font-size: 10px;
+            color: #ffcc00;
+            font-family: sans-serif;
+            margin-top: 3px;
+        }
+        .level-select-btn.locked {
+            background: #1a1a1a;
+            border-color: #555;
+            color: #777;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+        .level-select-btn.locked span {
+            color: #555;
+        }
+        #back-to-menu-btn {
+            background: #888;
+            color: #000;
+            border: 3px solid #fff;
+            padding: 10px 25px;
+            font-size: 16px;
+            border-radius: 10px;
+            cursor: pointer;
+            pointer-events: auto;
+        }
+
+        /* CONFIGURACIÓN MENÚ PRINCIPAL */
+        #settings-toggle-btn {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            border: 2px solid #ffcc00;
+            font-size: 22px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            pointer-events: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            z-index: 110;
+        }
+
+        /* PANEL DE CONFIGURACIONES */
+        #settings-panel {
+            background: rgba(20, 20, 20, 0.98);
+            border: 3px solid #ffcc00;
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 60px;
+            margin-bottom: 20px;
+            width: 310px;
+            display: none;
+            flex-direction: column;
+            gap: 12px;
+            align-items: center;
+            z-index: 105;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.8);
+        }
+        .setting-row {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            gap: 5px;
+            align-items: center;
+        }
+        .setting-row label {
+            font-size: 13px;
+            color: #ffcc00;
+            font-weight: bold;
+        }
+        .setting-select {
+            background: #333;
+            color: #fff;
+            border: 2px solid #555;
+            padding: 6px;
+            border-radius: 6px;
+            width: 95%;
+            font-size: 13px;
+            pointer-events: auto;
+            text-align: center;
+        }
+        .music-panel-btn {
+            width: 95%;
+            padding: 8px;
+            font-size: 12px;
+            font-family: 'Arial Black', sans-serif;
+            border-radius: 6px;
+            border: 2px solid #fff;
+            cursor: pointer;
+            pointer-events: auto;
+            text-align: center;
+            margin-bottom: 2px;
+        }
+        .music-btn-active { background: #00ff00; color: #000; }
+        .music-btn-inactive { background: #444; color: #aaa; border-color: #333; }
+
+        /* CÓDIGOS DE RECOMPENSA */
+        #code-section {
+            border-top: 2px dashed #444;
+            padding-top: 10px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+        }
+        #code-input {
+            background: #000;
+            border: 2px solid #00ff00;
+            color: #00ff00;
+            padding: 6px;
+            font-size: 15px;
+            border-radius: 6px;
+            width: 70%;
+            text-align: center;
+            letter-spacing: 3px;
+            font-family: monospace;
+            pointer-events: auto;
+        }
+        #code-submit-btn {
+            background: #00ff00;
+            color: #000;
+            border: none;
+            padding: 6px 15px;
+            font-size: 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            pointer-events: auto;
+        }
+
+        /* INTERFAZ (UI) */
+        #ui-header {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            right: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 10;
+            pointer-events: none;
+        }
+        .ui-box {
+            background: rgba(0, 0, 0, 0.65);
+            padding: 8px 14px;
+            border-radius: 20px;
+            border: 3px solid #ffcc00;
+            color: #fff;
+            font-size: 16px;
+            text-shadow: 2px 2px #000;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .ui-box img {
+            width: 24px;
+            height: 24px;
+        }
+        #ui-score img {
+            animation: spin 4s linear infinite;
+        }
+
+        /* BOTÓN DE PAUSA EN EL NIVEL (ENGRANAJE) */
+        #ingame-pause-btn {
+            background: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            border: 2px solid #ffcc00;
+            font-size: 20px;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            cursor: pointer;
+            pointer-events: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+
+        /* PANTALLA DE MENÚ DE PAUSA DENTRO DEL NIVEL */
+        #pause-overlay-screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.85);
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 140;
+            padding: 20px;
+        }
+        #pause-overlay-screen h2 {
+            color: #ffcc00;
+            font-size: 34px;
+            margin-bottom: 25px;
+            text-shadow: 3px 3px #000;
+        }
+        .pause-menu-row {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            width: 100%;
+            max-width: 280px;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+        .pause-action-btn {
+            width: 100%;
+            padding: 12px;
+            font-size: 18px;
+            font-family: 'Arial Black', sans-serif;
+            border-radius: 12px;
+            border: 3px solid #fff;
+            cursor: pointer;
+            pointer-events: auto;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+        }
+        #pause-continue-btn {
+            background: #00ff00;
+            color: #000;
+        }
+        #pause-quit-btn {
+            background: #ff3333;
+            color: #fff;
+        }
+        .audio-toggles-container {
+            display: flex;
+            gap: 15px;
+            width: 100%;
+            max-width: 280px;
+            justify-content: space-between;
+        }
+        .audio-toggle-btn {
+            flex: 1;
+            padding: 10px;
+            font-size: 12px;
+            font-family: 'Arial Black', sans-serif;
+            border-radius: 8px;
+            border: 2px solid #fff;
+            cursor: pointer;
+            pointer-events: auto;
+            text-align: center;
+            color: #000;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.3);
+        }
+        .audio-active {
+            background: #00ff00; 
+        }
+        .audio-muted {
+            background: #555; 
+            color: #aaa;
+            border-color: #333;
+        }
+
+        /* VENTANA FLOTANTE DE SUSCRIPCIÓN REBALACEADA */
+        #subscribe-popup {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            width: 320px;
+            background: rgba(15, 15, 15, 0.98);
+            border: 4px solid #ff0000;
+            border-radius: 20px;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            z-index: 150;
+            box-shadow: 0 0 25px rgba(255,0,0,0.7);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            pointer-events: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+        #subscribe-popup h2 {
+            color: #ff0000;
+            margin: 0;
+            font-size: 22px;
+            text-shadow: 2px 2px #000;
+        }
+        #subscribe-popup p {
+            font-size: 14px;
+            margin: 0;
+            line-height: 1.4;
+            font-family: sans-serif;
+        }
+        .popup-btn-container {
+            display: flex;
+            gap: 15px;
+            width: 100%;
+            justify-content: center;
+        }
+        .popup-btn {
+            padding: 10px 25px;
+            font-size: 16px;
+            font-family: 'Arial Black', sans-serif;
+            border-radius: 10px;
+            border: 2px solid #fff;
+            cursor: pointer;
+        }
+        #sub-yes-btn {
+            background: #00ff00;
+            color: #000;
+        }
+        #sub-no-btn {
+            background: #ff3333;
+            color: #fff;
+        }
+
+        /* CARTEL DE RECOMPENSA */
+        #announcement {
+            position: absolute;
+            top: 30%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            color: #fff;
+            font-size: 32px;
+            text-align: center;
+            text-shadow: 4px 4px #000;
+            background: rgba(0, 0, 0, 0.85);
+            padding: 20px 40px;
+            border-radius: 15px;
+            border: 5px solid #00ff00;
+            z-index: 15;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            pointer-events: none;
+        }
+        .target {
+            position: absolute;
+            width: 110px;
+            height: auto;
+            transform: translate(-50%, -50%);
+            z-index: 3;
+            pointer-events: none;
+        }
+        #crosshair {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 60px;
+            height: 60px;
+            background-image: url('Mira.PNG');
+            background-size: contain;
+            background-repeat: no-repeat;
+            transform: translate(-50%, -50%);
+            pointer-events: none !important;
+            z-index: 8;
+        }
+        #weapon-container {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 280px;
+            height: auto;
+            pointer-events: auto;
+            cursor: pointer;
+            z-index: 9;
+            transition: transform 0.05s ease;
+        }
+        #weapon {
+            width: 100%;
+            height: auto;
+            display: block;
+            pointer-events: none;
+        }
+        @keyframes spin {
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+
+    <audio id="audio-music" src="Music.mp3" loop></audio>
+    <audio id="audio-pistola" src="Pistola.mp3"></audio>
+    <audio id="audio-boton" src="Boton.mp3"></audio>
+
+    <div id="subscribe-popup">
+        <h2>📢 ¡SÚPER PROMO!</h2>
+        <p>¡Suscríbete al canal oficial de <b>Mr.Jostin</b>!<br>Cuesta exactamente <b>3,600 monedas</b> y <b>3 CoinCG</b> 🟣 del juego.</p>
+        <div class="popup-btn-container">
+            <button id="sub-yes-btn" class="popup-btn">SÍ</button>
+            <button id="sub-no-btn" class="popup-btn">NO</button>
+        </div>
+    </div>
+
+    <button id="settings-toggle-btn">⚙️</button>
+
+    <div id="welcome-screen">
+        <div id="settings-panel">
+            <div class="setting-row">
+                <label>OPCIONES DE MÚSICA / AUDIO:</label>
+                <button id="music-btn-normal" class="music-panel-btn music-btn-active">Música Normal 🎵</button>
+                <button id="music-btn-2" class="music-panel-btn music-btn-inactive">Música 2.0 ⚡</button>
+                <button id="music-btn-voice" class="music-panel-btn music-btn-inactive">Música 2.0 VoiceOver 🎤</button>
+            </div>
+
+            <div class="setting-row">
+                <label id="label-lang">IDIOMA / LANGUAGE:</label>
+                <select id="lang-select" class="setting-select">
+                    <option value="es">Español</option>
+                    <option value="en">English (Inglés)</option>
+                    <option value="fr">Français (Francés)</option>
+                    <option value="pt">Português (Portugués)</option>
+                    <option value="ru">Русский (Ruso)</option>
+                    <option value="de">Deutsch (Alemán)</option>
+                    <option value="es-la">Español Latinoamericano</option>
+                    <option value="es-es">Español de España</option>
+                    <option value="tr">Türkçe (Turco)</option>
+                    <option value="ar">العربية (Árabe)</option>
+                    <option value="hi">हिन्दी (Indio)</option>
+                    <option value="ja">日本語 (Japonés)</option>
+                    <option value="ko">한국어 (Coreano)</option>
+                </select>
+            </div>
+
+            <div id="code-section">
+                <label id="label-code">CÓDIGO DE MONEDAS:</label>
+                <input type="text" id="code-input" placeholder="Introduce código" maxlength="15">
+                <button id="code-submit-btn">ACEPTAR</button>
+            </div>
+        </div>
+
+        <h1 id="welcome-title">CHICKEN STRIKE NPC</h1>
+        <div id="version-tag">1.5.1 Beta</div>
+        <p id="welcome-desc">¡Bienvenido! Esta es una versión beta oficial del juego, por lo que podría contener algunos errores y bugs en el mapa durante el desarrollo en la plataforma MrTube.<br>Diseñado por ABG Productions® y Sprunki Animations Studios.</p>
+        
+        <div class="menu-wallet">
+            <div class="menu-wallet-box">
+                <img src="Moneda.PNG" alt="Moneda" class="coin-spin">
+                <span id="menu-score-text-1">0</span>
+            </div>
+            <div class="menu-wallet-box purple-wallet">
+                <img src="CoinCG.PNG" alt="CoinCG">
+                <span id="menu-coincg-text-1">0</span>
+            </div>
+        </div>
+
+        <div id="user-setup">
+            <label id="label-username" for="username-input">INGRESA TU NOMBRE DE PILOTO:</label>
+            <input type="text" id="username-input" placeholder="Ej: Pepe" maxlength="15">
+        </div>
+
+        <div id="ready-container">
+            <input type="checkbox" id="ready-checkbox">
+            <label for="ready-checkbox" id="ready-label">Estoy listo</label>
+        </div>
+
+        <button id="start-button" class="menu-btn">EMPEZAR A PROBAR</button>
+        <button id="exit-button" class="menu-btn">SALIR DEL JUEGO</button>
+    </div>
+
+    <div id="play-menu-screen">
+        <h1>CHICKEN STRIKE<br>NPC</h1>
+
+        <div class="menu-wallet">
+            <div class="menu-wallet-box">
+                <img src="Moneda.PNG" alt="Moneda" class="coin-spin">
+                <span id="menu-score-text-2">0</span>
+            </div>
+            <div class="menu-wallet-box purple-wallet">
+                <img src="CoinCG.PNG" alt="CoinCG">
+                <span id="menu-coincg-text-2">0</span>
+            </div>
+        </div>
+
+        <button id="jugar-main-btn" class="large-game-btn">Jugar</button>
+        <button id="tienda-main-btn" class="large-game-btn">Tienda</button>
+        <button id="salir-main-btn" class="large-game-btn">Salir del Juego</button>
+    </div>
+
+    <div id="shop-screen">
+        <h2>TimeChicken</h2>
+        <p class="shop-subtitle">Decoraciones de Armas y Súper Mejoras Especiales</p>
+        
+        <div class="menu-wallet">
+            <div class="menu-wallet-box">
+                <img src="Moneda.PNG" alt="Moneda" class="coin-spin">
+                <span id="menu-score-text-3">0</span>
+            </div>
+            <div class="menu-wallet-box purple-wallet">
+                <img src="CoinCG.PNG" alt="CoinCG">
+                <span id="menu-coincg-text-3">0</span>
+            </div>
+        </div>
+
+        <div class="shop-container">
+            <div class="shop-item">
+                <div class="shop-item-info">
+                    <div class="shop-item-title">Mejora 10.1 (Decorar Arma)</div>
+                    <div class="shop-item-desc">Dispara ráfagas continuas de balas muy rápido. Además activa Mejora 20 en Nivel 4 (NPCs se duplican por más monedas).</div>
+                </div>
+                <button id="buy-upgrade-1" class="shop-buy-btn" onclick="buyUpgrade(1, 1100, 10)">1100 🟡 + 10 🟣</button>
+            </div>
+
+            <div class="shop-item">
+                <div class="shop-item-info">
+                    <div class="shop-item-title">Mejora 20.2 (Decorar Arma)</div>
+                    <div class="shop-item-desc">En el Nivel 2, la ganancia base de 7 monedas se multiplica por 7 (49 monedas por baja).</div>
+                </div>
+                <button id="buy-upgrade-2" class="shop-buy-btn" onclick="buyUpgrade(2, 2200, 20)">2200 🟡 + 20 🟣</button>
+            </div>
+
+            <div class="shop-item">
+                <div class="shop-item-info">
+                    <div class="shop-item-title">Mejora 30.3 (Decorar Arma)</div>
+                    <div class="shop-item-desc">Último nivel: NPCs veloces en grupos de 3. ¡Si disparas a uno, mueren los 3 y te da 500 monedas!</div>
+                </div>
+                <button id="buy-upgrade-3" class="shop-buy-btn" onclick="buyUpgrade(3, 3300, 30)">3300 🟡 + 30 🟣</button>
+            </div>
+        </div>
+        
+        <button id="reset-shop-btn" onclick="resetShopUpgrades()">🔄 REINICIAR COMPRAS</button>
+        <button id="close-shop-btn">VOLVER AL MENÚ</button>
+    </div>
+
+    <div id="level-selection-screen">
+        <h2>SELECCIONA UN NIVEL</h2>
+
+        <div class="menu-wallet">
+            <div class="menu-wallet-box">
+                <img src="Moneda.PNG" alt="Moneda" class="coin-spin">
+                <span id="menu-score-text-4">0</span>
+            </div>
+            <div class="menu-wallet-box purple-wallet">
+                <img src="CoinCG.PNG" alt="CoinCG">
+                <span id="menu-coincg-text-4">0</span>
+            </div>
+        </div>
+
+        <div class="levels-grid">
+            <button class="level-select-btn" data-lvl="1">Nivel 1 <span>+1c por NPC</span></button>
+            <button class="level-select-btn locked" data-lvl="2" disabled>Nivel 2 <span>+7c por NPC</span></button>
+            <button class="level-select-btn locked" data-lvl="3" disabled>Nivel 3 <span>+10c por NPC</span></button>
+            <button class="level-select-btn locked" data-lvl="4" disabled>Nivel 4 <span>+20c por NPC</span></button>
+            <button class="level-select-btn locked" data-lvl="5" disabled>Nivel 5 <span>+30c por NPC</span></button>
+            <button class="level-select-btn locked" data-lvl="6" disabled>Nivel 6 <span>+40c por NPC</span></button>
+            <button class="level-select-btn locked" data-lvl="7" disabled>Nivel 7 <span>Varía</span></button>
+            <button class="level-select-btn locked" data-lvl="8" disabled>Nivel 8 <span>Varía</span></button>
+            <button class="level-select-btn locked" data-lvl="9" disabled>Nivel 9 <span>+50k por NPC</span></button>
+            <button class="level-select-btn locked" data-lvl="10" disabled>Nivel 10 <span>+1M por NPC</span></button>
+        </div>
+        <button id="back-to-menu-btn">VOLVER AL MENÚ</button>
+    </div>
+
+    <div id="pause-overlay-screen">
+        <h2>JUEGO PAUSADO</h2>
+        <div class="pause-menu-row">
+            <button id="pause-continue-btn" class="pause-action-btn">Continuar</button>
+            <button id="pause-quit-btn" class="pause-action-btn">Volver a menú</button>
+        </div>
+        <div class="audio-toggles-container">
+            <button id="toggle-music-btn" class="audio-toggle-btn audio-active">Silenciar Música</button>
+            <button id="toggle-sound-btn" class="audio-toggle-btn audio-active">Silenciar Sonido</button>
+        </div>
+    </div>
+
+    <div id="game-container">
+        <div id="stage"></div>
+
+        <div id="ui-header">
+            <div style="display: flex; flex-direction: column; gap: 5px;">
+                <div class="ui-box" id="ui-score">
+                    <img src="Moneda.PNG" alt="Moneda">
+                    <span id="score-text">0.0</span>
+                </div>
+                <div class="ui-box" id="ui-coincg">
+                    <img src="CoinCG.PNG" alt="CoinCG">
+                    <span id="coincg-text">0</span>
+                </div>
+            </div>
+            
+            <button id="ingame-pause-btn">⚙️</button>
+
+            <div style="display: flex; flex-direction: column; gap: 5px; align-items: flex-end;">
+                <div class="ui-box" id="ui-level">
+                    <span id="label-ui-level">Nivel</span>: <span id="level-text">1</span>
+                </div>
+                <div class="ui-box" id="ui-kills">
+                    <span id="label-ui-targets">Objetivos</span>: <span id="kills-text">0/5</span>
+                </div>
+                <div class="ui-box" id="ui-last-coins" style="border-color: #00ff00; font-size: 13px; padding: 4px 10px;">
+                    <span>Último NPC</span>: +<span id="last-coins-text" style="color: #00ff00;">0</span> 🟡
+                </div>
+            </div>
+        </div>
+
+        <div id="announcement"></div>
+        <div id="crosshair"></div>
+
+        <div id="weapon-container">
+            <img id="weapon" src="Manos.PNG" alt="Arma">
+        </div>
+    </div>
+
+    <script>
+        const stage = document.getElementById('stage');
+        const scoreText = document.getElementById('score-text');
+        const coincgText = document.getElementById('coincg-text');
+        const levelText = document.getElementById('level-text');
+        const killsText = document.getElementById('kills-text');
+        const lastCoinsText = document.getElementById('last-coins-text');
+        const announcement = document.getElementById('announcement');
+        const weaponContainer = document.getElementById('weapon-container');
+        const weaponImage = document.getElementById('weapon');
+        
+        const welcomeScreen = document.getElementById('welcome-screen');
+        const playMenuScreen = document.getElementById('play-menu-screen');
+        const shopScreen = document.getElementById('shop-screen');
+        const levelSelectionScreen = document.getElementById('level-selection-screen');
+        
+        const ingamePauseBtn = document.getElementById('ingame-pause-btn');
+        const pauseOverlayScreen = document.getElementById('pause-overlay-screen');
+        const pauseContinueBtn = document.getElementById('pause-continue-btn');
+        const pauseQuitBtn = document.getElementById('pause-quit-btn');
+        const toggleMusicBtn = document.getElementById('toggle-music-btn');
+        const toggleSoundBtn = document.getElementById('toggle-sound-btn');
+
+        const startButton = document.getElementById('start-button');
+        const exitButton = document.getElementById('exit-button');
+        const readyCheckbox = document.getElementById('ready-checkbox');
+        
+        const jugarMainBtn = document.getElementById('jugar-main-btn');
+        const tiendaMainBtn = document.getElementById('tienda-main-btn');
+        const salirMainBtn = document.getElementById('salir-main-btn');
+        const closeShopBtn = document.getElementById('close-shop-btn');
+        const backToMenuBtn = document.getElementById('back-to-menu-btn');
+        const levelButtons = document.querySelectorAll('.level-select-btn');
+
+        const subscribePopup = document.getElementById('subscribe-popup');
+        const subYesBtn = document.getElementById('sub-yes-btn');
+        const subNoBtn = document.getElementById('sub-no-btn');
+        
+        const usernameInput = document.getElementById('username-input');
+        const settingsToggleBtn = document.getElementById('settings-toggle-btn');
+        const settingsPanel = document.getElementById('settings-panel');
+        const langSelect = document.getElementById('lang-select');
+        const codeInput = document.getElementById('code-input');
+        const codeSubmitBtn = document.getElementById('code-submit-btn');
+
+        // Botones del panel de música avanzada
+        const musicBtnNormal = document.getElementById('music-btn-normal');
+        const musicBtn2 = document.getElementById('music-btn-2');
+        const musicBtnVoice = document.getElementById('music-btn-voice');
+
+        const audioMusic = document.getElementById('audio-music');
+        const audioPistola = document.getElementById('audio-pistola');
+        const audioBoton = document.getElementById('audio-boton');
+
+        const levelsConfig = {
+            1: { targets: 5, speed: 1.8, coinsPerKill: 1, reward: 25 },
+            2: { targets: 10, speed: 2.6, coinsPerKill: 7, reward: 50 },
+            3: { targets: 15, speed: 3.2, coinsPerKill: 10, reward: 100 },
+            4: { targets: 20, speed: 3.8, coinsPerKill: 20, reward: 200 },
+            5: { targets: 25, speed: 4.4, coinsPerKill: 30, reward: 300 },
+            6: { targets: 40, speed: 5.2, coinsPerKill: 40, reward: 500 },
+            7: { targets: 60, speed: 6.8, coinsPerKill: 0, reward: (9600 * 100) }, 
+            8: { targets: 90, speed: 3.5, coinsPerKill: 0, reward: (100000 * 9000) },
+            9: { targets: 120, speed: 7.5, coinsPerKill: 50000, reward: 5000000000 }, 
+            10: { targets: 150, speed: 9.0, coinsPerKill: 1000000, reward: 10000000000000 } 
+        };
+
+        let score = 0;
+        let coinCG = 0; 
+        let kills = 0;
+        let currentLevel = 1;
+        let maxUnlockedLevel = 1;
+        let stageX = 0;
+        let gameStarted = false;
+        let gamePaused = false; 
+        let currentUsername = "";
+        let popupTriggered = false; 
+        let activeNPCIntervals = [];
+        
+        let scrollSpeed = 1.8; 
+        let savedSpeedBeforePause = 1.8; 
+        const maxNPCs = 10;
+        const distanceBetweenNPCs = 350;
+
+        let upgradesOwned = { 1: false, 2: false, 3: false };
+        let lastShotTime = 0;
+        let shootCooldown = 400; 
+
+        let isMusicMuted = false;
+        let isSoundMuted = false;
+        let currentMusicTrack = "normal"; // normal, 2.0, voice
+
+        function formatearMonedas(cantidad) {
+            if (cantidad >= 1000000000000) {
+                return (cantidad / 1000000000000).toFixed(1) + " T";
+            } else if (cantidad >= 1000000000) {
+                return (cantidad / 1000000000).toFixed(1) + " B";
+            } else if (cantidad >= 1000000) {
+                return (cantidad / 1000000).toFixed(1) + " M";
+            } else {
+                return cantidad.toLocaleString();
+            }
+        }
+
+        function actualizarTextoMonedas() {
+            scoreText.textContent = formatearMonedas(score);
+            coincgText.textContent = coinCG;
+
+            const formatted = formatearMonedas(score);
+            for (let i = 1; i <= 4; i++) {
+                let mScore = document.getElementById(`menu-score-text-${i}`);
+                let mCoin = document.getElementById(`menu-coincg-text-${i}`);
+                if (mScore) mScore.textContent = formatted;
+                if (mCoin) mCoin.textContent = coinCG;
+            }
+        }
+
+        function playSoundBoton() {
+            if (isSoundMuted && gameStarted) return; 
+            audioBoton.currentTime = 0;
+            audioBoton.play().catch(e => console.log("Audio blocked"));
+        }
+
+        function playSoundPistola() {
+            if (isSoundMuted && gameStarted) return; 
+            audioPistola.currentTime = 0;
+            audioPistola.play().catch(e => console.log("Audio blocked"));
+        }
+
+        function changeMusicTrack(trackType) {
+            if (trackType === "normal") {
+                audioMusic.src = "Music.mp3";
+                musicBtnNormal.className = "music-panel-btn music-btn-active";
+                musicBtn2.className = "music-panel-btn music-btn-inactive";
+                musicBtnVoice.className = "music-panel-btn music-btn-inactive";
+            } else if (trackType === "2.0") {
+                audioMusic.src = "Music3.mp3";
+                musicBtnNormal.className = "music-panel-btn music-btn-inactive";
+                musicBtn2.className = "music-panel-btn music-btn-active";
+                musicBtnVoice.className = "music-panel-btn music-btn-inactive";
+            } else if (trackType === "voice") {
+                audioMusic.src = "Music2.mp3";
+                musicBtnNormal.className = "music-panel-btn music-btn-inactive";
+                musicBtn2.className = "music-panel-btn music-btn-inactive";
+                musicBtnVoice.className = "music-panel-btn music-btn-active";
+            }
+            currentMusicTrack = trackType;
+            if (!isMusicMuted) {
+                audioMusic.currentTime = 0;
+                audioMusic.play().catch(e => console.log("Track swap blocked"));
+            }
+        }
+
+        musicBtnNormal.addEventListener('click', () => { playSoundBoton(); changeMusicTrack("normal"); });
+        musicBtn2.addEventListener('click', () => { playSoundBoton(); changeMusicTrack("2.0"); });
+        musicBtnVoice.addEventListener('click', () => { playSoundBoton(); changeMusicTrack("voice"); });
+
+        if(localStorage.getItem('cs_saved_username')) {
+            currentUsername = localStorage.getItem('cs_saved_username');
+            usernameInput.value = currentUsername;
+            loadPlayerProgress(currentUsername);
+        } else {
+            actualizarTextoMonedas();
+        }
+
+        usernameInput.addEventListener('input', () => {
+            let name = usernameInput.value.trim();
+            if (name.toLowerCase() === "mr.jostin" && name !== "Mr.Jostin") {
+                alert("❌ ¡Este nombre tiene derechos de autor del Creador!");
+                usernameInput.value = "";
+                currentUsername = "";
+                return;
+            }
+
+            if(name !== "") {
+                let oldName = localStorage.getItem('cs_saved_username') || "";
+                if (oldName !== "" && oldName !== name && name !== "Mr.Jostin") {
+                    let changeCount = parseInt(localStorage.getItem('cs_name_changes_' + oldName) || "0");
+                    if (changeCount >= 1) {
+                        if (score < 1000) {
+                            alert("❌ Necesitas 1000 monedas para cambiar tu nombre de usuario de nuevo.");
+                            usernameInput.value = oldName;
+                            return;
+                        } else {
+                            score -= 1000;
+                            actualizarTextoMonedas();
+                            alert("💰 Se han descontado 1000 monedas por cambio de nombre.");
+                            changeCount++;
+                            localStorage.setItem('cs_name_changes_' + name, changeCount);
+                        }
+                    } else {
+                        changeCount++;
+                        localStorage.setItem('cs_name_changes_' + name, changeCount);
+                    }
+                }
+
+                currentUsername = name;
+                localStorage.setItem('cs_saved_username', currentUsername);
+                loadPlayerProgress(currentUsername);
+            }
+        });
+
+        function loadPlayerProgress(name) {
+            if(name.toLowerCase() === "mr.jostin" && name !== "Mr.Jostin") return;
+
+            let savedScore = localStorage.getItem('cs_score_' + name);
+            let savedCoinCG = localStorage.getItem('cs_coincg_' + name);
+            let savedMaxLevel = localStorage.getItem('cs_max_level_' + name);
+            
+            if(savedScore !== null) score = parseInt(savedScore);
+            else score = 0;
+
+            if(savedCoinCG !== null) coinCG = parseInt(savedCoinCG);
+            else coinCG = 0;
+
+            actualizarTextoMonedas();
+
+            if(savedMaxLevel !== null) maxUnlockedLevel = parseInt(savedMaxLevel);
+            else maxUnlockedLevel = 1;
+
+            [1, 2, 3].forEach(id => {
+                let savedUpgrade = localStorage.getItem(`cs_upgrade_${id}_` + name);
+                if (savedUpgrade === "true") upgradesOwned[id] = true;
+                else upgradesOwned[id] = false;
+            });
+
+            updateLevelButtonsUI();
+            updateShopButtonsUI();
+            checkSubscriptionTrigger();
+        }
+
+        function savePlayerProgress() {
+            if (currentUsername !== "") {
+                localStorage.setItem('cs_score_' + currentUsername, score);
+                localStorage.setItem('cs_coincg_' + currentUsername, coinCG);
+                localStorage.setItem('cs_max_level_' + currentUsername, maxUnlockedLevel);
+                [1, 2, 3].forEach(id => {
+                    localStorage.setItem(`cs_upgrade_${id}_` + currentUsername, upgradesOwned[id]);
+                });
+            }
+            checkSubscriptionTrigger();
+        }
+
+        function updateLevelButtonsUI() {
+            levelButtons.forEach(btn => {
+                let lvl = parseInt(btn.dataset.lvl);
+                if(lvl <= maxUnlockedLevel) {
+                    btn.classList.remove('locked');
+                    btn.removeAttribute('disabled');
+                } else {
+                    btn.classList.add('locked');
+                    btn.setAttribute('disabled', 'true');
+                }
+            });
+        }
+
+        function updateShopButtonsUI() {
+            [1, 2, 3].forEach(id => {
+                const btn = document.getElementById(`buy-upgrade-${id}`);
+                if (btn) {
+                    if (upgradesOwned[id]) {
+                        btn.textContent = "Comprado";
+                        btn.classList.add('owned');
+                    } else {
+                        btn.classList.remove('owned');
+                        if(id === 1) btn.textContent = "1100 🟡 + 10 🟣";
+                        if(id === 2) btn.textContent = "2200 🟡 + 20 🟣";
+                        if(id === 3) btn.textContent = "3300 🟡 + 30 🟣";
+                    }
+                }
+            });
+        }
+
+        function buyUpgrade(id, costCoins, costCoinCG) {
+            playSoundBoton();
+            if (currentUsername === "") {
+                alert("Por favor, ingresa tu nombre de piloto primero.");
+                return;
+            }
+            if (upgradesOwned[id]) {
+                alert("¡Ya compraste y decoraste tu arma con esta mejora!");
+                return;
+            }
+            if (score >= costCoins && coinCG >= costCoinCG) {
+                score -= costCoins;
+                coinCG -= costCoinCG;
+                upgradesOwned[id] = true;
+                actualizarTextoMonedas();
+                savePlayerProgress();
+                updateShopButtonsUI();
+                alert(`🎉 ¡Compraste la Súper Mejora con éxito! Tu arma ha sido decorada.`);
+            } else {
+                alert("❌ No tienes suficientes Monedas o CoinCG in tu billetera.");
+            }
+        }
+
+        function resetShopUpgrades() {
+            playSoundBoton();
+            if (currentUsername === "") {
+                alert("Ingresa un nombre de piloto primero.");
+                return;
+            }
+
+            let refundCoins = 0;
+            let refundCoinCG = 0;
+            if (upgradesOwned[1]) { refundCoins += 1100; refundCoinCG += 10; }
+            if (upgradesOwned[2]) { refundCoins += 2200; refundCoinCG += 20; }
+            if (upgradesOwned[3]) { refundCoins += 3300; refundCoinCG += 30; }
+
+            if (refundCoinCG === 0 && refundCoins === 0) {
+                alert("❌ No tienes ninguna mejora activa para reiniciar.");
+                return;
+            }
+
+            let confirmReset = confirm(`¿Quieres reiniciar tus mejoras? Se te devolverán ${refundCoins} monedas y ${refundCoinCG} CoinCG.`);
+            if (confirmReset) {
+                score += refundCoins;
+                coinCG += refundCoinCG;
+                actualizarTextoMonedas();
+                
+                upgradesOwned[1] = false;
+                upgradesOwned[2] = false;
+                upgradesOwned[3] = false;
+                
+                weaponImage.src = 'Manos.PNG';
+                shootCooldown = 400;
+
+                savePlayerProgress();
+                updateShopButtonsUI();
+                alert("🔄 ¡Compras reiniciadas con éxito!");
+            }
+        }
+
+        readyCheckbox.addEventListener('change', () => {
+            playSoundBoton();
+            if (readyCheckbox.checked) {
+                startButton.style.opacity = "1";
+                startButton.style.pointerEvents = "auto";
+            } else {
+                startButton.style.opacity = "0.5";
+                startButton.style.pointerEvents = "none";
+            }
+        });
+
+        exitButton.addEventListener('click', () => {
+            playSoundBoton();
+            window.location.reload();
+        });
+
+        settingsToggleBtn.addEventListener('click', () => {
+            playSoundBoton();
+            if(settingsPanel.style.display === "none" || settingsPanel.style.display === "") {
+                settingsPanel.style.display = "flex";
+            } else {
+                settingsPanel.style.display = "none";
+            }
+        });
+
+        codeSubmitBtn.addEventListener('click', () => {
+            playSoundBoton();
+            // Convertir a mayúsculas para evitar problemas de escritura
+            let inputCode = codeInput.value.trim().toUpperCase();
+            if(currentUsername === "") {
+                alert("Por favor, introduce un nombre primero antes de usar un código.");
+                return;
+            }
+
+            // Base de datos de códigos con sus respectivos tipos de recompensa
+            let rewards = { 
+                "328": { amount: 50, type: "coins" }, 
+                "589": { amount: 200, type: "coins" }, 
+                "194": { amount: 70, type: "coins" }, 
+                "MJ8": { amount: 800, type: "coins" },
+                "M18": { amount: 1000, type: "coins" }, 
+                "184": { amount: 500, type: "coins" }, 
+                "900": { amount: 9000, type: "coins" }, 
+                "50M": { amount: 50000000, type: "coins" },
+                // NUEVOS CÓDIGOS PARA COINCG (NO CADUCAN)
+                "MRT": { amount: 60, type: "coincg" },
+                "ABG": { amount: 100, type: "coincg" },
+                "15A": { amount: 15, type: "coincg" },
+                "67X": { amount: 67, type: "coincg" }
+            };
+
+            if(rewards[inputCode] !== undefined) {
+                let rewardData = rewards[inputCode];
+                let rewardAmount = rewardData.amount;
+                let rewardType = rewardData.type;
+
+                if(currentUsername === "Mr.Jostin") {
+                    if (rewardType === "coins") {
+                        score += rewardAmount;
+                        alert(`👑 ¡Acceso Creador! Código válido. Se añadieron +${formatearMonedas(rewardAmount)} monedas.`);
+                    } else if (rewardType === "coincg") {
+                        coinCG += rewardAmount;
+                        alert(`👑 ¡Acceso Creador! Código válido. Se añadieron +${rewardAmount} CoinCG 🟣.`);
+                    }
+                    actualizarTextoMonedas();
+                    savePlayerProgress();
+                    codeInput.value = "";
+                } else {
+                    let codeUsed = localStorage.getItem(`cs_code_${inputCode}_` + currentUsername);
+                    if(codeUsed === "true") {
+                        alert("❌ Este código ya fue utilizado por este usuario.");
+                    } else {
+                        if (rewardType === "coins") {
+                            score += rewardAmount;
+                            alert(`✅ ¡Código Aceptado! Has ganado +${formatearMonedas(rewardAmount)} monedas.`);
+                        } else if (rewardType === "coincg") {
+                            coinCG += rewardAmount;
+                            alert(`✅ ¡Código Aceptado! Has ganado +${rewardAmount} CoinCG 🟣.`);
+                        }
+                        actualizarTextoMonedas();
+                        localStorage.setItem(`cs_code_${inputCode}_` + currentUsername, "true");
+                        savePlayerProgress();
+                        codeInput.value = "";
+                    }
+                }
+            } else {
+                alert("❌ Código incorrecto o inválido.");
+            }
+        });
+
+        function checkSubscriptionTrigger() {
+            if (score >= 3600 && coinCG >= 3 && !popupTriggered) {
+                popupTriggered = true;
+                subscribePopup.style.transform = "translate(-50%, -50%) scale(1)";
+            }
+        }
+
+        subYesBtn.addEventListener('click', () => {
+            playSoundBoton();
+            if (score >= 3600 && coinCG >= 3) {
+                score -= 3600;
+                coinCG -= 3;
+                actualizarTextoMonedas();
+                savePlayerProgress();
+                subscribePopup.style.transform = "translate(-50%, -50%) scale(0)";
+                alert("🚀 ¡Redireccionando al canal oficial del Creador!");
+                window.open("https://youtube.com/@mr.jostin_oficial?si=JB-zmX5c7fRFRtq0", "_blank");
+            } else {
+                alert("No cumples con los requisitos: 3,600 monedas comunes y 3 CoinCG.");
+                subscribePopup.style.transform = "translate(-50%, -50%) scale(0)";
+            }
+        });
+
+        subNoBtn.addEventListener('click', () => {
+            playSoundBoton();
+            subscribePopup.style.transform = "translate(-50%, -50%) scale(0)";
+        });
+
+        startButton.addEventListener('click', () => {
+            playSoundBoton();
+            let finalName = usernameInput.value.trim();
+            if (finalName.toLowerCase() === "mr.jostin" && finalName !== "Mr.Jostin") {
+                alert("❌ Bloqueo de seguridad: No puedes usar el nombre del Creador.");
+                return;
+            }
+
+            if (!readyCheckbox.checked) {
+                alert("❌ Debes activar la casilla 'Estoy listo' primero.");
+                return;
+            }
+
+            if (!isMusicMuted) audioMusic.play().catch(e => console.log("Música iniciada."));
+
+            if(finalName === "") {
+                currentUsername = "Player";
+                localStorage.setItem('cs_saved_username', currentUsername);
+            } else {
+                currentUsername = finalName;
+            }
+            savePlayerProgress();
+
+            welcomeScreen.style.display = 'none';
+            playMenuScreen.style.display = 'flex'; 
+        });
+
+        jugarMainBtn.addEventListener('click', () => {
+            playSoundBoton();
+            playMenuScreen.style.display = 'none';
+            levelSelectionScreen.style.display = 'flex';
+            settingsToggleBtn.style.display = 'none'; 
+            updateLevelButtonsUI();
+        });
+
+        tiendaMainBtn.addEventListener('click', () => {
+            playSoundBoton();
+            playMenuScreen.style.display = 'none';
+            shopScreen.style.display = 'flex';
+            settingsToggleBtn.style.display = 'none'; 
+            updateShopButtonsUI();
+        });
+
+        closeShopBtn.addEventListener('click', () => {
+            playSoundBoton();
+            shopScreen.style.display = 'none';
+            playMenuScreen.style.display = 'flex';
+            settingsToggleBtn.style.display = 'flex'; 
+        });
+
+        salirMainBtn.addEventListener('click', () => {
+            playSoundBoton();
+            window.location.reload();
+        });
+
+        backToMenuBtn.addEventListener('click', () => {
+            playSoundBoton();
+            levelSelectionScreen.style.display = 'none';
+            playMenuScreen.style.display = 'flex';
+            settingsToggleBtn.style.display = 'flex'; 
+        });
+
+        levelButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                playSoundBoton();
+                let selectedLvl = parseInt(btn.dataset.lvl);
+                startLevel(selectedLvl);
+            });
+        });
+
+        function startLevel(lvl) {
+            levelSelectionScreen.style.display = 'none';
+            settingsToggleBtn.style.display = 'none'; 
+            currentLevel = lvl;
+            kills = 0;
+            gamePaused = false;
+            
+            scrollSpeed = levelsConfig[lvl].speed;
+            
+            if (currentLevel === 6 && upgradesOwned[3]) {
+                scrollSpeed = 8.5; 
+            }
+
+            if (upgradesOwned[3]) {
+                weaponImage.src = 'Manos_Mejora3.PNG';
+            } else if (upgradesOwned[2]) {
+                weaponImage.src = 'Manos_Mejora2.PNG';
+            } else if (upgradesOwned[1]) {
+                weaponImage.src = 'Manos_Mejora1.PNG';
+            } else {
+                weaponImage.src = 'Manos.PNG';
+            }
+
+            if (upgradesOwned[1]) {
+                shootCooldown = 60; 
+            } else {
+                shootCooldown = 400; 
+            }
+            
+            levelText.textContent = currentLevel;
+            killsText.textContent = `0/${levelsConfig[lvl].targets}`;
+            lastCoinsText.textContent = "0"; 
+            
+            clearAllNPCs();
+            
+            isMusicMuted = false;
+            isSoundMuted = false;
+            audioMusic.muted = false;
+            toggleMusicBtn.textContent = "Silenciar Música";
+            toggleMusicBtn.className = "audio-toggle-btn audio-active";
+            toggleSoundBtn.textContent = "Silenciar Sonido";
+            toggleSoundBtn.className = "audio-toggle-btn audio-active";
+
+            audioMusic.play().catch(e => console.log("Music play pending"));
+
+            gameStarted = true;
+            for(let i = 0; i < maxNPCs; i++) {
+                spawnNPC(i);
+            }
+        }
+
+        function clearAllNPCs() {
+            activeNPCIntervals.forEach(intervalId => clearInterval(intervalId));
+            activeNPCIntervals = [];
+            const targets = document.querySelectorAll('.target');
+            targets.forEach(t => t.remove());
+        }
+
+        function updateCamera() {
+            if (!gameStarted || gamePaused) {
+                requestAnimationFrame(updateCamera);
+                return;
+            }
+            
+            stageX -= scrollSpeed;
+            
+            if (stageX <= -window.innerWidth * 4) {
+                stageX = 0;
+                const targets = document.querySelectorAll('.target');
+                targets.forEach(npc => {
+                    let currentLeft = parseFloat(npc.style.left);
+                    npc.style.left = (currentLeft - window.innerWidth * 4) + 'px';
+                });
+            }
+            
+            stage.style.transform = `translateX(${stageX}px)`;
+            requestAnimationFrame(updateCamera);
+        }
+        requestAnimationFrame(updateCamera);
+
+        function fireWeapon() {
+            if (!gameStarted || gamePaused) return; 
+
+            let currentTime = Date.now();
+            if (currentTime - lastShotTime < shootCooldown) {
+                return; 
+            }
+            lastShotTime = currentTime;
+
+            playSoundPistola();
+
+            weaponContainer.style.transform = 'translateX(-50%) translateY(20px) scale(0.95)';
+            setTimeout(() => {
+                weaponContainer.style.transform = 'translateX(-50%) translateY(0) scale(1)';
+            }, 100);
+
+            const centerX = window.innerWidth / 2;
+            const centerY = window.innerHeight / 2;
+            
+            const targets = document.querySelectorAll('.target');
+            targets.forEach((npc) => {
+                if (npc.dataset.dead === "true") return;
+
+                const rect = npc.getBoundingClientRect();
+                
+                if (centerX >= rect.left && centerX <= rect.right &&
+                    centerY >= rect.top && centerY <= rect.bottom) {
+                    
+                    if (currentLevel === 6 && upgradesOwned[3] && npc.dataset.groupId) {
+                        let gid = npc.dataset.groupId;
+                        const groupMembers = document.querySelectorAll(`.target[data-group-id='${gid}']`);
+                        groupMembers.forEach(member => {
+                            if (member.dataset.dead !== "true") {
+                                eliminateNPC(member, true);
+                            }
+                        });
+                    } else {
+                        eliminateNPC(npc, false);
+                    }
+                }
+            });
+        }
+
+        weaponContainer.addEventListener('mousedown', (e) => { e.stopPropagation(); fireWeapon(); });
+        weaponContainer.addEventListener('touchstart', (e) => { e.stopPropagation(); e.preventDefault(); fireWeapon(); });
+
+        function spawnNPC(index) {
+            if (!gameStarted || gamePaused) return;
+            
+            if (currentLevel === 6 && upgradesOwned[3]) {
+                let groupId = "group_" + Date.now() + "_" + index;
+                for (let k = 0; k < 3; k++) {
+                    createNPCElement(index, groupId, k * 45); 
+                }
+            } else {
+                createNPCElement(index, null, 0);
+            }
+        }
+
+        function createNPCElement(index, groupId, clusterOffset) {
+            const npc = document.createElement('img');
+            npc.src = 'NPC.PNG';
+            npc.className = 'target';
+
+            if (groupId) {
+                npc.dataset.groupId = groupId;
+            }
+
+            const screenOffset = -stageX;
+            const spawnX = screenOffset + window.innerWidth + 100 + (index * distanceBetweenNPCs) + clusterOffset;
+            const spawnY = window.innerHeight / 2 + 30; 
+
+            npc.style.left = spawnX + 'px';
+            npc.style.top = spawnY + 'px';
+
+            stage.appendChild(npc);
+
+            let checkInterval = setInterval(() => {
+                if (gamePaused) return; 
+                const rect = npc.getBoundingClientRect();
+                if (rect.right < 0) {
+                    clearInterval(checkInterval);
+                    npc.remove();
+                    if (!groupId || clusterOffset === 0) {
+                        spawnNPC(maxNPCs - 1); 
+                    }
+                }
+            }, 1000);
+            
+            activeNPCIntervals.push(checkInterval);
+            npc.dataset.intervalIndex = activeNPCIntervals.length - 1;
+        }
+
+        function eliminateNPC(npc, isTripleKill) {
+            npc.dataset.dead = "true";
+            
+            let idx = npc.dataset.intervalIndex;
+            if(idx !== undefined && activeNPCIntervals[idx]) {
+                clearInterval(activeNPCIntervals[idx]);
+            }
+
+            npc.src = 'Disparado.PNG';
+            
+            let config = levelsConfig[currentLevel];
+            let rawCoins = config.coinsPerKill;
+
+            if (currentLevel === 2 && upgradesOwned[2]) {
+                rawCoins = rawCoins * 7;
+            }
+            if (currentLevel === 7) {
+                if (kills === 0) {
+                    rawCoins += 100;
+                }
+            }
+            if (currentLevel === 8) {
+                rawCoins = 300 * 30;
+                if (kills + 1 === 10) {
+                    scrollSpeed = 5.8; 
+                }
+            }
+
+            let finalNPCValue = rawCoins;
+            if (isTripleKill) {
+                let tripleBonus = Math.floor(500 / 3);
+                finalNPCValue += tripleBonus;
+                score += tripleBonus; 
+            }
+
+            score += rawCoins;
+            
+            lastCoinsText.textContent = formatearMonedas(finalNPCValue);
+            
+            actualizarTextoMonedas(); 
+            
+            kills++;
+            killsText.textContent = `${kills}/${config.targets}`;
+            
+            savePlayerProgress();
+
+            if (currentLevel === 4 && upgradesOwned[1] && !npc.dataset.wasDuplicated) {
+                setTimeout(() => {
+                    if (gameStarted && !gamePaused) {
+                        createNPCElement(1, null, 80);
+                        createNPCElement(1, null, 160);
+                        const items = document.querySelectorAll('.target');
+                        if(items.length > 0) {
+                            items[items.length - 1].dataset.wasDuplicated = "true";
+                            if(items.length > 1) items[items.length - 2].dataset.wasDuplicated = "true";
+                        }
+                    }
+                }, 200);
+            }
+
+            if (kills >= config.targets) {
+                gameStarted = false;
+                setTimeout(() => {
+                    triggerLevelReward();
+                }, 150);
+            }
+
+            setTimeout(() => {
+                npc.remove();
+                if (gameStarted && !gamePaused && (!npc.dataset.groupId || npc.dataset.groupId === "")) {
+                    spawnNPC(maxNPCs - 1);
+                }
+            }, 300);
+        }
+
+        function triggerLevelReward() {
+            clearAllNPCs();
+            let currentConfig = levelsConfig[currentLevel];
+            score += currentConfig.reward;
+            
+            let earnedCoinCG = currentLevel; 
+            coinCG += earnedCoinCG;
+            actualizarTextoMonedas();
+            
+            let message = `¡NIVEL ${currentLevel} COMPLETADO!<br><span style='color: #ffcc00;'>🎁 MONEDAS: +${formatearMonedas(currentConfig.reward)}</span><br><span style='color: #b026ff;'>💜 ¡GANASTE ${earnedCoinCG} CoinCG!</span>`;
+            
+            if (currentLevel === maxUnlockedLevel && maxUnlockedLevel < 10) {
+                maxUnlockedLevel++;
+            }
+            
+            savePlayerProgress();
+            
+            announcement.innerHTML = message;
+            announcement.style.transform = "translate(-50%, -50%) scale(1)";
+            
+            setTimeout(() => {
+                announcement.style.transform = "translate(-50%, -50%) scale(0)";
+                
+                if (currentLevel === 10) {
+                    setTimeout(() => {
+                        announcement.innerHTML = "<span style='color: #ffcc00; font-size: 20px;'>¡BETA COMPLETADA CON ÉXITO!<br><br><span style='color: #00ff00; font-size: 16px;'>¡Felicidades, Piloto! Has dominado la economía trillonaria de MrTube de la mano de ABG Productions®.</span></span>";
+                        announcement.style.transform = "translate(-50%, -50%) scale(1)";
+                        setTimeout(() => {
+                            announcement.style.transform = "translate(-50%, -50%) scale(0)";
+                            levelSelectionScreen.style.display = 'flex';
+                        }, 6000);
+                    }, 500);
+                } else {
+                    levelSelectionScreen.style.display = 'flex';
+                }
+            }, 3000);
+        }
+
+        ingamePauseBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (!gameStarted) return;
+            
+            playSoundBoton();
+            gamePaused = true; 
+            savedSpeedBeforePause = scrollSpeed; 
+            scrollSpeed = 0; 
+            
+            pauseOverlayScreen.style.display = "flex"; 
+        });
+
+        pauseContinueBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            playSoundBoton();
+            
+            gamePaused = false;
+            scrollSpeed = savedSpeedBeforePause; 
+            
+            pauseOverlayScreen.style.display = "none";
+        });
+
+        pauseQuitBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            
+            isMusicMuted = false;
+            isSoundMuted = false;
+            audioMusic.muted = false;
+            
+            gameStarted = false;
+            gamePaused = false;
+            clearAllNPCs();
+            
+            pauseOverlayScreen.style.display = "none";
+            levelSelectionScreen.style.display = "flex"; 
+            
+            actualizarTextoMonedas();
+            
+            audioMusic.play().catch(e => console.log("Audio restore error"));
+        });
+
+        toggleMusicBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            isMusicMuted = !isMusicMuted;
+            
+            if (isMusicMuted) {
+                audioMusic.muted = true;
+                toggleMusicBtn.textContent = "Música Silenciada";
+                toggleMusicBtn.className = "audio-toggle-btn audio-muted";
+            } else {
+                audioMusic.muted = false;
+                toggleMusicBtn.textContent = "Silenciar Música";
+                toggleMusicBtn.className = "audio-toggle-btn audio-active";
+                audioMusic.play().catch(o => {});
+            }
+        });
+
+        toggleSoundBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            isSoundMuted = !isSoundMuted;
+            
+            if (isSoundMuted) {
+                toggleSoundBtn.textContent = "Sonidos Silenciados";
+                toggleSoundBtn.className = "audio-toggle-btn audio-muted";
+            } else {
+                toggleSoundBtn.textContent = "Silenciar Sonido";
+                toggleSoundBtn.className = "audio-toggle-btn audio-active";
+            }
+        });
+
+        document.addEventListener('gesturestart', function (e) { e.preventDefault(); });
+    </script>
+</body>
+</html>
