@@ -394,15 +394,17 @@
             background: rgba(10, 10, 10, 0.95);
             display: none;
             flex-direction: column;
-            justify-content: center;
+            justify-content: flex-start;
             align-items: center;
             z-index: 130;
             padding: 20px;
-            overflow-y: auto;
+            overflow-y: scroll;
+            touch-action: pan-y !important;
         }
         #shop-screen h2 {
             color: #ffcc00;
             font-size: 36px;
+            margin-top: 10px;
             margin-bottom: 5px;
             text-shadow: 3px 3px #000;
         }
@@ -488,6 +490,7 @@
             font-size: 18px;
             border-radius: 12px;
             cursor: pointer;
+            margin-bottom: 30px;
         }
 
         /* PANEL DE SELECCIÓN DE NIVEL */
@@ -561,11 +564,11 @@
             pointer-events: auto;
         }
 
-        /* CONFIGURACIÓN MENÚ PRINCIPAL (ARRIBA DERECHA) */
+        /* CONFIGURACIÓN MENÚ PRINCIPAL (ARRIBA IZQUIERDA DESDE EL MENÚ DE JUEGO) */
         #settings-toggle-btn {
             position: absolute;
             top: 15px;
-            right: 15px;
+            left: 15px;
             background: rgba(0, 0, 0, 0.7);
             color: #fff;
             border: 2px solid #ffcc00;
@@ -579,11 +582,12 @@
             justify-content: center;
             align-items: center;
             box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-            z-index: 110;
+            z-index: 120;
         }
 
         /* PANEL DE CONFIGURACIONES */
         #settings-panel {
+            position: absolute;
             background: rgba(20, 20, 20, 0.98);
             border: 3px solid #ffcc00;
             border-radius: 15px;
@@ -593,8 +597,11 @@
             flex-direction: column;
             gap: 12px;
             align-items: center;
-            z-index: 105;
+            z-index: 125;
             box-shadow: 0 10px 25px rgba(0,0,0,0.8);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
         }
         .setting-row {
             display: flex;
@@ -665,7 +672,7 @@
             left: 15px;
             right: 15px;
             display: flex;
-            justify-content: space-between;
+            justify-between: space-between;
             align-items: center;
             z-index: 10;
             pointer-events: none;
@@ -926,7 +933,7 @@
         <img id="menu-avatar-preview" src="Foto.PNG" alt="Avatar">
     </div>
 
-    <button id="settings-toggle-btn">⚙️</button>
+    <button id="settings-toggle-btn" style="display: none;">⚙️</button>
 
     <div id="welcome-screen">
         
@@ -949,21 +956,6 @@
                 </div>
             </div>
             <button id="close-profile-panel-btn">GUARDAR Y CERRAR</button>
-        </div>
-
-        <div id="settings-panel">
-            <div class="setting-row">
-                <label>OPCIONES DE MÚSICA / AUDIO:</label>
-                <button id="music-btn-normal" class="music-panel-btn music-btn-active">Música Normal 🎵</button>
-                <button id="music-btn-2" class="music-panel-btn music-btn-inactive">Música 2.0 ⚡</button>
-                <button id="music-btn-voice" class="music-panel-btn music-btn-inactive">Música 2.0 VoiceOver 🎤</button>
-            </div>
-
-            <div id="code-section">
-                <label id="label-code">CÓDIGO DE MONEDAS:</label>
-                <input type="text" id="code-input" placeholder="Introduce código" maxlength="15">
-                <button id="code-submit-btn">ACEPTAR</button>
-            </div>
         </div>
 
         <h1 id="welcome-title">CHICKEN STRIKE NPC</h1>
@@ -1001,6 +993,22 @@
         <button id="jugar-main-btn" class="large-game-btn">Jugar</button>
         <button id="tienda-main-btn" class="large-game-btn">Tienda</button>
         <button id="salir-main-btn" class="large-game-btn">Salir del Juego</button>
+    </div>
+
+    <div id="settings-panel">
+        <div class="setting-row">
+            <label>OPCIONES DE MÚSICA / AUDIO:</label>
+            <button id="music-btn-normal" class="music-panel-btn music-btn-active">Música Normal 🎵</button>
+            <button id="music-btn-2" class="music-panel-btn music-btn-inactive">Música 2.0 ⚡</button>
+            <button id="music-btn-voice" class="music-panel-btn music-btn-inactive">Música 2.0 VoiceOver 🎤</button>
+        </div>
+
+        <div id="code-section">
+            <label id="label-code">CÓDIGO DE MONEDAS:</label>
+            <input type="text" id="code-input" placeholder="Introduce código" maxlength="15">
+            <button id="code-submit-btn">ACEPTAR</button>
+        </div>
+        <button id="close-settings-btn" style="background:#ff3333; color:#fff; border:2px solid #fff; border-radius:8px; padding:5px 15px; font-family:sans-serif; font-weight:bold; cursor:pointer; margin-top:5px;">CERRAR</button>
     </div>
 
     <div id="shop-screen">
@@ -1189,13 +1197,11 @@
         const subYesBtn = document.getElementById('sub-yes-btn');
         const subNoBtn = document.getElementById('sub-no-btn');
         
-        // Elementos de perfil y registro
         const menuProfileBtn = document.getElementById('menu-profile-btn');
         const profilePanel = document.getElementById('profile-panel');
         const closeProfilePanelBtn = document.getElementById('close-profile-panel-btn');
         const menuAvatarPreview = document.getElementById('menu-avatar-preview');
         
-        // Elementos del perfil integrado en el menú
         const menuMainAvatarImg = document.getElementById('menu-main-avatar-img');
         const menuMainNameTxt = document.getElementById('menu-main-name-txt');
 
@@ -1208,6 +1214,7 @@
 
         const settingsToggleBtn = document.getElementById('settings-toggle-btn');
         const settingsPanel = document.getElementById('settings-panel');
+        const closeSettingsBtn = document.getElementById('close-settings-btn');
         const codeInput = document.getElementById('code-input');
         const codeSubmitBtn = document.getElementById('code-submit-btn');
 
@@ -1219,7 +1226,6 @@
         const audioPistola = document.getElementById('audio-pistola');
         const audioBoton = document.getElementById('audio-boton');
 
-        // Configuración de niveles iniciales
         let levelsConfig = {
             1: { targets: 5, speed: 1.8, coinsPerKill: 1, reward: 25 },
             2: { targets: 10, speed: 2.6, coinsPerKill: 7, reward: 50 },
@@ -1323,7 +1329,6 @@
         musicBtn2.addEventListener('click', () => { playSoundBoton(); changeMusicTrack("2.0"); });
         musicBtnVoice.addEventListener('click', () => { playSoundBoton(); changeMusicTrack("voice"); });
 
-        // SISTEMA DE INTERFACES FLOTANTES DEL MENÚ
         menuProfileBtn.addEventListener('click', () => {
             playSoundBoton();
             settingsPanel.style.display = "none"; 
@@ -1347,7 +1352,7 @@
                 reader.onload = function(e) {
                     profilePic.src = e.target.result;
                     menuAvatarPreview.src = e.target.result;
-                    menuMainAvatarImg.src = e.target.result; // Actualiza el menú intermedio
+                    menuMainAvatarImg.src = e.target.result; 
                     if(currentUsername !== "") {
                         localStorage.setItem('cs_pfp_' + currentUsername, e.target.result);
                     }
@@ -1375,7 +1380,7 @@
 
             if (name !== "") {
                 currentUsername = name;
-                menuMainNameTxt.textContent = currentUsername; // Setea el nombre en el menú intermedio
+                menuMainNameTxt.textContent = currentUsername; 
                 localStorage.setItem('cs_saved_username', currentUsername);
                 loadPlayerProgress(currentUsername);
             }
@@ -1384,7 +1389,7 @@
         if(localStorage.getItem('cs_saved_username')) {
             currentUsername = localStorage.getItem('cs_saved_username');
             usernameInput.value = currentUsername;
-            menuMainNameTxt.textContent = currentUsername; // Setea el nombre guardado al arrancar
+            menuMainNameTxt.textContent = currentUsername; 
             if(currentUsername === "Mr.Jostin") creatorBadge.style.display = "block";
             loadPlayerProgress(currentUsername);
         } else {
@@ -1410,7 +1415,7 @@
             if(savedPfp !== null) {
                 profilePic.src = savedPfp;
                 menuAvatarPreview.src = savedPfp;
-                menuMainAvatarImg.src = savedPfp; // Carga el avatar guardado en el menú principal
+                menuMainAvatarImg.src = savedPfp; 
             } else {
                 profilePic.src = "Foto.PNG";
                 menuAvatarPreview.src = "Foto.PNG";
@@ -1545,10 +1550,16 @@
             window.location.reload();
         });
 
+        // MANEJO DE CONFIGURACIÓN DEL MENÚ PRINCIPAL INTERMEDIO
         settingsToggleBtn.addEventListener('click', () => {
             playSoundBoton();
             profilePanel.style.display = "none"; 
             settingsPanel.style.display = (settingsPanel.style.display === "none" || settingsPanel.style.display === "") ? "flex" : "none";
+        });
+
+        closeSettingsBtn.addEventListener('click', () => {
+            playSoundBoton();
+            settingsPanel.style.display = "none";
         });
 
         codeSubmitBtn.addEventListener('click', () => {
@@ -1622,14 +1633,16 @@
             welcomeScreen.style.display = 'none';
             playMenuScreen.style.display = 'flex'; 
             menuProfileBtn.style.display = 'none'; 
-            settingsToggleBtn.style.display = 'none';
+            
+            // EL ENGRANAJE APARECE EXACTAMENTE AQUÍ EN EL MENÚ PRINCIPAL
+            settingsToggleBtn.style.display = 'flex';
         });
 
-        jugarMainBtn.addEventListener('click', () => { playSoundBoton(); playMenuScreen.style.display = 'none'; levelSelectionScreen.style.display = 'flex'; });
-        tiendaMainBtn.addEventListener('click', () => { playSoundBoton(); playMenuScreen.style.display = 'none'; shopScreen.style.display = 'flex'; });
-        closeShopBtn.addEventListener('click', () => { playSoundBoton(); shopScreen.style.display = 'none'; playMenuScreen.style.display = 'flex'; });
+        jugarMainBtn.addEventListener('click', () => { playSoundBoton(); playMenuScreen.style.display = 'none'; settingsToggleBtn.style.display = 'none'; levelSelectionScreen.style.display = 'flex'; });
+        tiendaMainBtn.addEventListener('click', () => { playSoundBoton(); playMenuScreen.style.display = 'none'; settingsToggleBtn.style.display = 'none'; shopScreen.style.display = 'flex'; });
+        closeShopBtn.addEventListener('click', () => { playSoundBoton(); shopScreen.style.display = 'none'; playMenuScreen.style.display = 'flex'; settingsToggleBtn.style.display = 'flex'; });
         salirMainBtn.addEventListener('click', () => { window.location.reload(); });
-        backToMenuBtn.addEventListener('click', () => { playSoundBoton(); levelSelectionScreen.style.display = 'none'; playMenuScreen.style.display = 'flex'; });
+        backToMenuBtn.addEventListener('click', () => { playSoundBoton(); levelSelectionScreen.style.display = 'none'; playMenuScreen.style.display = 'flex'; settingsToggleBtn.style.display = 'flex'; });
 
         levelButtons.forEach(btn => {
             btn.addEventListener('click', () => {
@@ -1640,6 +1653,7 @@
 
         function startLevel(lvl) {
             levelSelectionScreen.style.display = 'none';
+            settingsToggleBtn.style.display = 'none';
             currentLevel = lvl;
             kills = 0;
             gamePaused = false;
