@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Chicken Strike NPC - Beta v1.5.1</title>
+    <title>Chicken Strike NPC - Beta v1.5.2</title>
     <style>
         * {
             box-sizing: border-box;
@@ -125,38 +125,91 @@
             animation: spin 4s linear infinite;
         }
         
-        /* REGISTRO DE NOMBRE DE USUARIO */
-        #user-setup {
-            margin-bottom: 20px;
+        /* SISTEMA DE REGISTRO NUEVO v1.5.2 */
+        #profile-section {
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 8px;
+            margin-bottom: 15px;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 10px;
+            border-radius: 15px;
+            border: 2px solid #ffcc00;
+            width: 280px;
         }
-        #user-setup label {
-            font-size: 14px;
-            color: #00ff00;
-            text-shadow: 1px 1px #000;
+        #profile-pic-container {
+            position: relative;
+            width: 80px;
+            height: 80px;
+            margin-bottom: 5px;
         }
-        #username-input {
-            background: #222;
+        #profile-pic {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
             border: 3px solid #ffcc00;
+            background: #222;
+        }
+        .edit-pfp-btn {
+            background: #ffcc00;
+            color: #000;
+            border: 1px solid #fff;
+            font-size: 10px;
+            font-weight: bold;
+            padding: 2px 6px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 2px;
+            font-family: Arial, sans-serif;
+            pointer-events: auto;
+        }
+        #user-setup-v152 {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            gap: 10px;
+            margin-top: 5px;
+        }
+        .setup-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3px;
+        }
+        .setup-group label {
+            font-size: 11px;
+            color: #ffcc00;
+        }
+        .v152-input {
+            background: #111;
+            border: 2px solid #fff;
             color: #fff;
-            padding: 10px 15px;
-            font-size: 16px;
-            border-radius: 10px;
+            padding: 6px;
+            font-size: 13px;
+            border-radius: 8px;
             text-align: center;
-            font-family: 'Arial', sans-serif;
+            font-family: Arial, sans-serif;
             font-weight: bold;
             pointer-events: auto;
-            width: 220px;
+            width: 90%;
         }
-        #username-input:focus {
+        .v152-input:focus {
             outline: none;
             border-color: #00ff00;
         }
+        .badge-casilla {
+            background: #00ff00;
+            color: #000;
+            font-size: 10px;
+            padding: 3px 6px;
+            border-radius: 4px;
+            font-weight: bold;
+            margin-top: 2px;
+            display: none;
+        }
 
-        /* SECCIÓN DE VERIFICACIÓN (ESTOY LISTO) */
+        /* SECCIÓN DE VERIFICACIÓN (ESTOY PREPARANDO) */
         #ready-container {
             background: rgba(0, 0, 0, 0.6);
             border: 2px solid #ffcc00;
@@ -280,6 +333,7 @@
             align-items: center;
             z-index: 130;
             padding: 20px;
+            overflow-y: auto;
         }
         #shop-screen h2 {
             color: #ffcc00;
@@ -316,7 +370,7 @@
         }
         .shop-item-title {
             color: #00ff00;
-            font-size: 16px;
+            font-size: 14px;
             margin-bottom: 4px;
         }
         .shop-item-desc {
@@ -330,7 +384,7 @@
             color: #fff;
             border: 2px solid #fff;
             font-family: 'Arial Black', sans-serif;
-            font-size: 12px;
+            font-size: 11px;
             padding: 10px 12px;
             border-radius: 8px;
             cursor: pointer;
@@ -805,6 +859,8 @@
     <audio id="audio-pistola" src="Pistola.mp3"></audio>
     <audio id="audio-boton" src="Boton.mp3"></audio>
 
+    <input type="file" id="pfp-file-input" accept="image/*" style="display: none;">
+
     <div id="subscribe-popup">
         <h2>📢 ¡SÚPER PROMO!</h2>
         <p>¡Suscríbete al canal oficial de <b>Mr.Jostin</b>!<br>Cuesta exactamente <b>3,600 monedas</b> y <b>3 CoinCG</b> 🟣 del juego.</p>
@@ -852,7 +908,7 @@
         </div>
 
         <h1 id="welcome-title">CHICKEN STRIKE NPC</h1>
-        <div id="version-tag">1.5.1 Beta</div>
+        <div id="version-tag">1.5.2 Beta</div>
         <p id="welcome-desc">¡Bienvenido! Esta es una versión beta oficial del juego, por lo que podría contener algunos errores y bugs en el mapa durante el desarrollo en la plataforma MrTube.<br>Diseñado por ABG Productions® y Sprunki Animations Studios.</p>
         
         <div class="menu-wallet">
@@ -866,14 +922,28 @@
             </div>
         </div>
 
-        <div id="user-setup">
-            <label id="label-username" for="username-input">INGRESA TU NOMBRE DE PILOTO:</label>
-            <input type="text" id="username-input" placeholder="Ej: Pepe" maxlength="15">
+        <div id="profile-section">
+            <div id="profile-pic-container">
+                <img id="profile-pic" src="Foto.PNG" alt="Perfil">
+            </div>
+            <button id="edit-pfp-btn" class="edit-pfp-btn">Editar Foto</button>
+
+            <div id="user-setup-v152">
+                <div class="setup-group">
+                    <label>Ingresar un Correo Electrónico (Opcional):</label>
+                    <input type="email" id="email-input" class="v152-input" placeholder="correo@ejemplo.com">
+                </div>
+                <div class="setup-group">
+                    <label>Ingresa un Nombre:</label>
+                    <input type="text" id="username-input" class="v152-input" placeholder="Ej: Pepe" maxlength="15">
+                    <div id="creator-badge" class="badge-casilla">Propiedad del creador</div>
+                </div>
+            </div>
         </div>
 
         <div id="ready-container">
             <input type="checkbox" id="ready-checkbox">
-            <label for="ready-checkbox" id="ready-label">Estoy listo</label>
+            <label for="ready-checkbox" id="ready-label">Estoy Preparando</label>
         </div>
 
         <button id="start-button" class="menu-btn">EMPEZAR A PROBAR</button>
@@ -934,9 +1004,33 @@
             <div class="shop-item">
                 <div class="shop-item-info">
                     <div class="shop-item-title">Mejora 30.3 (Decorar Arma)</div>
-                    <div class="shop-item-desc">Último nivel: NPCs veloces en grupos de 3. ¡Si disparas a uno, mueren los 3 y te da 500 monedas!</div>
+                    <div class="shop-item-desc">Nivel 10 original: NPCs veloces en grupos de 3. ¡Si disparas a uno, mueren los 3 y da 500 monedas!</div>
                 </div>
                 <button id="buy-upgrade-3" class="shop-buy-btn" onclick="buyUpgrade(3, 3300, 30)">3300 🟡 + 30 🟣</button>
+            </div>
+
+            <div class="shop-item">
+                <div class="shop-item-info">
+                    <div class="shop-item-title">Mejora 40.4 (Frenar Cerdo)</div>
+                    <div class="shop-item-desc">Nivel 8: NPCs frenan el cerdo en grupos de 2. Bajas dan 300,000🟡 y 250🟣. ¡Solo hay que matar 10 NPCs!</div>
+                </div>
+                <button id="buy-upgrade-4" class="shop-buy-btn" onclick="buyUpgrade(4, 4400, 40)">4400 🟡 + 40 🟣</button>
+            </div>
+
+            <div class="shop-item">
+                <div class="shop-item-info">
+                    <div class="shop-item-title">Mejora 50.5 (Nivel 1 Extremo)</div>
+                    <div class="shop-item-desc">Nivel 1: NPCs hiperveloces. Requiere 10 bajas. ¡Cada baja otorga 36 Billones🟡 y 20🟣!</div>
+                </div>
+                <button id="buy-upgrade-5" class="shop-buy-btn" onclick="buyUpgrade(5, 0, 0)">Gratis para Probar</button>
+            </div>
+
+            <div class="shop-item">
+                <div class="shop-item-info">
+                    <div class="shop-item-title">Mejora 60.6 (Nivel 10 Divino)</div>
+                    <div class="shop-item-desc">Nivel 10: NPCs ultra rápidos. ¡Solo matas 5 para ganar! Cada baja da 6 Billones🟡 y 900🟣.</div>
+                </div>
+                <button id="buy-upgrade-6" class="shop-buy-btn" onclick="buyUpgrade(6, 0, 0)">Gratis para Probar</button>
             </div>
         </div>
         
@@ -959,16 +1053,16 @@
         </div>
 
         <div class="levels-grid">
-            <button class="level-select-btn" data-lvl="1">Nivel 1 <span>+1c por NPC</span></button>
+            <button class="level-select-btn" data-lvl="1">Nivel 1 <span>Recompensa Base</span></button>
             <button class="level-select-btn locked" data-lvl="2" disabled>Nivel 2 <span>+7c por NPC</span></button>
             <button class="level-select-btn locked" data-lvl="3" disabled>Nivel 3 <span>+10c por NPC</span></button>
             <button class="level-select-btn locked" data-lvl="4" disabled>Nivel 4 <span>+20c por NPC</span></button>
             <button class="level-select-btn locked" data-lvl="5" disabled>Nivel 5 <span>+30c por NPC</span></button>
             <button class="level-select-btn locked" data-lvl="6" disabled>Nivel 6 <span>+40c por NPC</span></button>
             <button class="level-select-btn locked" data-lvl="7" disabled>Nivel 7 <span>Varía</span></button>
-            <button class="level-select-btn locked" data-lvl="8" disabled>Nivel 8 <span>Varía</span></button>
+            <button class="level-select-btn locked" data-lvl="8" disabled>Nivel 8 <span>Especial Cerdo</span></button>
             <button class="level-select-btn locked" data-lvl="9" disabled>Nivel 9 <span>+50k por NPC</span></button>
-            <button class="level-select-btn locked" data-lvl="10" disabled>Nivel 10 <span>+1M por NPC</span></button>
+            <button class="level-select-btn locked" data-lvl="10" disabled>Nivel 10 <span>Fin de la Beta</span></button>
         </div>
         <button id="back-to-menu-btn">VOLVER AL MENÚ</button>
     </div>
@@ -1061,14 +1155,20 @@
         const subYesBtn = document.getElementById('sub-yes-btn');
         const subNoBtn = document.getElementById('sub-no-btn');
         
+        // Elementos de registro v1.5.2
         const usernameInput = document.getElementById('username-input');
+        const emailInput = document.getElementById('email-input');
+        const profilePic = document.getElementById('profile-pic');
+        const editPfpBtn = document.getElementById('edit-pfp-btn');
+        const pfpFileInput = document.getElementById('pfp-file-input');
+        const creatorBadge = document.getElementById('creator-badge');
+
         const settingsToggleBtn = document.getElementById('settings-toggle-btn');
         const settingsPanel = document.getElementById('settings-panel');
         const langSelect = document.getElementById('lang-select');
         const codeInput = document.getElementById('code-input');
         const codeSubmitBtn = document.getElementById('code-submit-btn');
 
-        // Botones del panel de música avanzada
         const musicBtnNormal = document.getElementById('music-btn-normal');
         const musicBtn2 = document.getElementById('music-btn-2');
         const musicBtnVoice = document.getElementById('music-btn-voice');
@@ -1077,7 +1177,8 @@
         const audioPistola = document.getElementById('audio-pistola');
         const audioBoton = document.getElementById('audio-boton');
 
-        const levelsConfig = {
+        // Configuración de niveles iniciales
+        let levelsConfig = {
             1: { targets: 5, speed: 1.8, coinsPerKill: 1, reward: 25 },
             2: { targets: 10, speed: 2.6, coinsPerKill: 7, reward: 50 },
             3: { targets: 15, speed: 3.2, coinsPerKill: 10, reward: 100 },
@@ -1107,13 +1208,14 @@
         const maxNPCs = 10;
         const distanceBetweenNPCs = 350;
 
-        let upgradesOwned = { 1: false, 2: false, 3: false };
+        // Soporte extendido para las nuevas mejoras v1.5.2
+        let upgradesOwned = { 1: false, 2: false, 3: false, 4: false, 5: false, 6: false };
         let lastShotTime = 0;
         let shootCooldown = 400; 
 
         let isMusicMuted = false;
         let isSoundMuted = false;
-        let currentMusicTrack = "normal"; // normal, 2.0, voice
+        let currentMusicTrack = "normal";
 
         function formatearMonedas(cantidad) {
             if (cantidad >= 1000000000000) {
@@ -1143,13 +1245,13 @@
         function playSoundBoton() {
             if (isSoundMuted && gameStarted) return; 
             audioBoton.currentTime = 0;
-            audioBoton.play().catch(e => console.log("Audio blocked"));
+            audioBoton.play().catch(e => {});
         }
 
         function playSoundPistola() {
             if (isSoundMuted && gameStarted) return; 
             audioPistola.currentTime = 0;
-            audioPistola.play().catch(e => console.log("Audio blocked"));
+            audioPistola.play().catch(e => {});
         }
 
         function changeMusicTrack(trackType) {
@@ -1172,7 +1274,7 @@
             currentMusicTrack = trackType;
             if (!isMusicMuted) {
                 audioMusic.currentTime = 0;
-                audioMusic.play().catch(e => console.log("Track swap blocked"));
+                audioMusic.play().catch(e => {});
             }
         }
 
@@ -1180,57 +1282,68 @@
         musicBtn2.addEventListener('click', () => { playSoundBoton(); changeMusicTrack("2.0"); });
         musicBtnVoice.addEventListener('click', () => { playSoundBoton(); changeMusicTrack("voice"); });
 
-        if(localStorage.getItem('cs_saved_username')) {
-            currentUsername = localStorage.getItem('cs_saved_username');
-            usernameInput.value = currentUsername;
-            loadPlayerProgress(currentUsername);
-        } else {
-            actualizarTextoMonedas();
-        }
+        // SISTEMA DE CARGA DE IMAGEN DE GALERÍA
+        editPfpBtn.addEventListener('click', () => {
+            playSoundBoton();
+            pfpFileInput.click();
+        });
 
+        pfpFileInput.addEventListener('change', () => {
+            const file = pfpFileInput.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    profilePic.src = e.target.result;
+                    if(currentUsername !== "") {
+                        localStorage.setItem('cs_pfp_' + currentUsername, e.target.result);
+                    }
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // MANEJO E INTEGRACIÓN DE NOMBRES BLOQUEADOS Y CASILLA CREADOR
         usernameInput.addEventListener('input', () => {
             let name = usernameInput.value.trim();
-            if (name.toLowerCase() === "mr.jostin" && name !== "Mr.Jostin") {
-                alert("❌ ¡Este nombre tiene derechos de autor del Creador!");
+            let lowerName = name.toLowerCase();
+
+            // Bloqueo estricto de variaciones protegidas
+            if (lowerName === "abg" || lowerName === "abg productions" || lowerName === "abg productions®" || (lowerName === "mr.jostin" && name !== "Mr.Jostin")) {
+                alert("❌ ¡Este nombre está protegido por derechos de autor!");
                 usernameInput.value = "";
-                currentUsername = "";
+                creatorBadge.style.display = "none";
                 return;
             }
 
-            if(name !== "") {
-                let oldName = localStorage.getItem('cs_saved_username') || "";
-                if (oldName !== "" && oldName !== name && name !== "Mr.Jostin") {
-                    let changeCount = parseInt(localStorage.getItem('cs_name_changes_' + oldName) || "0");
-                    if (changeCount >= 1) {
-                        if (score < 1000) {
-                            alert("❌ Necesitas 1000 monedas para cambiar tu nombre de usuario de nuevo.");
-                            usernameInput.value = oldName;
-                            return;
-                        } else {
-                            score -= 1000;
-                            actualizarTextoMonedas();
-                            alert("💰 Se han descontado 1000 monedas por cambio de nombre.");
-                            changeCount++;
-                            localStorage.setItem('cs_name_changes_' + name, changeCount);
-                        }
-                    } else {
-                        changeCount++;
-                        localStorage.setItem('cs_name_changes_' + name, changeCount);
-                    }
-                }
+            // Casilla Automática del Creador Único
+            if (name === "Mr.Jostin") {
+                creatorBadge.style.display = "block";
+            } else {
+                creatorBadge.style.display = "none";
+            }
 
+            if (name !== "") {
                 currentUsername = name;
                 localStorage.setItem('cs_saved_username', currentUsername);
                 loadPlayerProgress(currentUsername);
             }
         });
 
-        function loadPlayerProgress(name) {
-            if(name.toLowerCase() === "mr.jostin" && name !== "Mr.Jostin") return;
+        if(localStorage.getItem('cs_saved_username')) {
+            currentUsername = localStorage.getItem('cs_saved_username');
+            usernameInput.value = currentUsername;
+            if(currentUsername === "Mr.Jostin") creatorBadge.style.display = "block";
+            loadPlayerProgress(currentUsername);
+        } else {
+            actualizarTextoMonedas();
+        }
 
+        function loadPlayerProgress(name) {
             let savedScore = localStorage.getItem('cs_score_' + name);
             let savedCoinCG = localStorage.getItem('cs_coincg_' + name);
             let savedMaxLevel = localStorage.getItem('cs_max_level_' + name);
+            let savedEmail = localStorage.getItem('cs_email_' + name);
+            let savedPfp = localStorage.getItem('cs_pfp_' + name);
             
             if(savedScore !== null) score = parseInt(savedScore);
             else score = 0;
@@ -1238,16 +1351,21 @@
             if(savedCoinCG !== null) coinCG = parseInt(savedCoinCG);
             else coinCG = 0;
 
+            if(savedEmail !== null) emailInput.value = savedEmail;
+            else emailInput.value = "";
+
+            if(savedPfp !== null) profilePic.src = savedPfp;
+            else profilePic.src = "Foto.PNG";
+
             actualizarTextoMonedas();
 
             if(savedMaxLevel !== null) maxUnlockedLevel = parseInt(savedMaxLevel);
             else maxUnlockedLevel = 1;
 
-            [1, 2, 3].forEach(id => {
+            for (let id = 1; id <= 6; id++) {
                 let savedUpgrade = localStorage.getItem(`cs_upgrade_${id}_` + name);
-                if (savedUpgrade === "true") upgradesOwned[id] = true;
-                else upgradesOwned[id] = false;
-            });
+                upgradesOwned[id] = (savedUpgrade === "true");
+            }
 
             updateLevelButtonsUI();
             updateShopButtonsUI();
@@ -1259,9 +1377,10 @@
                 localStorage.setItem('cs_score_' + currentUsername, score);
                 localStorage.setItem('cs_coincg_' + currentUsername, coinCG);
                 localStorage.setItem('cs_max_level_' + currentUsername, maxUnlockedLevel);
-                [1, 2, 3].forEach(id => {
+                localStorage.setItem('cs_email_' + currentUsername, emailInput.value.trim());
+                for (let id = 1; id <= 6; id++) {
                     localStorage.setItem(`cs_upgrade_${id}_` + currentUsername, upgradesOwned[id]);
-                });
+                }
             }
             checkSubscriptionTrigger();
         }
@@ -1280,7 +1399,7 @@
         }
 
         function updateShopButtonsUI() {
-            [1, 2, 3].forEach(id => {
+            for(let id = 1; id <= 6; id++) {
                 const btn = document.getElementById(`buy-upgrade-${id}`);
                 if (btn) {
                     if (upgradesOwned[id]) {
@@ -1291,19 +1410,22 @@
                         if(id === 1) btn.textContent = "1100 🟡 + 10 🟣";
                         if(id === 2) btn.textContent = "2200 🟡 + 20 🟣";
                         if(id === 3) btn.textContent = "3300 🟡 + 30 🟣";
+                        if(id === 4) btn.textContent = "4400 🟡 + 40 🟣";
+                        if(id === 5) btn.textContent = "Activar Gratis";
+                        if(id === 6) btn.textContent = "Activar Gratis";
                     }
                 }
-            });
+            }
         }
 
         function buyUpgrade(id, costCoins, costCoinCG) {
             playSoundBoton();
             if (currentUsername === "") {
-                alert("Por favor, ingresa tu nombre de piloto primero.");
+                alert("Por favor, ingresa tu nombre primero.");
                 return;
             }
             if (upgradesOwned[id]) {
-                alert("¡Ya compraste y decoraste tu arma con esta mejora!");
+                alert("¡Ya posees esta mejora!");
                 return;
             }
             if (score >= costCoins && coinCG >= costCoinCG) {
@@ -1313,46 +1435,37 @@
                 actualizarTextoMonedas();
                 savePlayerProgress();
                 updateShopButtonsUI();
-                alert(`🎉 ¡Compraste la Súper Mejora con éxito! Tu arma ha sido decorada.`);
+                alert(`🎉 ¡Súper Mejora activada con éxito de calidad Trillonaria!`);
             } else {
-                alert("❌ No tienes suficientes Monedas o CoinCG in tu billetera.");
+                alert("❌ No tienes suficientes Monedas o CoinCG.");
             }
         }
 
         function resetShopUpgrades() {
             playSoundBoton();
-            if (currentUsername === "") {
-                alert("Ingresa un nombre de piloto primero.");
-                return;
-            }
+            if (currentUsername === "") return;
 
             let refundCoins = 0;
             let refundCoinCG = 0;
             if (upgradesOwned[1]) { refundCoins += 1100; refundCoinCG += 10; }
             if (upgradesOwned[2]) { refundCoins += 2200; refundCoinCG += 20; }
             if (upgradesOwned[3]) { refundCoins += 3300; refundCoinCG += 30; }
+            if (upgradesOwned[4]) { refundCoins += 4400; refundCoinCG += 40; }
 
-            if (refundCoinCG === 0 && refundCoins === 0) {
-                alert("❌ No tienes ninguna mejora activa para reiniciar.");
-                return;
-            }
-
-            let confirmReset = confirm(`¿Quieres reiniciar tus mejoras? Se te devolverán ${refundCoins} monedas y ${refundCoinCG} CoinCG.`);
+            let confirmReset = confirm(`¿Quieres reiniciar tus mejoras? Se te devolverá lo invertido.`);
             if (confirmReset) {
                 score += refundCoins;
                 coinCG += refundCoinCG;
                 actualizarTextoMonedas();
                 
-                upgradesOwned[1] = false;
-                upgradesOwned[2] = false;
-                upgradesOwned[3] = false;
+                for(let id=1; id<=6; id++) upgradesOwned[id] = false;
                 
                 weaponImage.src = 'Manos.PNG';
                 shootCooldown = 400;
 
                 savePlayerProgress();
                 updateShopButtonsUI();
-                alert("🔄 ¡Compras reiniciadas con éxito!");
+                alert("🔄 ¡Compras reiniciadas!");
             }
         }
 
@@ -1374,75 +1487,43 @@
 
         settingsToggleBtn.addEventListener('click', () => {
             playSoundBoton();
-            if(settingsPanel.style.display === "none" || settingsPanel.style.display === "") {
-                settingsPanel.style.display = "flex";
-            } else {
-                settingsPanel.style.display = "none";
-            }
+            settingsPanel.style.display = (settingsPanel.style.display === "none" || settingsPanel.style.display === "") ? "flex" : "none";
         });
 
         codeSubmitBtn.addEventListener('click', () => {
             playSoundBoton();
-            // Convertir a mayúsculas para evitar problemas de escritura
             let inputCode = codeInput.value.trim().toUpperCase();
-            if(currentUsername === "") {
-                alert("Por favor, introduce un nombre primero antes de usar un código.");
-                return;
-            }
+            if(currentUsername === "") return;
 
-            // Base de datos de códigos con sus respectivos tipos de recompensa
             let rewards = { 
-                "328": { amount: 50, type: "coins" }, 
-                "589": { amount: 200, type: "coins" }, 
-                "194": { amount: 70, type: "coins" }, 
-                "MJ8": { amount: 800, type: "coins" },
-                "M18": { amount: 1000, type: "coins" }, 
-                "184": { amount: 500, type: "coins" }, 
-                "900": { amount: 9000, type: "coins" }, 
-                "50M": { amount: 50000000, type: "coins" },
-                // NUEVOS CÓDIGOS PARA COINCG (NO CADUCAN)
-                "MRT": { amount: 60, type: "coincg" },
-                "ABG": { amount: 100, type: "coincg" },
-                "15A": { amount: 15, type: "coincg" },
-                "67X": { amount: 67, type: "coincg" }
+                "328": { amount: 50, type: "coins" }, "589": { amount: 200, type: "coins" }, 
+                "194": { amount: 70, type: "coins" }, "MJ8": { amount: 800, type: "coins" },
+                "M18": { amount: 1000, type: "coins" }, "184": { amount: 500, type: "coins" }, 
+                "900": { amount: 9000, type: "coins" }, "50M": { amount: 50000000, type: "coins" },
+                "MRT": { amount: 60, type: "coincg" }, "ABG": { amount: 100, type: "coincg" },
+                "15A": { amount: 15, type: "coincg" }, "67X": { amount: 67, type: "coincg" }
             };
 
             if(rewards[inputCode] !== undefined) {
-                let rewardData = rewards[inputCode];
-                let rewardAmount = rewardData.amount;
-                let rewardType = rewardData.type;
-
+                let rData = rewards[inputCode];
                 if(currentUsername === "Mr.Jostin") {
-                    if (rewardType === "coins") {
-                        score += rewardAmount;
-                        alert(`👑 ¡Acceso Creador! Código válido. Se añadieron +${formatearMonedas(rewardAmount)} monedas.`);
-                    } else if (rewardType === "coincg") {
-                        coinCG += rewardAmount;
-                        alert(`👑 ¡Acceso Creador! Código válido. Se añadieron +${rewardAmount} CoinCG 🟣.`);
-                    }
-                    actualizarTextoMonedas();
-                    savePlayerProgress();
-                    codeInput.value = "";
+                    if (rData.type === "coins") score += rData.amount;
+                    else coinCG += rData.amount;
+                    alert("👑 ¡Acceso Creador concedido!");
+                    actualizarTextoMonedas(); savePlayerProgress(); codeInput.value = "";
                 } else {
-                    let codeUsed = localStorage.getItem(`cs_code_${inputCode}_` + currentUsername);
-                    if(codeUsed === "true") {
-                        alert("❌ Este código ya fue utilizado por este usuario.");
-                    } else {
-                        if (rewardType === "coins") {
-                            score += rewardAmount;
-                            alert(`✅ ¡Código Aceptado! Has ganado +${formatearMonedas(rewardAmount)} monedas.`);
-                        } else if (rewardType === "coincg") {
-                            coinCG += rewardAmount;
-                            alert(`✅ ¡Código Aceptado! Has ganado +${rewardAmount} CoinCG 🟣.`);
-                        }
-                        actualizarTextoMonedas();
+                    let used = localStorage.getItem(`cs_code_${inputCode}_` + currentUsername);
+                    if(used === "true") alert("❌ Código ya usado.");
+                    else {
+                        if (rData.type === "coins") score += rData.amount;
+                        else coinCG += rData.amount;
                         localStorage.setItem(`cs_code_${inputCode}_` + currentUsername, "true");
-                        savePlayerProgress();
-                        codeInput.value = "";
+                        actualizarTextoMonedas(); savePlayerProgress(); codeInput.value = "";
+                        alert("✅ Código Aceptado.");
                     }
                 }
             } else {
-                alert("❌ Código incorrecto o inválido.");
+                alert("❌ Código inválido.");
             }
         });
 
@@ -1456,138 +1537,83 @@
         subYesBtn.addEventListener('click', () => {
             playSoundBoton();
             if (score >= 3600 && coinCG >= 3) {
-                score -= 3600;
-                coinCG -= 3;
-                actualizarTextoMonedas();
-                savePlayerProgress();
+                score -= 3600; coinCG -= 3;
+                actualizarTextoMonedas(); savePlayerProgress();
                 subscribePopup.style.transform = "translate(-50%, -50%) scale(0)";
-                alert("🚀 ¡Redireccionando al canal oficial del Creador!");
                 window.open("https://youtube.com/@mr.jostin_oficial?si=JB-zmX5c7fRFRtq0", "_blank");
-            } else {
-                alert("No cumples con los requisitos: 3,600 monedas comunes y 3 CoinCG.");
-                subscribePopup.style.transform = "translate(-50%, -50%) scale(0)";
             }
         });
 
-        subNoBtn.addEventListener('click', () => {
-            playSoundBoton();
-            subscribePopup.style.transform = "translate(-50%, -50%) scale(0)";
-        });
+        subNoBtn.addEventListener('click', () => { playSoundBoton(); subscribePopup.style.transform = "translate(-50%, -50%) scale(0)"; });
 
         startButton.addEventListener('click', () => {
             playSoundBoton();
             let finalName = usernameInput.value.trim();
-            if (finalName.toLowerCase() === "mr.jostin" && finalName !== "Mr.Jostin") {
-                alert("❌ Bloqueo de seguridad: No puedes usar el nombre del Creador.");
-                return;
-            }
-
-            if (!readyCheckbox.checked) {
-                alert("❌ Debes activar la casilla 'Estoy listo' primero.");
-                return;
-            }
-
-            if (!isMusicMuted) audioMusic.play().catch(e => console.log("Música iniciada."));
-
             if(finalName === "") {
-                currentUsername = "Player";
-                localStorage.setItem('cs_saved_username', currentUsername);
-            } else {
-                currentUsername = finalName;
+                alert("Por favor introduce un nombre válido para continuar.");
+                return;
             }
-            savePlayerProgress();
+            if (!readyCheckbox.checked) return;
 
+            if (!isMusicMuted) audioMusic.play().catch(e => {});
+            savePlayerProgress();
             welcomeScreen.style.display = 'none';
             playMenuScreen.style.display = 'flex'; 
         });
 
-        jugarMainBtn.addEventListener('click', () => {
-            playSoundBoton();
-            playMenuScreen.style.display = 'none';
-            levelSelectionScreen.style.display = 'flex';
-            settingsToggleBtn.style.display = 'none'; 
-            updateLevelButtonsUI();
-        });
-
-        tiendaMainBtn.addEventListener('click', () => {
-            playSoundBoton();
-            playMenuScreen.style.display = 'none';
-            shopScreen.style.display = 'flex';
-            settingsToggleBtn.style.display = 'none'; 
-            updateShopButtonsUI();
-        });
-
-        closeShopBtn.addEventListener('click', () => {
-            playSoundBoton();
-            shopScreen.style.display = 'none';
-            playMenuScreen.style.display = 'flex';
-            settingsToggleBtn.style.display = 'flex'; 
-        });
-
-        salirMainBtn.addEventListener('click', () => {
-            playSoundBoton();
-            window.location.reload();
-        });
-
-        backToMenuBtn.addEventListener('click', () => {
-            playSoundBoton();
-            levelSelectionScreen.style.display = 'none';
-            playMenuScreen.style.display = 'flex';
-            settingsToggleBtn.style.display = 'flex'; 
-        });
+        jugarMainBtn.addEventListener('click', () => { playSoundBoton(); playMenuScreen.style.display = 'none'; levelSelectionScreen.style.display = 'flex'; });
+        tiendaMainBtn.addEventListener('click', () => { playSoundBoton(); playMenuScreen.style.display = 'none'; shopScreen.style.display = 'flex'; });
+        closeShopBtn.addEventListener('click', () => { playSoundBoton(); shopScreen.style.display = 'none'; playMenuScreen.style.display = 'flex'; });
+        salirMainBtn.addEventListener('click', () => { window.location.reload(); });
+        backToMenuBtn.addEventListener('click', () => { playSoundBoton(); levelSelectionScreen.style.display = 'none'; playMenuScreen.style.display = 'flex'; });
 
         levelButtons.forEach(btn => {
             btn.addEventListener('click', () => {
                 playSoundBoton();
-                let selectedLvl = parseInt(btn.dataset.lvl);
-                startLevel(selectedLvl);
+                startLevel(parseInt(btn.dataset.lvl));
             });
         });
 
+        // CONTROL DE REGLAS DE NIVELES ACTUALIZADO v1.5.2
         function startLevel(lvl) {
             levelSelectionScreen.style.display = 'none';
-            settingsToggleBtn.style.display = 'none'; 
             currentLevel = lvl;
             kills = 0;
             gamePaused = false;
             
+            // Reajuste de objetivos dinámicos por mejoras activadas
+            let totalTargets = levelsConfig[lvl].targets;
             scrollSpeed = levelsConfig[lvl].speed;
-            
-            if (currentLevel === 6 && upgradesOwned[3]) {
-                scrollSpeed = 8.5; 
+
+            if (currentLevel === 1 && upgradesOwned[5]) {
+                totalTargets = 10; // Petición Mejora 50.5
+                scrollSpeed = 9.5;  // Más rápido que el nivel 10 base
+            }
+            if (currentLevel === 8 && upgradesOwned[4]) {
+                totalTargets = 10; // Petición Mejora 40.4
+            }
+            if (currentLevel === 10 && upgradesOwned[6]) {
+                totalTargets = 5;  // Petición Mejora 60.6
+                scrollSpeed = 16.0; // Muchísimo más veloz
             }
 
-            if (upgradesOwned[3]) {
-                weaponImage.src = 'Manos_Mejora3.PNG';
-            } else if (upgradesOwned[2]) {
-                weaponImage.src = 'Manos_Mejora2.PNG';
-            } else if (upgradesOwned[1]) {
-                weaponImage.src = 'Manos_Mejora1.PNG';
-            } else {
-                weaponImage.src = 'Manos.PNG';
-            }
+            // Texturas de Armas según prioridades
+            if (upgradesOwned[6]) { weaponImage.src = 'Manos_Mejora6.PNG'; }
+            else if (upgradesOwned[5]) { weaponImage.src = 'Manos_Mejora5.PNG'; }
+            else if (upgradesOwned[4]) { weaponImage.src = 'Manos_Mejora4.PNG'; }
+            else if (upgradesOwned[3]) { weaponImage.src = 'Manos_Mejora3.PNG'; }
+            else if (upgradesOwned[2]) { weaponImage.src = 'Manos_Mejora2.PNG'; }
+            else if (upgradesOwned[1]) { weaponImage.src = 'Manos_Mejora1.PNG'; }
+            else { weaponImage.src = 'Manos.PNG'; }
 
-            if (upgradesOwned[1]) {
-                shootCooldown = 60; 
-            } else {
-                shootCooldown = 400; 
-            }
+            shootCooldown = upgradesOwned[1] ? 60 : 400;
             
             levelText.textContent = currentLevel;
-            killsText.textContent = `0/${levelsConfig[lvl].targets}`;
+            killsText.textContent = `0/${totalTargets}`;
             lastCoinsText.textContent = "0"; 
             
             clearAllNPCs();
-            
-            isMusicMuted = false;
-            isSoundMuted = false;
-            audioMusic.muted = false;
-            toggleMusicBtn.textContent = "Silenciar Música";
-            toggleMusicBtn.className = "audio-toggle-btn audio-active";
-            toggleSoundBtn.textContent = "Silenciar Sonido";
-            toggleSoundBtn.className = "audio-toggle-btn audio-active";
-
-            audioMusic.play().catch(e => console.log("Music play pending"));
+            audioMusic.play().catch(e => {});
 
             gameStarted = true;
             for(let i = 0; i < maxNPCs; i++) {
@@ -1598,8 +1624,7 @@
         function clearAllNPCs() {
             activeNPCIntervals.forEach(intervalId => clearInterval(intervalId));
             activeNPCIntervals = [];
-            const targets = document.querySelectorAll('.target');
-            targets.forEach(t => t.remove());
+            document.querySelectorAll('.target').forEach(t => t.remove());
         }
 
         function updateCamera() {
@@ -1607,18 +1632,14 @@
                 requestAnimationFrame(updateCamera);
                 return;
             }
-            
             stageX -= scrollSpeed;
-            
             if (stageX <= -window.innerWidth * 4) {
                 stageX = 0;
-                const targets = document.querySelectorAll('.target');
-                targets.forEach(npc => {
+                document.querySelectorAll('.target').forEach(npc => {
                     let currentLeft = parseFloat(npc.style.left);
                     npc.style.left = (currentLeft - window.innerWidth * 4) + 'px';
                 });
             }
-            
             stage.style.transform = `translateX(${stageX}px)`;
             requestAnimationFrame(updateCamera);
         }
@@ -1626,39 +1647,26 @@
 
         function fireWeapon() {
             if (!gameStarted || gamePaused) return; 
-
             let currentTime = Date.now();
-            if (currentTime - lastShotTime < shootCooldown) {
-                return; 
-            }
+            if (currentTime - lastShotTime < shootCooldown) return; 
             lastShotTime = currentTime;
 
             playSoundPistola();
-
             weaponContainer.style.transform = 'translateX(-50%) translateY(20px) scale(0.95)';
-            setTimeout(() => {
-                weaponContainer.style.transform = 'translateX(-50%) translateY(0) scale(1)';
-            }, 100);
+            setTimeout(() => { weaponContainer.style.transform = 'translateX(-50%) translateY(0) scale(1)'; }, 100);
 
             const centerX = window.innerWidth / 2;
             const centerY = window.innerHeight / 2;
             
-            const targets = document.querySelectorAll('.target');
-            targets.forEach((npc) => {
+            document.querySelectorAll('.target').forEach((npc) => {
                 if (npc.dataset.dead === "true") return;
-
                 const rect = npc.getBoundingClientRect();
                 
-                if (centerX >= rect.left && centerX <= rect.right &&
-                    centerY >= rect.top && centerY <= rect.bottom) {
-                    
-                    if (currentLevel === 6 && upgradesOwned[3] && npc.dataset.groupId) {
+                if (centerX >= rect.left && centerX <= rect.right && centerY >= rect.top && centerY <= rect.bottom) {
+                    if (npc.dataset.groupId) {
                         let gid = npc.dataset.groupId;
-                        const groupMembers = document.querySelectorAll(`.target[data-group-id='${gid}']`);
-                        groupMembers.forEach(member => {
-                            if (member.dataset.dead !== "true") {
-                                eliminateNPC(member, true);
-                            }
+                        document.querySelectorAll(`.target[data-group-id='${gid}']`).forEach(member => {
+                            if (member.dataset.dead !== "true") eliminateNPC(member, true);
                         });
                     } else {
                         eliminateNPC(npc, false);
@@ -1667,16 +1675,17 @@
             });
         }
 
-        weaponContainer.addEventListener('mousedown', (e) => { e.stopPropagation(); fireWeapon(); });
         weaponContainer.addEventListener('touchstart', (e) => { e.stopPropagation(); e.preventDefault(); fireWeapon(); });
+        weaponContainer.addEventListener('mousedown', (e) => { e.stopPropagation(); fireWeapon(); });
 
         function spawnNPC(index) {
             if (!gameStarted || gamePaused) return;
             
-            if (currentLevel === 6 && upgradesOwned[3]) {
-                let groupId = "group_" + Date.now() + "_" + index;
-                for (let k = 0; k < 3; k++) {
-                    createNPCElement(index, groupId, k * 45); 
+            // Regla de Grupos de 2 para la Mejora 40.4 en Nivel 8
+            if (currentLevel === 8 && upgradesOwned[4]) {
+                let groupId = "group8_" + Date.now() + "_" + index;
+                for (let k = 0; k < 2; k++) {
+                    createNPCElement(index, groupId, k * 55);
                 }
             } else {
                 createNPCElement(index, null, 0);
@@ -1687,10 +1696,7 @@
             const npc = document.createElement('img');
             npc.src = 'NPC.PNG';
             npc.className = 'target';
-
-            if (groupId) {
-                npc.dataset.groupId = groupId;
-            }
+            if (groupId) npc.dataset.groupId = groupId;
 
             const screenOffset = -stageX;
             const spawnX = screenOffset + window.innerWidth + 100 + (index * distanceBetweenNPCs) + clusterOffset;
@@ -1698,7 +1704,6 @@
 
             npc.style.left = spawnX + 'px';
             npc.style.top = spawnY + 'px';
-
             stage.appendChild(npc);
 
             let checkInterval = setInterval(() => {
@@ -1707,9 +1712,7 @@
                 if (rect.right < 0) {
                     clearInterval(checkInterval);
                     npc.remove();
-                    if (!groupId || clusterOffset === 0) {
-                        spawnNPC(maxNPCs - 1); 
-                    }
+                    if (!groupId || clusterOffset === 0) spawnNPC(maxNPCs - 1); 
                 }
             }, 1000);
             
@@ -1717,78 +1720,61 @@
             npc.dataset.intervalIndex = activeNPCIntervals.length - 1;
         }
 
-        function eliminateNPC(npc, isTripleKill) {
+        function eliminateNPC(npc, isGroupKill) {
             npc.dataset.dead = "true";
-            
             let idx = npc.dataset.intervalIndex;
-            if(idx !== undefined && activeNPCIntervals[idx]) {
-                clearInterval(activeNPCIntervals[idx]);
-            }
+            if(idx !== undefined && activeNPCIntervals[idx]) clearInterval(activeNPCIntervals[idx]);
 
             npc.src = 'Disparado.PNG';
             
             let config = levelsConfig[currentLevel];
             let rawCoins = config.coinsPerKill;
+            let currentLevelMaxTargets = config.targets;
 
+            // EVALUACIÓN DE LAS RECOMPENSAS DE LAS NUEVAS MEJORAS
+            if (currentLevel === 1) {
+                if (upgradesOwned[5]) {
+                    rawCoins = 6000000 * 6000000; // 36 Trillones 🟡
+                    coinCG += 20;                 // +20 CoinCG 🟣
+                    currentLevelMaxTargets = 10;
+                }
+            }
             if (currentLevel === 2 && upgradesOwned[2]) {
                 rawCoins = rawCoins * 7;
             }
-            if (currentLevel === 7) {
-                if (kills === 0) {
-                    rawCoins += 100;
-                }
-            }
             if (currentLevel === 8) {
-                rawCoins = 300 * 30;
-                if (kills + 1 === 10) {
-                    scrollSpeed = 5.8; 
+                if (upgradesOwned[4]) {
+                    rawCoins = 500 * 600; // 300,000 Monedas 🟡
+                    coinCG += (50 * 5);   // 250 CoinCG 🟣
+                    currentLevelMaxTargets = 10;
+                } else {
+                    rawCoins = 300 * 30;
                 }
             }
-
-            let finalNPCValue = rawCoins;
-            if (isTripleKill) {
-                let tripleBonus = Math.floor(500 / 3);
-                finalNPCValue += tripleBonus;
-                score += tripleBonus; 
+            if (currentLevel === 10) {
+                if (upgradesOwned[6]) {
+                    rawCoins = 6000000000; // 6 Billones 🟡
+                    coinCG += 900;          // 900 CoinCG 🟣
+                    currentLevelMaxTargets = 5;
+                }
             }
 
             score += rawCoins;
-            
-            lastCoinsText.textContent = formatearMonedas(finalNPCValue);
-            
+            lastCoinsText.textContent = formatearMonedas(rawCoins);
             actualizarTextoMonedas(); 
             
             kills++;
-            killsText.textContent = `${kills}/${config.targets}`;
-            
+            killsText.textContent = `${kills}/${currentLevelMaxTargets}`;
             savePlayerProgress();
 
-            if (currentLevel === 4 && upgradesOwned[1] && !npc.dataset.wasDuplicated) {
-                setTimeout(() => {
-                    if (gameStarted && !gamePaused) {
-                        createNPCElement(1, null, 80);
-                        createNPCElement(1, null, 160);
-                        const items = document.querySelectorAll('.target');
-                        if(items.length > 0) {
-                            items[items.length - 1].dataset.wasDuplicated = "true";
-                            if(items.length > 1) items[items.length - 2].dataset.wasDuplicated = "true";
-                        }
-                    }
-                }, 200);
-            }
-
-            if (kills >= config.targets) {
+            if (kills >= currentLevelMaxTargets) {
                 gameStarted = false;
-                setTimeout(() => {
-                    triggerLevelReward();
-                }, 150);
+                setTimeout(() => { triggerLevelReward(); }, 150);
             }
 
             setTimeout(() => {
                 npc.remove();
-                if (gameStarted && !gamePaused && (!npc.dataset.groupId || npc.dataset.groupId === "")) {
-                    spawnNPC(maxNPCs - 1);
-                }
+                if (gameStarted && !gamePaused && !npc.dataset.groupId) spawnNPC(maxNPCs - 1);
             }, 300);
         }
 
@@ -1803,10 +1789,7 @@
             
             let message = `¡NIVEL ${currentLevel} COMPLETADO!<br><span style='color: #ffcc00;'>🎁 MONEDAS: +${formatearMonedas(currentConfig.reward)}</span><br><span style='color: #b026ff;'>💜 ¡GANASTE ${earnedCoinCG} CoinCG!</span>`;
             
-            if (currentLevel === maxUnlockedLevel && maxUnlockedLevel < 10) {
-                maxUnlockedLevel++;
-            }
-            
+            if (currentLevel === maxUnlockedLevel && maxUnlockedLevel < 10) maxUnlockedLevel++;
             savePlayerProgress();
             
             announcement.innerHTML = message;
@@ -1814,15 +1797,11 @@
             
             setTimeout(() => {
                 announcement.style.transform = "translate(-50%, -50%) scale(0)";
-                
                 if (currentLevel === 10) {
                     setTimeout(() => {
-                        announcement.innerHTML = "<span style='color: #ffcc00; font-size: 20px;'>¡BETA COMPLETADA CON ÉXITO!<br><br><span style='color: #00ff00; font-size: 16px;'>¡Felicidades, Piloto! Has dominado la economía trillonaria de MrTube de la mano de ABG Productions®.</span></span>";
+                        announcement.innerHTML = "<span style='color: #ffcc00; font-size: 20px;'>¡BETA COMPLETADA v1.5.2!<br><br><span style='color: #00ff00; font-size: 16px;'>Actualizaciones listas en MrTube de la mano de ABG Productions®.</span></span>";
                         announcement.style.transform = "translate(-50%, -50%) scale(1)";
-                        setTimeout(() => {
-                            announcement.style.transform = "translate(-50%, -50%) scale(0)";
-                            levelSelectionScreen.style.display = 'flex';
-                        }, 6000);
+                        setTimeout(() => { announcement.style.transform = "translate(-50%, -50%) scale(0)"; levelSelectionScreen.style.display = 'flex'; }, 4000);
                     }, 500);
                 } else {
                     levelSelectionScreen.style.display = 'flex';
@@ -1831,72 +1810,34 @@
         }
 
         ingamePauseBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            if (!gameStarted) return;
-            
-            playSoundBoton();
-            gamePaused = true; 
-            savedSpeedBeforePause = scrollSpeed; 
-            scrollSpeed = 0; 
-            
+            e.stopPropagation(); if (!gameStarted) return;
+            playSoundBoton(); gamePaused = true; savedSpeedBeforePause = scrollSpeed; scrollSpeed = 0; 
             pauseOverlayScreen.style.display = "flex"; 
         });
 
-        pauseContinueBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            playSoundBoton();
-            
-            gamePaused = false;
-            scrollSpeed = savedSpeedBeforePause; 
-            
-            pauseOverlayScreen.style.display = "none";
-        });
-
+        pauseContinueBtn.addEventListener('click', (e) => { e.stopPropagation(); playSoundBoton(); gamePaused = false; scrollSpeed = savedSpeedBeforePause; pauseOverlayScreen.style.display = "none"; });
         pauseQuitBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            
-            isMusicMuted = false;
-            isSoundMuted = false;
-            audioMusic.muted = false;
-            
-            gameStarted = false;
-            gamePaused = false;
-            clearAllNPCs();
-            
-            pauseOverlayScreen.style.display = "none";
-            levelSelectionScreen.style.display = "flex"; 
-            
-            actualizarTextoMonedas();
-            
-            audioMusic.play().catch(e => console.log("Audio restore error"));
+            e.stopPropagation(); isMusicMuted = false; isSoundMuted = false; audioMusic.muted = false;
+            gameStarted = false; gamePaused = false; clearAllNPCs();
+            pauseOverlayScreen.style.display = "none"; levelSelectionScreen.style.display = "flex"; 
+            actualizarTextoMonedas(); audioMusic.play().catch(e => {});
         });
 
         toggleMusicBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            isMusicMuted = !isMusicMuted;
-            
+            e.stopPropagation(); isMusicMuted = !isMusicMuted;
             if (isMusicMuted) {
-                audioMusic.muted = true;
-                toggleMusicBtn.textContent = "Música Silenciada";
-                toggleMusicBtn.className = "audio-toggle-btn audio-muted";
+                audioMusic.muted = true; toggleMusicBtn.textContent = "Música Silenciada"; toggleMusicBtn.className = "audio-toggle-btn audio-muted";
             } else {
-                audioMusic.muted = false;
-                toggleMusicBtn.textContent = "Silenciar Música";
-                toggleMusicBtn.className = "audio-toggle-btn audio-active";
-                audioMusic.play().catch(o => {});
+                audioMusic.muted = false; toggleMusicBtn.textContent = "Silenciar Música"; toggleMusicBtn.className = "audio-toggle-btn audio-active"; audioMusic.play().catch(o => {});
             }
         });
 
         toggleSoundBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            isSoundMuted = !isSoundMuted;
-            
+            e.stopPropagation(); isSoundMuted = !isSoundMuted;
             if (isSoundMuted) {
-                toggleSoundBtn.textContent = "Sonidos Silenciados";
-                toggleSoundBtn.className = "audio-toggle-btn audio-muted";
+                toggleSoundBtn.textContent = "Sonidos Silenciados"; toggleSoundBtn.className = "audio-toggle-btn audio-muted";
             } else {
-                toggleSoundBtn.textContent = "Silenciar Sonido";
-                toggleSoundBtn.className = "audio-toggle-btn audio-active";
+                toggleSoundBtn.textContent = "Silenciar Sonido"; toggleSoundBtn.className = "audio-toggle-btn audio-active";
             }
         });
 
