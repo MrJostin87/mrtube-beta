@@ -49,14 +49,13 @@
             background-position: center;
             display: flex;
             flex-direction: column;
-            justify-content: flex-start;
+            justify-content: center;
             align-items: center;
             z-index: 100;
             color: #fff;
             text-align: center;
             padding: 20px;
-            overflow-y: auto; 
-            touch-action: pan-y; 
+            overflow: hidden; 
         }
         #welcome-screen::before {
             content: "";
@@ -68,7 +67,7 @@
         #welcome-screen h1 {
             color: #ffcc00;
             font-size: 34px;
-            margin-top: 50px;
+            margin-top: 10px;
             margin-bottom: 5px;
             text-shadow: 3px 3px #000;
             letter-spacing: 1px;
@@ -86,12 +85,37 @@
             border: 1px solid #fff;
         }
         #welcome-screen p {
-            font-size: 16px;
+            font-size: 15px;
             max-width: 85%;
             line-height: 1.4;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             color: #fff;
             text-shadow: 2px 2px 4px #000;
+        }
+
+        /* BOTÓN DE PERFIL EN EL MENÚ (ARRIBA IZQUIERDA) */
+        #menu-profile-btn {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            border: 3px solid #ffcc00;
+            background: #222;
+            overflow: hidden;
+            cursor: pointer;
+            pointer-events: auto;
+            z-index: 110;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #menu-profile-btn img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         /* BILLETERA GLOBAL EN EL MENÚ */
@@ -125,23 +149,26 @@
             animation: spin 4s linear infinite;
         }
         
-        /* SISTEMA DE REGISTRO NUEVO v1.5.2 */
-        #profile-section {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-bottom: 15px;
-            background: rgba(0, 0, 0, 0.6);
-            padding: 10px;
+        /* PESTAÑA / PANEL DE PERFIL FLOTANTE */
+        #profile-panel {
+            position: absolute;
+            background: rgba(20, 20, 20, 0.98);
+            border: 3px solid #ffcc00;
             border-radius: 15px;
-            border: 2px solid #ffcc00;
-            width: 280px;
+            padding: 20px;
+            width: 310px;
+            display: none;
+            flex-direction: column;
+            gap: 12px;
+            align-items: center;
+            z-index: 115;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.8);
         }
         #profile-pic-container {
             position: relative;
             width: 80px;
             height: 80px;
-            margin-bottom: 5px;
+            margin-bottom: 2px;
         }
         #profile-pic {
             width: 100%;
@@ -155,12 +182,11 @@
             background: #ffcc00;
             color: #000;
             border: 1px solid #fff;
-            font-size: 10px;
+            font-size: 11px;
             font-weight: bold;
-            padding: 2px 6px;
-            border-radius: 5px;
+            padding: 4px 10px;
+            border-radius: 6px;
             cursor: pointer;
-            margin-top: 2px;
             font-family: Arial, sans-serif;
             pointer-events: auto;
         }
@@ -192,7 +218,7 @@
             font-family: Arial, sans-serif;
             font-weight: bold;
             pointer-events: auto;
-            width: 90%;
+            width: 95%;
         }
         .v152-input:focus {
             outline: none;
@@ -208,8 +234,19 @@
             margin-top: 2px;
             display: none;
         }
+        #close-profile-panel-btn {
+            background: #00ff00;
+            color: #000;
+            border: 2px solid #fff;
+            font-family: 'Arial Black', sans-serif;
+            font-size: 12px;
+            padding: 6px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 5px;
+        }
 
-        /* SECCIÓN DE VERIFICACIÓN (ESTOY PREPARANDO) */
+        /* SECCIÓN DE VERIFICACIÓN */
         #ready-container {
             background: rgba(0, 0, 0, 0.6);
             border: 2px solid #ffcc00;
@@ -425,7 +462,7 @@
             cursor: pointer;
         }
 
-        /* PANEL DE SELECCIÓN DE NIVEL DE 10 NIVELES (Grid Mejorado) */
+        /* PANEL DE SELECCIÓN DE NIVEL */
         #level-selection-screen {
             position: absolute;
             top: 0;
@@ -496,11 +533,11 @@
             pointer-events: auto;
         }
 
-        /* CONFIGURACIÓN MENÚ PRINCIPAL */
+        /* CONFIGURACIÓN MENÚ PRINCIPAL (ARRIBA DERECHA) */
         #settings-toggle-btn {
             position: absolute;
             top: 15px;
-            left: 15px;
+            right: 15px;
             background: rgba(0, 0, 0, 0.7);
             color: #fff;
             border: 2px solid #ffcc00;
@@ -523,8 +560,6 @@
             border: 3px solid #ffcc00;
             border-radius: 15px;
             padding: 20px;
-            margin-top: 60px;
-            margin-bottom: 20px;
             width: 310px;
             display: none;
             flex-direction: column;
@@ -544,17 +579,6 @@
             font-size: 13px;
             color: #ffcc00;
             font-weight: bold;
-        }
-        .setting-select {
-            background: #333;
-            color: #fff;
-            border: 2px solid #555;
-            padding: 6px;
-            border-radius: 6px;
-            width: 95%;
-            font-size: 13px;
-            pointer-events: auto;
-            text-align: center;
         }
         .music-panel-btn {
             width: 95%;
@@ -638,7 +662,7 @@
             animation: spin 4s linear infinite;
         }
 
-        /* BOTÓN DE PAUSA EN EL NIVEL (ENGRANAJE) */
+        /* BOTÓN DE PAUSA EN EL NIVEL */
         #ingame-pause-btn {
             background: rgba(0, 0, 0, 0.7);
             color: #fff;
@@ -655,7 +679,7 @@
             box-shadow: 0 4px 6px rgba(0,0,0,0.3);
         }
 
-        /* PANTALLA DE MENÚ DE PAUSA DENTRO DEL NIVEL */
+        /* PANTALLA DE PAUSA DENTRO DEL NIVEL */
         #pause-overlay-screen {
             position: absolute;
             top: 0;
@@ -734,7 +758,7 @@
             border-color: #333;
         }
 
-        /* VENTANA FLOTANTE DE SUSCRIPCIÓN REBALACEADA */
+        /* VENTANA FLOTANTE DE SUSCRIPCIÓN */
         #subscribe-popup {
             position: absolute;
             top: 50%;
@@ -870,59 +894,16 @@
         </div>
     </div>
 
+    <div id="menu-profile-btn">
+        <img id="menu-avatar-preview" src="Foto.PNG" alt="Avatar">
+    </div>
+
     <button id="settings-toggle-btn">⚙️</button>
 
     <div id="welcome-screen">
-        <div id="settings-panel">
-            <div class="setting-row">
-                <label>OPCIONES DE MÚSICA / AUDIO:</label>
-                <button id="music-btn-normal" class="music-panel-btn music-btn-active">Música Normal 🎵</button>
-                <button id="music-btn-2" class="music-panel-btn music-btn-inactive">Música 2.0 ⚡</button>
-                <button id="music-btn-voice" class="music-panel-btn music-btn-inactive">Música 2.0 VoiceOver 🎤</button>
-            </div>
-
-            <div class="setting-row">
-                <label id="label-lang">IDIOMA / LANGUAGE:</label>
-                <select id="lang-select" class="setting-select">
-                    <option value="es">Español</option>
-                    <option value="en">English (Inglés)</option>
-                    <option value="fr">Français (Francés)</option>
-                    <option value="pt">Português (Portugués)</option>
-                    <option value="ru">Русский (Ruso)</option>
-                    <option value="de">Deutsch (Alemán)</option>
-                    <option value="es-la">Español Latinoamericano</option>
-                    <option value="es-es">Español de España</option>
-                    <option value="tr">Türkçe (Turco)</option>
-                    <option value="ar">العربية (Árabe)</option>
-                    <option value="hi">हिन्दी (Indio)</option>
-                    <option value="ja">日本語 (Japonés)</option>
-                    <option value="ko">한국어 (Coreano)</option>
-                </select>
-            </div>
-
-            <div id="code-section">
-                <label id="label-code">CÓDIGO DE MONEDAS:</label>
-                <input type="text" id="code-input" placeholder="Introduce código" maxlength="15">
-                <button id="code-submit-btn">ACEPTAR</button>
-            </div>
-        </div>
-
-        <h1 id="welcome-title">CHICKEN STRIKE NPC</h1>
-        <div id="version-tag">1.5.2 Beta</div>
-        <p id="welcome-desc">¡Bienvenido! Esta es una versión beta oficial del juego, por lo que podría contener algunos errores y bugs en el mapa durante el desarrollo en la plataforma MrTube.<br>Diseñado por ABG Productions® y Sprunki Animations Studios.</p>
         
-        <div class="menu-wallet">
-            <div class="menu-wallet-box">
-                <img src="Moneda.PNG" alt="Moneda" class="coin-spin">
-                <span id="menu-score-text-1">0</span>
-            </div>
-            <div class="menu-wallet-box purple-wallet">
-                <img src="CoinCG.PNG" alt="CoinCG">
-                <span id="menu-coincg-text-1">0</span>
-            </div>
-        </div>
-
-        <div id="profile-section">
+        <div id="profile-panel">
+            <h3 style="color: #ffcc00; margin: 0 0 5px 0; font-size: 18px; text-shadow: 2px 2px #000;">PERFIL DE JUGADOR</h3>
             <div id="profile-pic-container">
                 <img id="profile-pic" src="Foto.PNG" alt="Perfil">
             </div>
@@ -939,7 +920,27 @@
                     <div id="creator-badge" class="badge-casilla">Propiedad del creador</div>
                 </div>
             </div>
+            <button id="close-profile-panel-btn">GUARDAR Y CERRAR</button>
         </div>
+
+        <div id="settings-panel">
+            <div class="setting-row">
+                <label>OPCIONES DE MÚSICA / AUDIO:</label>
+                <button id="music-btn-normal" class="music-panel-btn music-btn-active">Música Normal 🎵</button>
+                <button id="music-btn-2" class="music-panel-btn music-btn-inactive">Música 2.0 ⚡</button>
+                <button id="music-btn-voice" class="music-panel-btn music-btn-inactive">Música 2.0 VoiceOver 🎤</button>
+            </div>
+
+            <div id="code-section">
+                <label id="label-code">CÓDIGO DE MONEDAS:</label>
+                <input type="text" id="code-input" placeholder="Introduce código" maxlength="15">
+                <button id="code-submit-btn">ACEPTAR</button>
+            </div>
+        </div>
+
+        <h1 id="welcome-title">CHICKEN STRIKE $UNIC</h1>
+        <div id="version-tag">1.5.2 Beta</div>
+        <p id="welcome-desc">¡Bienvenido! Esta es una versión beta oficial del juego, por lo que podría contener algunos errores y bugs en el mapa durante el desarrollo en la plataforma MrTube.<br>Diseñado por ABG Productions® y Sprunki Animations Studios.</p>
 
         <div id="ready-container">
             <input type="checkbox" id="ready-checkbox">
@@ -1155,7 +1156,12 @@
         const subYesBtn = document.getElementById('sub-yes-btn');
         const subNoBtn = document.getElementById('sub-no-btn');
         
-        // Elementos de registro v1.5.2
+        // Elementos de perfil y registro
+        const menuProfileBtn = document.getElementById('menu-profile-btn');
+        const profilePanel = document.getElementById('profile-panel');
+        const closeProfilePanelBtn = document.getElementById('close-profile-panel-btn');
+        const menuAvatarPreview = document.getElementById('menu-avatar-preview');
+
         const usernameInput = document.getElementById('username-input');
         const emailInput = document.getElementById('email-input');
         const profilePic = document.getElementById('profile-pic');
@@ -1165,7 +1171,6 @@
 
         const settingsToggleBtn = document.getElementById('settings-toggle-btn');
         const settingsPanel = document.getElementById('settings-panel');
-        const langSelect = document.getElementById('lang-select');
         const codeInput = document.getElementById('code-input');
         const codeSubmitBtn = document.getElementById('code-submit-btn');
 
@@ -1208,7 +1213,6 @@
         const maxNPCs = 10;
         const distanceBetweenNPCs = 350;
 
-        // Soporte extendido para las nuevas mejoras v1.5.2
         let upgradesOwned = { 1: false, 2: false, 3: false, 4: false, 5: false, 6: false };
         let lastShotTime = 0;
         let shootCooldown = 400; 
@@ -1282,7 +1286,18 @@
         musicBtn2.addEventListener('click', () => { playSoundBoton(); changeMusicTrack("2.0"); });
         musicBtnVoice.addEventListener('click', () => { playSoundBoton(); changeMusicTrack("voice"); });
 
-        // SISTEMA DE CARGA DE IMAGEN DE GALERÍA
+        // SISTEMA DE INTERFACES FLOTANTES DEL MENÚ
+        menuProfileBtn.addEventListener('click', () => {
+            playSoundBoton();
+            settingsPanel.style.display = "none"; // Cierra el otro panel por orden
+            profilePanel.style.display = (profilePanel.style.display === "none" || profilePanel.style.display === "") ? "flex" : "none";
+        });
+
+        closeProfilePanelBtn.addEventListener('click', () => {
+            playSoundBoton();
+            profilePanel.style.display = "none";
+        });
+
         editPfpBtn.addEventListener('click', () => {
             playSoundBoton();
             pfpFileInput.click();
@@ -1294,6 +1309,7 @@
                 const reader = new FileReader();
                 reader.onload = function(e) {
                     profilePic.src = e.target.result;
+                    menuAvatarPreview.src = e.target.result;
                     if(currentUsername !== "") {
                         localStorage.setItem('cs_pfp_' + currentUsername, e.target.result);
                     }
@@ -1302,12 +1318,10 @@
             }
         });
 
-        // MANEJO E INTEGRACIÓN DE NOMBRES BLOQUEADOS Y CASILLA CREADOR
         usernameInput.addEventListener('input', () => {
             let name = usernameInput.value.trim();
             let lowerName = name.toLowerCase();
 
-            // Bloqueo estricto de variaciones protegidas
             if (lowerName === "abg" || lowerName === "abg productions" || lowerName === "abg productions®" || (lowerName === "mr.jostin" && name !== "Mr.Jostin")) {
                 alert("❌ ¡Este nombre está protegido por derechos de autor!");
                 usernameInput.value = "";
@@ -1315,7 +1329,6 @@
                 return;
             }
 
-            // Casilla Automática del Creador Único
             if (name === "Mr.Jostin") {
                 creatorBadge.style.display = "block";
             } else {
@@ -1354,8 +1367,13 @@
             if(savedEmail !== null) emailInput.value = savedEmail;
             else emailInput.value = "";
 
-            if(savedPfp !== null) profilePic.src = savedPfp;
-            else profilePic.src = "Foto.PNG";
+            if(savedPfp !== null) {
+                profilePic.src = savedPfp;
+                menuAvatarPreview.src = savedPfp;
+            } else {
+                profilePic.src = "Foto.PNG";
+                menuAvatarPreview.src = "Foto.PNG";
+            }
 
             actualizarTextoMonedas();
 
@@ -1421,7 +1439,7 @@
         function buyUpgrade(id, costCoins, costCoinCG) {
             playSoundBoton();
             if (currentUsername === "") {
-                alert("Por favor, ingresa tu nombre primero.");
+                alert("Por favor, ingresa tu nombre primero en el botón de perfil.");
                 return;
             }
             if (upgradesOwned[id]) {
@@ -1487,6 +1505,7 @@
 
         settingsToggleBtn.addEventListener('click', () => {
             playSoundBoton();
+            profilePanel.style.display = "none"; // Cierra el de perfil por orden
             settingsPanel.style.display = (settingsPanel.style.display === "none" || settingsPanel.style.display === "") ? "flex" : "none";
         });
 
@@ -1550,7 +1569,8 @@
             playSoundBoton();
             let finalName = usernameInput.value.trim();
             if(finalName === "") {
-                alert("Por favor introduce un nombre válido para continuar.");
+                alert("Por favor abre tu foto de perfil arriba a la izquierda e introduce un nombre válido para continuar.");
+                profilePanel.style.display = "flex";
                 return;
             }
             if (!readyCheckbox.checked) return;
@@ -1559,6 +1579,8 @@
             savePlayerProgress();
             welcomeScreen.style.display = 'none';
             playMenuScreen.style.display = 'flex'; 
+            menuProfileBtn.style.display = 'none'; // Se oculta al jugar
+            settingsToggleBtn.style.display = 'none';
         });
 
         jugarMainBtn.addEventListener('click', () => { playSoundBoton(); playMenuScreen.style.display = 'none'; levelSelectionScreen.style.display = 'flex'; });
@@ -1574,30 +1596,27 @@
             });
         });
 
-        // CONTROL DE REGLAS DE NIVELES ACTUALIZADO v1.5.2
         function startLevel(lvl) {
             levelSelectionScreen.style.display = 'none';
             currentLevel = lvl;
             kills = 0;
             gamePaused = false;
             
-            // Reajuste de objetivos dinámicos por mejoras activadas
             let totalTargets = levelsConfig[lvl].targets;
             scrollSpeed = levelsConfig[lvl].speed;
 
             if (currentLevel === 1 && upgradesOwned[5]) {
-                totalTargets = 10; // Petición Mejora 50.5
-                scrollSpeed = 9.5;  // Más rápido que el nivel 10 base
+                totalTargets = 10; 
+                scrollSpeed = 9.5;  
             }
             if (currentLevel === 8 && upgradesOwned[4]) {
-                totalTargets = 10; // Petición Mejora 40.4
+                totalTargets = 10; 
             }
             if (currentLevel === 10 && upgradesOwned[6]) {
-                totalTargets = 5;  // Petición Mejora 60.6
-                scrollSpeed = 16.0; // Muchísimo más veloz
+                totalTargets = 5;  
+                scrollSpeed = 16.0; 
             }
 
-            // Texturas de Armas según prioridades
             if (upgradesOwned[6]) { weaponImage.src = 'Manos_Mejora6.PNG'; }
             else if (upgradesOwned[5]) { weaponImage.src = 'Manos_Mejora5.PNG'; }
             else if (upgradesOwned[4]) { weaponImage.src = 'Manos_Mejora4.PNG'; }
@@ -1681,7 +1700,6 @@
         function spawnNPC(index) {
             if (!gameStarted || gamePaused) return;
             
-            // Regla de Grupos de 2 para la Mejora 40.4 en Nivel 8
             if (currentLevel === 8 && upgradesOwned[4]) {
                 let groupId = "group8_" + Date.now() + "_" + index;
                 for (let k = 0; k < 2; k++) {
@@ -1731,11 +1749,10 @@
             let rawCoins = config.coinsPerKill;
             let currentLevelMaxTargets = config.targets;
 
-            // EVALUACIÓN DE LAS RECOMPENSAS DE LAS NUEVAS MEJORAS
             if (currentLevel === 1) {
                 if (upgradesOwned[5]) {
-                    rawCoins = 6000000 * 6000000; // 36 Trillones 🟡
-                    coinCG += 20;                 // +20 CoinCG 🟣
+                    rawCoins = 6000000 * 6000000; 
+                    coinCG += 20;                 
                     currentLevelMaxTargets = 10;
                 }
             }
@@ -1744,8 +1761,8 @@
             }
             if (currentLevel === 8) {
                 if (upgradesOwned[4]) {
-                    rawCoins = 500 * 600; // 300,000 Monedas 🟡
-                    coinCG += (50 * 5);   // 250 CoinCG 🟣
+                    rawCoins = 500 * 600; 
+                    coinCG += (50 * 5);   
                     currentLevelMaxTargets = 10;
                 } else {
                     rawCoins = 300 * 30;
@@ -1753,8 +1770,8 @@
             }
             if (currentLevel === 10) {
                 if (upgradesOwned[6]) {
-                    rawCoins = 6000000000; // 6 Billones 🟡
-                    coinCG += 900;          // 900 CoinCG 🟣
+                    rawCoins = 6000000000; 
+                    coinCG += 900;          
                     currentLevelMaxTargets = 5;
                 }
             }
