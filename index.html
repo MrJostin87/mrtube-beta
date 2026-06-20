@@ -118,6 +118,34 @@
             object-fit: cover;
         }
 
+        /* COMPONENTE DE PERFIL EN EL MENÚ PRINCIPAL INTERMEDIO */
+        .menu-main-profile {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 15px;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 12px 25px;
+            border-radius: 15px;
+            border: 2px solid #ffcc00;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+        .menu-main-avatar {
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            border: 3px solid #ffcc00;
+            object-fit: cover;
+            background: #222;
+        }
+        .menu-main-name {
+            color: #fff;
+            font-size: 20px;
+            text-shadow: 2px 2px #000;
+            letter-spacing: 0.5px;
+        }
+
         /* BILLETERA GLOBAL EN EL MENÚ */
         .menu-wallet {
             display: flex;
@@ -319,7 +347,7 @@
         #play-menu-screen h1 {
             color: #ffcc00;
             font-size: 42px;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
             text-shadow: 4px 4px #000;
             letter-spacing: 1px;
         }
@@ -938,7 +966,7 @@
             </div>
         </div>
 
-        <h1 id="welcome-title">CHICKEN STRIKE $UNIC</h1>
+        <h1 id="welcome-title">CHICKEN STRIKE NPC</h1>
         <div id="version-tag">1.5.2 Beta</div>
         <p id="welcome-desc">¡Bienvenido! Esta es una versión beta oficial del juego, por lo que podría contener algunos errores y bugs en el mapa durante el desarrollo en la plataforma MrTube.<br>Diseñado por ABG Productions® y Sprunki Animations Studios.</p>
 
@@ -953,6 +981,11 @@
 
     <div id="play-menu-screen">
         <h1>CHICKEN STRIKE<br>NPC</h1>
+
+        <div class="menu-main-profile">
+            <img id="menu-main-avatar-img" class="menu-main-avatar" src="Foto.PNG" alt="Avatar Juego">
+            <div id="menu-main-name-txt" class="menu-main-name">Mr. Jostin</div>
+        </div>
 
         <div class="menu-wallet">
             <div class="menu-wallet-box">
@@ -1161,6 +1194,10 @@
         const profilePanel = document.getElementById('profile-panel');
         const closeProfilePanelBtn = document.getElementById('close-profile-panel-btn');
         const menuAvatarPreview = document.getElementById('menu-avatar-preview');
+        
+        // Elementos del perfil integrado en el menú
+        const menuMainAvatarImg = document.getElementById('menu-main-avatar-img');
+        const menuMainNameTxt = document.getElementById('menu-main-name-txt');
 
         const usernameInput = document.getElementById('username-input');
         const emailInput = document.getElementById('email-input');
@@ -1289,7 +1326,7 @@
         // SISTEMA DE INTERFACES FLOTANTES DEL MENÚ
         menuProfileBtn.addEventListener('click', () => {
             playSoundBoton();
-            settingsPanel.style.display = "none"; // Cierra el otro panel por orden
+            settingsPanel.style.display = "none"; 
             profilePanel.style.display = (profilePanel.style.display === "none" || profilePanel.style.display === "") ? "flex" : "none";
         });
 
@@ -1310,6 +1347,7 @@
                 reader.onload = function(e) {
                     profilePic.src = e.target.result;
                     menuAvatarPreview.src = e.target.result;
+                    menuMainAvatarImg.src = e.target.result; // Actualiza el menú intermedio
                     if(currentUsername !== "") {
                         localStorage.setItem('cs_pfp_' + currentUsername, e.target.result);
                     }
@@ -1337,6 +1375,7 @@
 
             if (name !== "") {
                 currentUsername = name;
+                menuMainNameTxt.textContent = currentUsername; // Setea el nombre en el menú intermedio
                 localStorage.setItem('cs_saved_username', currentUsername);
                 loadPlayerProgress(currentUsername);
             }
@@ -1345,6 +1384,7 @@
         if(localStorage.getItem('cs_saved_username')) {
             currentUsername = localStorage.getItem('cs_saved_username');
             usernameInput.value = currentUsername;
+            menuMainNameTxt.textContent = currentUsername; // Setea el nombre guardado al arrancar
             if(currentUsername === "Mr.Jostin") creatorBadge.style.display = "block";
             loadPlayerProgress(currentUsername);
         } else {
@@ -1370,9 +1410,11 @@
             if(savedPfp !== null) {
                 profilePic.src = savedPfp;
                 menuAvatarPreview.src = savedPfp;
+                menuMainAvatarImg.src = savedPfp; // Carga el avatar guardado en el menú principal
             } else {
                 profilePic.src = "Foto.PNG";
                 menuAvatarPreview.src = "Foto.PNG";
+                menuMainAvatarImg.src = "Foto.PNG";
             }
 
             actualizarTextoMonedas();
@@ -1505,7 +1547,7 @@
 
         settingsToggleBtn.addEventListener('click', () => {
             playSoundBoton();
-            profilePanel.style.display = "none"; // Cierra el de perfil por orden
+            profilePanel.style.display = "none"; 
             settingsPanel.style.display = (settingsPanel.style.display === "none" || settingsPanel.style.display === "") ? "flex" : "none";
         });
 
@@ -1579,7 +1621,7 @@
             savePlayerProgress();
             welcomeScreen.style.display = 'none';
             playMenuScreen.style.display = 'flex'; 
-            menuProfileBtn.style.display = 'none'; // Se oculta al jugar
+            menuProfileBtn.style.display = 'none'; 
             settingsToggleBtn.style.display = 'none';
         });
 
