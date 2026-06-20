@@ -377,6 +377,11 @@
             color: #000;
             box-shadow: 0 5px 15px rgba(255,204,0,0.4);
         }
+        #resats-main-btn {
+            background: #00bfff;
+            color: #000;
+            box-shadow: 0 5px 15px rgba(0, 191, 255, 0.4);
+        }
         #salir-main-btn {
             background: #ff3333;
             color: #fff;
@@ -564,7 +569,7 @@
             pointer-events: auto;
         }
 
-        /* CONFIGURACIÓN MENÚ PRINCIPAL (ARRIBA IZQUIERDA DESDE EL MENÚ DE JUEGO) */
+        /* CONFIGURACIÓN MENÚ PRINCIPAL */
         #settings-toggle-btn {
             position: absolute;
             top: 15px;
@@ -585,20 +590,20 @@
             z-index: 120;
         }
 
-        /* PANEL DE CONFIGURACIONES */
+        /* PANEL DE CONFIGURACIONES ACTUALIZADO (BUG FIX DISEÑO OSCURO) */
         #settings-panel {
             position: absolute;
-            background: rgba(20, 20, 20, 0.98);
-            border: 3px solid #ffcc00;
-            border-radius: 15px;
+            background: linear-gradient(135deg, #151515 0%, #252525 100%);
+            border: 4px solid #ffcc00;
+            border-radius: 20px;
             padding: 20px;
-            width: 310px;
+            width: 320px;
             display: none;
             flex-direction: column;
-            gap: 12px;
+            gap: 14px;
             align-items: center;
             z-index: 125;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.8);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.9), inset 0 0 15px rgba(255, 204, 0, 0.2);
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
@@ -607,62 +612,112 @@
             display: flex;
             flex-direction: column;
             width: 100%;
-            gap: 5px;
+            gap: 6px;
             align-items: center;
         }
         .setting-row label {
-            font-size: 13px;
+            font-size: 14px;
             color: #ffcc00;
             font-weight: bold;
+            text-shadow: 2px 2px #000;
+            text-align: center;
         }
         .music-panel-btn {
             width: 95%;
-            padding: 8px;
+            padding: 10px;
             font-size: 12px;
             font-family: 'Arial Black', sans-serif;
-            border-radius: 6px;
+            border-radius: 8px;
             border: 2px solid #fff;
             cursor: pointer;
             pointer-events: auto;
             text-align: center;
             margin-bottom: 2px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
         }
-        .music-btn-active { background: #00ff00; color: #000; }
+        .music-btn-active { background: #00ff00; color: #000; border-color: #fff; }
         .music-btn-inactive { background: #444; color: #aaa; border-color: #333; }
 
         /* CÓDIGOS DE RECOMPENSA */
         #code-section {
-            border-top: 2px dashed #444;
-            padding-top: 10px;
+            border-top: 3px dashed #ffcc00;
+            padding-top: 12px;
             width: 100%;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
         }
         #code-input {
             background: #000;
             border: 2px solid #00ff00;
             color: #00ff00;
-            padding: 6px;
-            font-size: 15px;
-            border-radius: 6px;
-            width: 70%;
+            padding: 8px;
+            font-size: 16px;
+            border-radius: 8px;
+            width: 80%;
             text-align: center;
-            letter-spacing: 3px;
+            letter-spacing: 2px;
             font-family: monospace;
+            font-weight: bold;
             pointer-events: auto;
         }
         #code-submit-btn {
             background: #00ff00;
             color: #000;
-            border: none;
-            padding: 6px 15px;
-            font-size: 12px;
-            border-radius: 5px;
+            border: 2px solid #fff;
+            padding: 8px 20px;
+            font-size: 13px;
+            border-radius: 8px;
             cursor: pointer;
-            font-weight: bold;
+            font-family: 'Arial Black', sans-serif;
             pointer-events: auto;
+            box-shadow: 0 4px 6px rgba(0,255,0,0.3);
+        }
+
+        /* PESTAÑA / PANEL DE RESATS (📕 GUÍA DE CONSEJOS) */
+        #resats-panel {
+            position: absolute;
+            background: linear-gradient(to bottom, #111, #222);
+            border: 4px solid #00bfff;
+            border-radius: 20px;
+            padding: 20px;
+            width: 340px;
+            height: 80vh;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            z-index: 135;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.9);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .resats-content {
+            width: 100%;
+            overflow-y: auto;
+            flex-image: 1;
+            padding-right: 5px;
+            text-align: left;
+            font-family: Arial, sans-serif;
+            color: #fff;
+            font-size: 13px;
+            line-height: 1.4;
+        }
+        .resats-content h4 {
+            color: #ffcc00;
+            margin: 10px 0 5px 0;
+            font-family: 'Arial Black', sans-serif;
+            border-bottom: 1px solid #444;
+            padding-bottom: 2px;
+        }
+        .resats-code-list {
+            background: rgba(0,0,0,0.5);
+            padding: 8px;
+            border-radius: 8px;
+            font-family: monospace;
+            color: #00ff00;
+            font-size: 12px;
         }
 
         /* INTERFAZ (UI) */
@@ -672,7 +727,7 @@
             left: 15px;
             right: 15px;
             display: flex;
-            justify-between: space-between;
+            justify-content: space-between;
             align-items: center;
             z-index: 10;
             pointer-events: none;
@@ -992,10 +1047,22 @@
 
         <button id="jugar-main-btn" class="large-game-btn">Jugar</button>
         <button id="tienda-main-btn" class="large-game-btn">Tienda</button>
+        <button id="resats-main-btn" class="large-game-btn">Resats 📕</button>
         <button id="salir-main-btn" class="large-game-btn">Salir del Juego</button>
     </div>
 
     <div id="settings-panel">
+        <div class="menu-wallet" style="margin-bottom: 5px;">
+            <div class="menu-wallet-box" style="font-size:12px; padding:4px 8px;">
+                <img src="Moneda.PNG" alt="Moneda" class="coin-spin">
+                <span id="menu-score-text-5">0</span>
+            </div>
+            <div class="menu-wallet-box purple-wallet" style="font-size:12px; padding:4px 8px;">
+                <img src="CoinCG.PNG" alt="CoinCG">
+                <span id="menu-coincg-text-5">0</span>
+            </div>
+        </div>
+
         <div class="setting-row">
             <label>OPCIONES DE MÚSICA / AUDIO:</label>
             <button id="music-btn-normal" class="music-panel-btn music-btn-active">Música Normal 🎵</button>
@@ -1008,7 +1075,34 @@
             <input type="text" id="code-input" placeholder="Introduce código" maxlength="15">
             <button id="code-submit-btn">ACEPTAR</button>
         </div>
-        <button id="close-settings-btn" style="background:#ff3333; color:#fff; border:2px solid #fff; border-radius:8px; padding:5px 15px; font-family:sans-serif; font-weight:bold; cursor:pointer; margin-top:5px;">CERRAR</button>
+        <button id="close-settings-btn" style="background:#ff3333; color:#fff; border:2px solid #fff; border-radius:8px; padding:6px 20px; font-family:'Arial Black', sans-serif; font-size:12px; cursor:pointer; margin-top:5px; box-shadow:0 4px 6px rgba(0,0,0,0.4);">CERRAR</button>
+    </div>
+
+    <div id="resats-panel">
+        <h3 style="color: #00bfff; margin: 0 0 10px 0; font-size: 24px; text-shadow: 2px 2px #000; text-align:center;">RESATS 📕</h3>
+        <div class="resats-content">
+            <h4>💡 CONSEJOS PARA NOVATOS</h4>
+            <p>• <b>¿Cómo pasarse un nivel?:</b> Apunta con precisión al centro de la pantalla usando la mira (Crosshair) y presiona tus manos o el arma justo cuando el NPC pase por el centro.</p>
+            <p>• <b>Mejoras:</b> Ahorra tus monedas y CoinCG para comprar mejoras en la Tienda. ¡La Mejora 1 reduce drásticamente el enfriamiento de disparo!</p>
+            
+            <h4>🔑 CÓDIGOS DE MONEDAS Y COINCG</h4>
+            <div class="resats-code-list">
+                328: +50 Monedas<br>
+                589: +200 Monedas<br>
+                194: +70 Monedas<br>
+                MJ8: +800 Monedas<br>
+                184: +500 Monedas<br>
+                50M: +50 Millones Monedas<br>
+                ABG: +100 CoinCG 🟣<br>
+                67X: +67 CoinCG 🟣<br>
+                M18: +1000 Monedas<br>
+                900: +9000 Monedas<br>
+                MRT: +60 CoinCG 🟣<br>
+                15A: +15 CoinCG 🟣
+            </div>
+            <p style="margin-top:10px; font-size:11px; color:#aaa; text-align:center;">ABG Productions® & Sprunki Animations Studios</p>
+        </div>
+        <button id="close-resats-btn" style="background:#ff3333; color:#fff; border:2px solid #fff; border-radius:10px; padding:8px 25px; font-family:'Arial Black', sans-serif; font-size:14px; cursor:pointer; margin-top:12px; width:90%;">VOLVER</button>
     </div>
 
     <div id="shop-screen">
@@ -1218,6 +1312,11 @@
         const codeInput = document.getElementById('code-input');
         const codeSubmitBtn = document.getElementById('code-submit-btn');
 
+        // ELEMENTOS ASOCIADOS A RESATS
+        const resatsMainBtn = document.getElementById('resats-main-btn');
+        const resatsPanel = document.getElementById('resats-panel');
+        const closeResatsBtn = document.getElementById('close-resats-btn');
+
         const musicBtnNormal = document.getElementById('music-btn-normal');
         const musicBtn2 = document.getElementById('music-btn-2');
         const musicBtnVoice = document.getElementById('music-btn-voice');
@@ -1281,7 +1380,7 @@
             coincgText.textContent = coinCG;
 
             const formatted = formatearMonedas(score);
-            for (let i = 1; i <= 4; i++) {
+            for (let i = 1; i <= 5; i++) {
                 let mScore = document.getElementById(`menu-score-text-${i}`);
                 let mCoin = document.getElementById(`menu-coincg-text-${i}`);
                 if (mScore) mScore.textContent = formatted;
@@ -1332,6 +1431,7 @@
         menuProfileBtn.addEventListener('click', () => {
             playSoundBoton();
             settingsPanel.style.display = "none"; 
+            resatsPanel.style.display = "none";
             profilePanel.style.display = (profilePanel.style.display === "none" || profilePanel.style.display === "") ? "flex" : "none";
         });
 
@@ -1554,12 +1654,26 @@
         settingsToggleBtn.addEventListener('click', () => {
             playSoundBoton();
             profilePanel.style.display = "none"; 
+            resatsPanel.style.display = "none";
             settingsPanel.style.display = (settingsPanel.style.display === "none" || settingsPanel.style.display === "") ? "flex" : "none";
         });
 
         closeSettingsBtn.addEventListener('click', () => {
             playSoundBoton();
             settingsPanel.style.display = "none";
+        });
+
+        // EVENTOS DEL NUEVO BOTÓN RESATS 📕
+        resatsMainBtn.addEventListener('click', () => {
+            playSoundBoton();
+            profilePanel.style.display = "none";
+            settingsPanel.style.display = "none";
+            resatsPanel.style.display = "flex";
+        });
+
+        closeResatsBtn.addEventListener('click', () => {
+            playSoundBoton();
+            resatsPanel.style.display = "none";
         });
 
         codeSubmitBtn.addEventListener('click', () => {
@@ -1634,7 +1748,6 @@
             playMenuScreen.style.display = 'flex'; 
             menuProfileBtn.style.display = 'none'; 
             
-            // EL ENGRANAJE APARECE EXACTAMENTE AQUÍ EN EL MENÚ PRINCIPAL
             settingsToggleBtn.style.display = 'flex';
         });
 
