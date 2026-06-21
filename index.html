@@ -675,7 +675,7 @@
             box-shadow: 0 4px 6px rgba(0,255,0,0.3);
         }
 
-        /* PESTAÑA / PANEL DE RESATS (📕 GUÍA DE CONSEJOS) */
+        /* PESTAÑA / PANEL DE RESATS (📕 GUÍA DE CONSEJOS con Scroll Habilitado) */
         #resats-panel {
             position: absolute;
             background: linear-gradient(to bottom, #111, #222);
@@ -692,21 +692,23 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
+            touch-action: pan-y !important;
         }
         .resats-content {
             width: 100%;
             overflow-y: auto;
-            flex-image: 1;
+            flex: 1;
             padding-right: 5px;
             text-align: left;
             font-family: Arial, sans-serif;
             color: #fff;
             font-size: 13px;
             line-height: 1.4;
+            touch-action: pan-y !important;
         }
         .resats-content h4 {
-            color: #ffcc00;
-            margin: 10px 0 5px 0;
+            color: #00bfff;
+            margin: 15px 0 5px 0;
             font-family: 'Arial Black', sans-serif;
             border-bottom: 1px solid #444;
             padding-bottom: 2px;
@@ -1081,6 +1083,16 @@
     <div id="resats-panel">
         <h3 style="color: #00bfff; margin: 0 0 10px 0; font-size: 24px; text-shadow: 2px 2px #000; text-align:center;">RESATS 📕</h3>
         <div class="resats-content">
+            <p style="color: #ffcc00; font-weight: bold; font-size: 14px; margin-bottom: 12px;">📕 ¡Bienvenido a la sección Resats!</p>
+            <p>Esta es la sección ideal para todos los novatos que van arrancando su aventura en el juego. Si eres nuevo por aquí y quieres empezar con el pie derecho, ¡este es tu lugar!</p>
+            <p>Aquí te daremos todo lo necesario para dominar el juego desde el primer día:</p>
+            <p>• 🎮 <b>Guías básicas:</b> Cómo jugar y aprender los controles principales.</p>
+            <p>• 🪙 <b>Economía:</b> Los mejores consejos sobre cómo conseguir monedas rápidamente.</p>
+            <p>• 🔑 <b>Regalos especiales:</b> ¡Códigos activos para canjear por monedas gratis!</p>
+            <p style="background: rgba(255, 51, 51, 0.2); border: 1px dashed #ff3333; padding: 8px; border-radius: 6px; font-size: 11px; margin-top: 10px;">
+                ⚠️ <b>Nota importante:</b> Esta sección se encuentra actualmente en versión Beta. Estamos trabajando para mejorarla, por lo que algunas funciones o guías podrían cambiar o actualizarse pronto.
+            </p>
+
             <h4>💡 CONSEJOS PARA NOVATOS</h4>
             <p>• <b>¿Cómo pasarse un nivel?:</b> Apunta con precisión al centro de la pantalla usando la mira (Crosshair) y presiona tus manos o el arma justo cuando el NPC pase por el centro.</p>
             <p>• <b>Mejoras:</b> Ahorra tus monedas y CoinCG para comprar mejoras en la Tienda. ¡La Mejora 1 reduce drásticamente el enfriamiento de disparo!</p>
@@ -1098,9 +1110,13 @@
                 M18: +1000 Monedas<br>
                 900: +9000 Monedas<br>
                 MRT: +60 CoinCG 🟣<br>
-                15A: +15 CoinCG 🟣
+                15A: +15 CoinCG 🟣<br>
+                <span style="color: #ffcc00; font-weight:bold;">[ESPECIALES]</span><br>
+                MrJ: +5 Trillones Monedas (Completa Nivel 4)<br>
+                123: +123 Millones Monedas (Compra Mejora 10.1)<br>
+                456: +500 CoinCG 🟣 (Completa Nivel 10)
             </div>
-            <p style="margin-top:10px; font-size:11px; color:#aaa; text-align:center;">ABG Productions® & Sprunki Animations Studios</p>
+            <p style="margin-top:15px; font-size:11px; color:#aaa; text-align:center;">ABG Productions® & Sprunki Animations Studios</p>
         </div>
         <button id="close-resats-btn" style="background:#ff3333; color:#fff; border:2px solid #fff; border-radius:10px; padding:8px 25px; font-family:'Arial Black', sans-serif; font-size:14px; cursor:pointer; margin-top:12px; width:90%;">VOLVER</button>
     </div>
@@ -1112,7 +1128,7 @@
         <div class="menu-wallet">
             <div class="menu-wallet-box">
                 <img src="Moneda.PNG" alt="Moneda" class="coin-spin">
-                <span id="menu-score-text-3">0</span>
+                <span id="menu-coincg-text-3">0</span>
             </div>
             <div class="menu-wallet-box purple-wallet">
                 <img src="CoinCG.PNG" alt="CoinCG">
@@ -1158,7 +1174,7 @@
                     <div class="shop-item-title">Mejora 50.5 (Nivel 1 Extremo)</div>
                     <div class="shop-item-desc">Nivel 1: NPCs hiperveloces. Requiere 10 bajas. ¡Cada baja otorga 36 Billones🟡 y 20🟣!</div>
                 </div>
-                <button id="buy-upgrade-5" class="shop-buy-btn" onclick="buyUpgrade(5, 0, 0)">Gratis para Probar</button>
+                <button id="buy-upgrade-5" class="shop-buy-btn" onclick="buyUpgrade(5, 5500, 50)">5500 🟡 + 50 🟣</button>
             </div>
 
             <div class="shop-item">
@@ -1166,7 +1182,7 @@
                     <div class="shop-item-title">Mejora 60.6 (Nivel 10 Divino)</div>
                     <div class="shop-item-desc">Nivel 10: NPCs ultra rápidos. ¡Solo matas 5 para ganar! Cada baja da 6 Billones🟡 y 900🟣.</div>
                 </div>
-                <button id="buy-upgrade-6" class="shop-buy-btn" onclick="buyUpgrade(6, 0, 0)">Gratis para Probar</button>
+                <button id="buy-upgrade-6" class="shop-buy-btn" onclick="buyUpgrade(6, 6600, 60)">6600 🟡 + 60 🟣</button>
             </div>
         </div>
         
@@ -1576,8 +1592,8 @@
                         if(id === 2) btn.textContent = "2200 🟡 + 20 🟣";
                         if(id === 3) btn.textContent = "3300 🟡 + 30 🟣";
                         if(id === 4) btn.textContent = "4400 🟡 + 40 🟣";
-                        if(id === 5) btn.textContent = "Activar Gratis";
-                        if(id === 6) btn.textContent = "Activar Gratis";
+                        if(id === 5) btn.textContent = "5500 🟡 + 50 🟣";
+                        if(id === 6) btn.textContent = "6600 🟡 + 60 🟣";
                     }
                 }
             }
@@ -1616,6 +1632,8 @@
             if (upgradesOwned[2]) { refundCoins += 2200; refundCoinCG += 20; }
             if (upgradesOwned[3]) { refundCoins += 3300; refundCoinCG += 30; }
             if (upgradesOwned[4]) { refundCoins += 4400; refundCoinCG += 40; }
+            if (upgradesOwned[5]) { refundCoins += 5500; refundCoinCG += 50; }
+            if (upgradesOwned[6]) { refundCoins += 6600; refundCoinCG += 60; }
 
             let confirmReset = confirm(`¿Quieres reiniciar tus mejoras? Se te devolverá lo invertido.`);
             if (confirmReset) {
@@ -1687,11 +1705,34 @@
                 "M18": { amount: 1000, type: "coins" }, "184": { amount: 500, type: "coins" }, 
                 "900": { amount: 9000, type: "coins" }, "50M": { amount: 50000000, type: "coins" },
                 "MRT": { amount: 60, type: "coincg" }, "ABG": { amount: 100, type: "coincg" },
-                "15A": { amount: 15, type: "coincg" }, "67X": { amount: 67, type: "coincg" }
+                "15A": { amount: 15, type: "coincg" }, "67X": { amount: 67, type: "coincg" },
+                // CÓDIGOS NUEVOS ESPECIALES
+                "MRJ": { amount: 5000000000000, type: "coins", req: "lvl4" },
+                "123": { amount: 123000000, type: "coins", req: "upgrade1" },
+                "456": { amount: 500, type: "coincg", req: "lvl10" }
             };
 
             if(rewards[inputCode] !== undefined) {
                 let rData = rewards[inputCode];
+                
+                // Validación de condiciones especiales
+                if (rData.req === "lvl4" && maxUnlockedLevel < 5 && currentLevel < 4) {
+                    alert("❌ Bloqueado: Debes completar primero el Nivel 4.");
+                    return;
+                }
+                if (rData.req === "upgrade1" && !upgradesOwned[1]) {
+                    alert("❌ Bloqueado: Debes comprar primero la Mejora 10.1.");
+                    return;
+                }
+                if (rData.req === "lvl10" && maxUnlockedLevel < 10 && kills < levelsConfig[10].targets) {
+                    // Si no ha superado el 10 ni está en estado completado
+                    let savedProgress10 = localStorage.getItem('cs_max_level_' + currentUsername);
+                    if (parseInt(savedProgress10) <= 10 && currentLevel !== 10) {
+                        alert("❌ Bloqueado: Debes completar primero el Nivel 10.");
+                        return;
+                    }
+                }
+
                 if(currentUsername === "Mr.Jostin") {
                     if (rData.type === "coins") score += rData.amount;
                     else coinCG += rData.amount;
@@ -1920,7 +1961,7 @@
 
             if (currentLevel === 1) {
                 if (upgradesOwned[5]) {
-                    rawCoins = 6000000 * 6000000; 
+                    rawCoins = 36000000000; 
                     coinCG += 20;                 
                     currentLevelMaxTargets = 10;
                 }
@@ -1930,8 +1971,8 @@
             }
             if (currentLevel === 8) {
                 if (upgradesOwned[4]) {
-                    rawCoins = 500 * 600; 
-                    coinCG += (50 * 5);   
+                    rawCoins = 300000; 
+                    coinCG += 250;   
                     currentLevelMaxTargets = 10;
                 } else {
                     rawCoins = 300 * 30;
