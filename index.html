@@ -177,6 +177,11 @@
             animation: spin 4s linear infinite;
         }
         
+        /* ESTILO PARA DETENER ANIMACIÓN EN MODO RLU */
+        .stop-animation {
+            animation: none !important;
+        }
+
         /* PESTAÑA / PANEL DE PERFIL FLOTANTE */
         #profile-panel {
             position: absolute;
@@ -596,11 +601,13 @@
             background: linear-gradient(135deg, #151515 0%, #252525 100%);
             border: 4px solid #ffcc00;
             border-radius: 20px;
-            padding: 20px;
+            padding: 15px;
             width: 320px;
+            max-height: 90vh;
+            overflow-y: auto;
             display: none;
             flex-direction: column;
-            gap: 14px;
+            gap: 12px;
             align-items: center;
             z-index: 125;
             box-shadow: 0 10px 30px rgba(0,0,0,0.9), inset 0 0 15px rgba(255, 204, 0, 0.2);
@@ -616,7 +623,7 @@
             align-items: center;
         }
         .setting-row label {
-            font-size: 14px;
+            font-size: 13px;
             color: #ffcc00;
             font-weight: bold;
             text-shadow: 2px 2px #000;
@@ -637,6 +644,40 @@
         }
         .music-btn-active { background: #00ff00; color: #000; border-color: #fff; }
         .music-btn-inactive { background: #444; color: #aaa; border-color: #333; }
+
+        /* ESTILOS DE RENDIMIENTO BOTÓN RLU */
+        .rlu-container {
+            border-top: 3px dashed #00ff00;
+            padding-top: 10px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+        }
+        .rlu-btn {
+            width: 95%;
+            padding: 12px;
+            font-size: 13px;
+            font-family: 'Arial Black', sans-serif;
+            border-radius: 10px;
+            border: 3px solid #fff;
+            cursor: pointer;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+            transition: all 0.2s;
+        }
+        .rlu-off {
+            background: #ff3333;
+            color: #fff;
+            box-shadow: 0 0 12px rgba(255,51,51,0.5);
+        }
+        .rlu-on {
+            background: #00ff00;
+            color: #000;
+            box-shadow: 0 0 15px rgba(0,255,0,0.7);
+            border-color: #000;
+        }
 
         /* CÓDIGOS DE RECOMPENSA */
         #code-section {
@@ -1015,7 +1056,7 @@
             <button id="close-profile-panel-btn">GUARDAR Y CERRAR</button>
         </div>
 
-        <h1 id="welcome-title">CHICKEN STRIKE NPC</h1>
+        <h1 id="welcome-title">CHICKEN STRIKE  NPC</h1>
         <div id="version-tag">1.6 Beta</div>
         <p id="welcome-desc">¡Bienvenido! Esta es una versión beta oficial del juego, por lo que podría contener algunos errores y bugs en el mapa durante el desarrollo en la plataforma MrTube.<br>Diseñado por ABG Productions® y Sprunki Animations Studios.</p>
 
@@ -1038,7 +1079,7 @@
 
         <div class="menu-wallet">
             <div class="menu-wallet-box">
-                <img src="Moneda.PNG" alt="Moneda" class="coin-spin">
+                <img id="wallet-coin-1" src="Moneda.PNG" alt="Moneda" class="coin-spin">
                 <span id="menu-score-text-2">0</span>
             </div>
             <div class="menu-wallet-box purple-wallet">
@@ -1056,7 +1097,7 @@
     <div id="settings-panel">
         <div class="menu-wallet" style="margin-bottom: 5px;">
             <div class="menu-wallet-box" style="font-size:12px; padding:4px 8px;">
-                <img src="Moneda.PNG" alt="Moneda" class="coin-spin">
+                <img id="wallet-coin-5" src="Moneda.PNG" alt="Moneda" class="coin-spin">
                 <span id="menu-score-text-5">0</span>
             </div>
             <div class="menu-wallet-box purple-wallet" style="font-size:12px; padding:4px 8px;">
@@ -1070,6 +1111,11 @@
             <button id="music-btn-normal" class="music-panel-btn music-btn-active">Música Normal 🎵</button>
             <button id="music-btn-2" class="music-panel-btn music-btn-inactive">Música 2.0 ⚡</button>
             <button id="music-btn-voice" class="music-panel-btn music-btn-inactive">Música 2.0 VoiceOver 🎤</button>
+        </div>
+
+        <div class="rlu-container">
+            <label>OPTIMIZACIÓN DISPOSITIVO:</label>
+            <button id="rlu-toggle-btn" class="rlu-btn rlu-off">RLU: APAGADO ❌</button>
         </div>
 
         <div id="code-section">
@@ -1127,8 +1173,8 @@
         
         <div class="menu-wallet">
             <div class="menu-wallet-box">
-                <img src="Moneda.PNG" alt="Moneda" class="coin-spin">
-                <span id="menu-coincg-text-3">0</span>
+                <img id="wallet-coin-3" src="Moneda.PNG" alt="Moneda" class="coin-spin">
+                <span id="menu-score-text-3">0</span>
             </div>
             <div class="menu-wallet-box purple-wallet">
                 <img src="CoinCG.PNG" alt="CoinCG">
@@ -1195,7 +1241,7 @@
 
         <div class="menu-wallet">
             <div class="menu-wallet-box">
-                <img src="Moneda.PNG" alt="Moneda" class="coin-spin">
+                <img id="wallet-coin-4" src="Moneda.PNG" alt="Moneda" class="coin-spin">
                 <span id="menu-score-text-4">0</span>
             </div>
             <div class="menu-wallet-box purple-wallet">
@@ -1237,7 +1283,7 @@
         <div id="ui-header">
             <div style="display: flex; flex-direction: column; gap: 5px;">
                 <div class="ui-box" id="ui-score">
-                    <img src="Moneda.PNG" alt="Moneda">
+                    <img id="wallet-coin-game" src="Moneda.PNG" alt="Moneda" class="coin-spin">
                     <span id="score-text">0.0</span>
                 </div>
                 <div class="ui-box" id="ui-coincg">
@@ -1328,6 +1374,10 @@
         const codeInput = document.getElementById('code-input');
         const codeSubmitBtn = document.getElementById('code-submit-btn');
 
+        // ELEMENTOS RENDIMIENTO LEGENDARIO ULTRA (RLU)
+        const rluToggleBtn = document.getElementById('rlu-toggle-btn');
+        let isRLUEnabled = false; 
+
         // ELEMENTOS ASOCIADOS A RESATS
         const resatsMainBtn = document.getElementById('resats-main-btn');
         const resatsPanel = document.getElementById('resats-panel');
@@ -1368,8 +1418,8 @@
         
         let scrollSpeed = 1.8; 
         let savedSpeedBeforePause = 1.8; 
-        const maxNPCs = 10;
-        const distanceBetweenNPCs = 350;
+        let maxNPCs = 10;
+        let distanceBetweenNPCs = 350;
 
         let upgradesOwned = { 1: false, 2: false, 3: false, 4: false, 5: false, 6: false };
         let lastShotTime = 0;
@@ -1439,6 +1489,61 @@
                 audioMusic.play().catch(e => {});
             }
         }
+
+        // CONTROL INTEGRADO DEL BOTÓN RLU (RENDIMIENTO LEGENDARIO ULTRA)
+        rluToggleBtn.addEventListener('click', () => {
+            playSoundBoton();
+            isRLUEnabled = !isRLUEnabled;
+            
+            const coinGiroElements = [
+                document.getElementById('wallet-coin-1'),
+                document.getElementById('wallet-coin-3'),
+                document.getElementById('wallet-coin-4'),
+                document.getElementById('wallet-coin-5'),
+                document.getElementById('wallet-coin-game')
+            ];
+
+            if(isRLUEnabled) {
+                // ACTIVAR MODO RLU
+                rluToggleBtn.textContent = "RLU: ULTRA ACTIVADO ⚡";
+                rluToggleBtn.className = "rlu-btn rlu-on";
+                
+                // 1. Apagar animaciones pesadas de CSS (giro de monedas)
+                coinGiroElements.forEach(el => { if(el) el.classList.add('stop-animation'); });
+
+                // 2. Modificar el stage para usar menos GPU (Color sólido en vez de repetir imagen larga)
+                stage.style.backgroundImage = "none";
+                stage.style.backgroundColor = "#111";
+
+                // 3. Reducir variables de renderizado de NPCs en tiempo real
+                maxNPCs = 5;
+                distanceBetweenNPCs = 600; 
+                
+                if (gameStarted) {
+                    // Si está en una partida activa, reorganizar dinámicamente para evitar lags
+                    clearAllNPCs();
+                    for(let i = 0; i < maxNPCs; i++) { spawnNPC(i); }
+                }
+            } else {
+                // DESACTIVAR MODO RLU (VOLVER AL DISEÑO TRADICIONAL)
+                rluToggleBtn.textContent = "RLU: APAGADO ❌";
+                rluToggleBtn.className = "rlu-btn rlu-off";
+                
+                coinGiroElements.forEach(el => { if(el) el.classList.remove('stop-animation'); });
+                stage.style.backgroundImage = "url('Fondo.PNG')";
+                
+                maxNPCs = 10;
+                distanceBetweenNPCs = 350;
+
+                if (gameStarted) {
+                    clearAllNPCs();
+                    for(let i = 0; i < maxNPCs; i++) { spawnNPC(i); }
+                }
+            }
+            if(currentUsername !== "") {
+                localStorage.setItem('cs_rlu_' + currentUsername, isRLUEnabled ? "true" : "false");
+            }
+        });
 
         musicBtnNormal.addEventListener('click', () => { playSoundBoton(); changeMusicTrack("normal"); });
         musicBtn2.addEventListener('click', () => { playSoundBoton(); changeMusicTrack("2.0"); });
@@ -1518,6 +1623,7 @@
             let savedMaxLevel = localStorage.getItem('cs_max_level_' + name);
             let savedEmail = localStorage.getItem('cs_email_' + name);
             let savedPfp = localStorage.getItem('cs_pfp_' + name);
+            let savedRLU = localStorage.getItem('cs_rlu_' + name);
             
             if(savedScore !== null) score = parseInt(savedScore);
             else score = 0;
@@ -1548,6 +1654,15 @@
                 upgradesOwned[id] = (savedUpgrade === "true");
             }
 
+            // CARGAR ESTADO DEL BOTÓN RLU GUARDADO
+            if(savedRLU === "true") {
+                isRLUEnabled = false; 
+                rluToggleBtn.click(); 
+            } else {
+                isRLUEnabled = true;
+                rluToggleBtn.click();
+            }
+
             updateLevelButtonsUI();
             updateShopButtonsUI();
             checkSubscriptionTrigger();
@@ -1559,6 +1674,7 @@
                 localStorage.setItem('cs_coincg_' + currentUsername, coinCG);
                 localStorage.setItem('cs_max_level_' + currentUsername, maxUnlockedLevel);
                 localStorage.setItem('cs_email_' + currentUsername, emailInput.value.trim());
+                localStorage.setItem('cs_rlu_' + currentUsername, isRLUEnabled ? "true" : "false");
                 for (let id = 1; id <= 6; id++) {
                     localStorage.setItem(`cs_upgrade_${id}_` + currentUsername, upgradesOwned[id]);
                 }
