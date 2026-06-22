@@ -645,7 +645,7 @@
         .music-btn-active { background: #00ff00; color: #000; border-color: #fff; }
         .music-btn-inactive { background: #444; color: #aaa; border-color: #333; }
 
-        /* ESTILOS DE RENDIMIENTO BOTÓN RLU */
+        /* ESTILOS DE RENDIMIENTO BOTÓN RLU CON ANIMACIÓN RGB */
         .rlu-container {
             border-top: 3px dashed #00ff00;
             padding-top: 10px;
@@ -661,22 +661,29 @@
             font-size: 13px;
             font-family: 'Arial Black', sans-serif;
             border-radius: 10px;
-            border: 3px solid #fff;
             cursor: pointer;
             text-align: center;
             box-shadow: 0 4px 8px rgba(0,0,0,0.4);
             transition: all 0.2s;
+            animation: rgbBorder 3s linear infinite; /* Animación RGB en las esquinas */
         }
         .rlu-off {
             background: #ff3333;
             color: #fff;
-            box-shadow: 0 0 12px rgba(255,51,51,0.5);
         }
         .rlu-on {
             background: #00ff00;
             color: #000;
-            box-shadow: 0 0 15px rgba(0,255,0,0.7);
-            border-color: #000;
+        }
+
+        /* Animación de colores RGB para las esquinas del botón */
+        @keyframes rgbBorder {
+            0% { border: 3px solid #ff0000; box-shadow: 0 0 10px #ff0000; }
+            20% { border: 3px solid #00ff00; box-shadow: 0 0 10px #00ff00; }
+            40% { border: 3px solid #0000ff; box-shadow: 0 0 10px #0000ff; }
+            60% { border: 3px solid #ffff00; box-shadow: 0 0 10px #ffff00; }
+            80% { border: 3px solid #b026ff; box-shadow: 0 0 10px #b026ff; }
+            100% { border: 3px solid #ff0000; box-shadow: 0 0 10px #ff0000; }
         }
 
         /* CÓDIGOS DE RECOMPENSA */
@@ -1015,6 +1022,7 @@
     <audio id="audio-music" src="Music.mp3" loop></audio>
     <audio id="audio-pistola" src="Pistola.mp3"></audio>
     <audio id="audio-boton" src="Boton.mp3"></audio>
+    <audio id="audio-rlu" src="RLU.mp3"></audio>
 
     <input type="file" id="pfp-file-input" accept="image/*" style="display: none;">
 
@@ -1131,6 +1139,11 @@
         <div class="resats-content">
             <p style="color: #ffcc00; font-weight: bold; font-size: 14px; margin-bottom: 12px;">📕 ¡Bienvenido a la sección Resats!</p>
             <p>Esta es la sección ideal para todos los novatos que van arrancando su aventura en el juego. Si eres nuevo por aquí y quieres empezar con el pie derecho, ¡este es tu lugar!</p>
+            
+            <h4>⚡ GUÍA EXTENSA: ¿QUÉ ES EL BOTÓN RLU?</h4>
+            <p>El botón <b>RLU</b> corresponde a las siglas de <b>Rendimiento Legendario Ultra</b>. Es una herramienta de optimización de última generación diseñada por el estudio para aquellos usuarios que experimentan retrasos, tirones o bajadas bruscas de FPS en sus dispositivos móviles durante las pruebas en MrTube.</p>
+            <p><b>¿Cómo funciona exactamente?:</b> Al activar el modo RLU, el motor interno del juego realiza una reestructuración de carga gráfica instantánea. Primero, apaga las animaciones pesadas de CSS que hacen girar de manera constante las monedas en la interfaz. Segundo, elimina por completo el renderizado continuo de la imagen de fondo infinita ('Fondo.PNG') en el viewport y la reemplaza por un entorno de color sólido oscuro que alivia al procesador de video. Por último, optimiza el ciclo reduciendo a la mitad los NPCs máximos simultáneos y espaciándolos estratégicamente para mantener un flujo fluido sin sacrificar tus recompensas de nivel. ¡Es la solución definitiva para mantener una estabilidad total en cualquier gama!</p>
+
             <p>Aquí te daremos todo lo necesario para dominar el juego desde el primer día:</p>
             <p>• 🎮 <b>Guías básicas:</b> Cómo jugar y aprender los controles principales.</p>
             <p>• 🪙 <b>Economía:</b> Los mejores consejos sobre cómo conseguir monedas rápidamente.</p>
@@ -1272,8 +1285,8 @@
             <button id="pause-quit-btn" class="pause-action-btn">Volver a menú</button>
         </div>
         <div class="audio-toggles-container">
-            <button id="toggle-music-btn" class="audio-toggle-btn audio-active">Silenciar Música</button>
-            <button id="toggle-sound-btn" class="audio-toggle-btn audio-active">Silenciar Sonido</button>
+            <button id="toggle-music-btn" class="audio-toggle-btn audio-toggle-btn audio-active">Silenciar Música</button>
+            <button id="toggle-sound-btn" class="audio-toggle-btn audio-toggle-btn audio-active">Silenciar Sonido</button>
         </div>
     </div>
 
@@ -1390,6 +1403,7 @@
         const audioMusic = document.getElementById('audio-music');
         const audioPistola = document.getElementById('audio-pistola');
         const audioBoton = document.getElementById('audio-boton');
+        const audioRLU = document.getElementById('audio-rlu'); // Referencia JS del sonido RLU
 
         let levelsConfig = {
             1: { targets: 5, speed: 1.8, coinsPerKill: 1, reward: 25 },
@@ -1460,6 +1474,12 @@
             audioBoton.play().catch(e => {});
         }
 
+        function playSoundRLU() {
+            if (isSoundMuted && gameStarted) return;
+            audioRLU.currentTime = 0;
+            audioRLU.play().catch(e => {});
+        }
+
         function playSoundPistola() {
             if (isSoundMuted && gameStarted) return; 
             audioPistola.currentTime = 0;
@@ -1490,9 +1510,9 @@
             }
         }
 
-        // CONTROL INTEGRADO DEL BOTÓN RLU (RENDIMIENTO LEGENDARIO ULTRA)
+        // CONTROL INTEGRADO DEL BOTÓN RLU CON SONIDO ESPECIAL INCLUIDO
         rluToggleBtn.addEventListener('click', () => {
-            playSoundBoton();
+            playSoundRLU(); // Reproduce RLU.mp3 de forma prioritaria al tocar
             isRLUEnabled = !isRLUEnabled;
             
             const coinGiroElements = [
