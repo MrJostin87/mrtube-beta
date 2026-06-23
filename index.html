@@ -574,6 +574,73 @@
             pointer-events: auto;
         }
 
+        /* NUEVOS ESTILOS PARA EL BOTÓN Y PANEL DE DUELO CONTRA BOT */
+        #bot-duel-toggle-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #ffcc00;
+            color: #000;
+            border: 3px solid #fff;
+            padding: 8px 14px;
+            font-size: 13px;
+            font-family: 'Arial Black', sans-serif;
+            border-radius: 10px;
+            cursor: pointer;
+            z-index: 122;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+        }
+        #bot-duel-screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(15, 15, 15, 0.98);
+            border: 4px solid #ffcc00;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 125;
+            padding: 20px;
+            text-align: center;
+        }
+        #bot-duel-screen h2 {
+            color: #ffcc00;
+            font-size: 32px;
+            margin-bottom: 20px;
+            text-shadow: 3px 3px #000;
+        }
+        .bot-menu-btn {
+            width: 85%;
+            max-width: 300px;
+            padding: 15px;
+            font-size: 22px;
+            font-family: 'Arial Black', sans-serif;
+            border-radius: 15px;
+            border: 3px solid #fff;
+            cursor: pointer;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+            color: #000;
+        }
+        #btn-bot-contra2 {
+            background: #00ff00;
+        }
+        #btn-bot-proximamente {
+            background: #555;
+            color: #aaa;
+            cursor: not-allowed;
+        }
+        #btn-bot-back {
+            background: #ff3333;
+            color: #fff;
+            font-size: 16px;
+            padding: 10px;
+            max-width: 200px;
+        }
+
         /* CONFIGURACIÓN MENÚ PRINCIPAL */
         #settings-toggle-btn {
             position: absolute;
@@ -1251,6 +1318,8 @@
 
     <div id="level-selection-screen">
         <h2>SELECCIONA UN NIVEL</h2>
+        
+        <button id="bot-duel-toggle-btn">Duelo Contra Bot 🤖</button>
 
         <div class="menu-wallet">
             <div class="menu-wallet-box">
@@ -1276,6 +1345,13 @@
             <button class="level-select-btn locked" data-lvl="10" disabled>Nivel 10 <span>+1M por NPC</span></button>
         </div>
         <button id="back-to-menu-btn">VOLVER AL MENÚ</button>
+    </div>
+
+    <div id="bot-duel-screen">
+        <h2>SISTEMA DE DUELOS</h2>
+        <button id="btn-bot-contra2" class="bot-menu-btn">1: Contra 2 🤖</button>
+        <button id="btn-bot-proximamente" class="bot-menu-btn" disabled>2: Próximamente 🔒</button>
+        <button id="btn-bot-back" class="bot-menu-btn">VOLVER</button>
     </div>
 
     <div id="pause-overlay-screen">
@@ -1344,6 +1420,12 @@
         const shopScreen = document.getElementById('shop-screen');
         const levelSelectionScreen = document.getElementById('level-selection-screen');
         
+        // ELEMENTOS DEL MODO BOT NUEVO
+        const botDuelToggleBtn = document.getElementById('bot-duel-toggle-btn');
+        const botDuelScreen = document.getElementById('bot-duel-screen');
+        const btnBotContra2 = document.getElementById('btn-bot-contra2');
+        const btnBotBack = document.getElementById('btn-bot-back');
+
         const ingamePauseBtn = document.getElementById('ingame-pause-btn');
         const pauseOverlayScreen = document.getElementById('pause-overlay-screen');
         const pauseContinueBtn = document.getElementById('pause-continue-btn');
@@ -1442,6 +1524,13 @@
         let isMusicMuted = false;
         let isSoundMuted = false;
         let currentMusicTrack = "normal";
+
+        // VARIABLES NUEVAS PARA EL MODO DUELO CONTRA BOT
+        let isBotModeActive = false;
+        let botKills = 0;
+        let duelTimeLeft = 30;
+        let duelTimerInterval = null;
+        let botShootingInterval = null;
 
         function formatearMonedas(cantidad) {
             if (cantidad >= 1000000000000) {
@@ -1934,6 +2023,25 @@
         salirMainBtn.addEventListener('click', () => { window.location.reload(); });
         backToMenuBtn.addEventListener('click', () => { playSoundBoton(); levelSelectionScreen.style.display = 'none'; playMenuScreen.style.display = 'flex'; settingsToggleBtn.style.display = 'flex'; });
 
+        // EVENTOS DE LOS BOTONES DE LA NUEVA PESTAÑA BOT
+        botDuelToggleBtn.addEventListener('click', () => {
+            playSoundBoton();
+            levelSelectionScreen.style.display = 'none';
+            botDuelScreen.style.display = 'flex';
+        });
+
+        btnBotBack.addEventListener('click', () => {
+            playSoundBoton();
+            botDuelScreen.style.display = 'none';
+            levelSelectionScreen.style.display = 'flex';
+        });
+
+        btnBotContra2.addEventListener('click', () => {
+            playSoundBoton();
+            botDuelScreen.style.display = 'none';
+            startBotDuelLevel();
+        });
+
         levelButtons.forEach(btn => {
             btn.addEventListener('click', () => {
                 playSoundBoton();
@@ -1944,6 +2052,7 @@
         function startLevel(lvl) {
             levelSelectionScreen.style.display = 'none';
             settingsToggleBtn.style.display = 'none';
+            isBotModeActive = false; // Desactivar modo bot por si acaso
             currentLevel = lvl;
             kills = 0;
             gamePaused = false;
@@ -1977,6 +2086,9 @@
             killsText.textContent = `0/${totalTargets}`;
             lastCoinsText.textContent = "0"; 
             
+            document.getElementById('label-ui-level').textContent = "Nivel";
+            document.getElementById('label-ui-targets').textContent = "Objetivos";
+
             clearAllNPCs();
             audioMusic.play().catch(e => {});
 
@@ -1984,6 +2096,69 @@
             for(let i = 0; i < maxNPCs; i++) {
                 spawnNPC(i);
             }
+        }
+
+        // NUEVA FUNCIÓN PARA INICIAR EL DUELO CONTRA BOT PERSONALIZADO
+        function startBotDuelLevel() {
+            settingsToggleBtn.style.display = 'none';
+            isBotModeActive = true;
+            kills = 0;
+            botKills = 0;
+            duelTimeLeft = 30;
+            gamePaused = false;
+            scrollSpeed = 3.5; // Velocidad estable y movida para el duelo
+
+            if (upgradesOwned[1]) shootCooldown = 60;
+            else shootCooldown = 400;
+
+            levelText.textContent = "BOT";
+            document.getElementById('label-ui-level').textContent = "Modo";
+            document.getElementById('label-ui-targets').textContent = "Tiempo";
+            killsText.textContent = `${duelTimeLeft}s`;
+            lastCoinsText.textContent = "0";
+
+            // Mostrar marcador inicial en la pantalla de anuncios pequeña
+            announcement.innerHTML = `<span style="font-size:16px; color:#fff;">Tú: 0 | Bot: 0</span>`;
+            announcement.style.transform = "translate(-50%, -50%) scale(1)";
+            announcement.style.top = "80px"; // Lo subimos un poco para que no estorbe la mira
+
+            clearAllNPCs();
+            audioMusic.play().catch(e => {});
+            gameStarted = true;
+
+            // Spawnear primera oleada de NPCs infinitos
+            for (let i = 0; i < maxNPCs; i++) {
+                spawnNPC(i);
+            }
+
+            // Intervalo del Cronómetro de 30 segundos
+            clearInterval(duelTimerInterval);
+            duelTimerInterval = setInterval(() => {
+                if (gamePaused) return;
+                duelTimeLeft--;
+                killsText.textContent = `${duelTimeLeft}s`;
+
+                if (duelTimeLeft <= 0) {
+                    endBotDuel();
+                }
+            }, 1000);
+
+            // Inteligencia Artificial del Bot: Intenta disparar de forma aleatoria cada 800ms
+            clearInterval(botShootingInterval);
+            botShootingInterval = setInterval(() => {
+                if (gamePaused || !gameStarted) return;
+                
+                // El bot tiene un 65% de probabilidad de acertar un tiro a un NPC vivo en pantalla
+                if (Math.random() < 0.65) {
+                    const targets = document.querySelectorAll('.target');
+                    for (let npc of targets) {
+                        if (npc.dataset.dead !== "true") {
+                            eliminateNPCByBot(npc);
+                            break;
+                        }
+                    }
+                }
+            }, 800);
         }
 
         function clearAllNPCs() {
@@ -2046,7 +2221,7 @@
         function spawnNPC(index) {
             if (!gameStarted || gamePaused) return;
             
-            if (currentLevel === 8 && upgradesOwned[4]) {
+            if (currentLevel === 8 && upgradesOwned[4] && !isBotModeActive) {
                 let groupId = "group8_" + Date.now() + "_" + index;
                 for (let k = 0; k < 2; k++) {
                     createNPCElement(index, groupId, k * 55);
@@ -2091,6 +2266,18 @@
 
             npc.src = 'Disparado.PNG';
             
+            // Si es Modo Bot, lleva un conteo diferente sin límite de bajas por nivel
+            if (isBotModeActive) {
+                kills++;
+                announcement.innerHTML = `<span style="font-size:16px; color:#fff;">Tú: ${kills} | Bot: ${botKills}</span>`;
+                
+                setTimeout(() => {
+                    npc.remove();
+                    if (gameStarted && !gamePaused) spawnNPC(maxNPCs - 1);
+                }, 300);
+                return;
+            }
+
             let config = levelsConfig[currentLevel];
             let rawCoins = config.coinsPerKill;
             let currentLevelMaxTargets = config.targets;
@@ -2141,6 +2328,68 @@
             }, 300);
         }
 
+        // NUEVA FUNCIÓN PARA ELIMINAR NPC CUANDO EL BOT DISPARA
+        function eliminateNPCByBot(npc) {
+            npc.dataset.dead = "true";
+            let idx = npc.dataset.intervalIndex;
+            if(idx !== undefined && activeNPCIntervals[idx]) clearInterval(activeNPCIntervals[idx]);
+
+            npc.src = 'Disparado.PNG';
+            botKills++;
+            announcement.innerHTML = `<span style="font-size:16px; color:#fff;">Tú: ${kills} | Bot: ${botKills}</span>`;
+
+            setTimeout(() => {
+                npc.remove();
+                if (gameStarted && !gamePaused) spawnNPC(maxNPCs - 1);
+            }, 300);
+        }
+
+        // NUEVA FUNCIÓN AL TERMINAR LOS 30 SEGUNDOS DEL MODO DUELO
+        function endBotDuel() {
+            gameStarted = false;
+            clearInterval(duelTimerInterval);
+            clearInterval(botShootingInterval);
+            clearAllNPCs();
+
+            // Devolver cartel de anuncio a su posición central original
+            announcement.style.top = "30%";
+
+            let premioMonedas = 0;
+            let premioCoinCG = 0;
+            let mensajeFinal = "";
+
+            if (kills > botKills) {
+                // Gana el Jugador una cantidad grande
+                premioMonedas = 5000;
+                premioCoinCG = 20;
+                mensajeFinal = `🏆 ¡GANASTE EL DUELO contra el Bot!<br><span style="color:#00ff00;">Tú: ${kills} bajas | Bot: ${botKills} bajas</span><br><br><span style="color:#ffcc00;">🎁 GRAN PREMIO: +5,000 🟡</span><br><span style="color:#b026ff;">💜 COIN CG: +20 🟣</span>`;
+            } else if (botKills > kills) {
+                // Gana el Bot, el jugador se lleva premio pequeño de consolación
+                premioMonedas = 500;
+                premioCoinCG = 2;
+                mensajeFinal = `🤖 EL BOT TE GANÓ...<br><span style="color:#ff3333;">Bot: ${botKills} bajas | Tú: ${kills} bajas</span><br><br><span style="color:#ffcc00;">🎁 PREMIO PEQUEÑO: +500 🟡</span><br><span style="color:#b026ff;">💜 COIN CG: +2 🟣</span>`;
+            } else {
+                // Empate absoluto
+                premioMonedas = 1500;
+                premioCoinCG = 5;
+                mensajeFinal = `🤝 ¡EMPATE IMPRESIONANTE!<br><span style="color:#ffcc00;">Ambos con ${kills} bajas</span><br><br><span style="color:#ffcc00;">🎁 PREMIO: +1,500 🟡</span><br><span style="color:#b026ff;">💜 COIN CG: +5 🟣</span>`;
+            }
+
+            score += premioMonedas;
+            coinCG += premioCoinCG;
+            actualizarTextoMonedas();
+            savePlayerProgress();
+
+            announcement.innerHTML = mensajeFinal;
+            announcement.style.transform = "translate(-50%, -50%) scale(1)";
+
+            setTimeout(() => {
+                announcement.style.transform = "translate(-50%, -50%) scale(0)";
+                isBotModeActive = false;
+                levelSelectionScreen.style.display = 'flex';
+            }, 4500);
+        }
+
         function triggerLevelReward() {
             clearAllNPCs();
             let currentConfig = levelsConfig[currentLevel];
@@ -2181,7 +2430,10 @@
         pauseContinueBtn.addEventListener('click', (e) => { e.stopPropagation(); playSoundBoton(); gamePaused = false; scrollSpeed = savedSpeedBeforePause; pauseOverlayScreen.style.display = "none"; });
         pauseQuitBtn.addEventListener('click', (e) => {
             e.stopPropagation(); isMusicMuted = false; isSoundMuted = false; audioMusic.muted = false;
-            gameStarted = false; gamePaused = false; clearAllNPCs();
+            gameStarted = false; gamePaused = false; 
+            clearInterval(duelTimerInterval); clearInterval(botShootingInterval);
+            clearAllNPCs();
+            announcement.style.top = "30%"; announcement.style.transform = "translate(-50%, -50%) scale(0)";
             pauseOverlayScreen.style.display = "none"; levelSelectionScreen.style.display = "flex"; 
             actualizarTextoMonedas(); audioMusic.play().catch(e => {});
         });
