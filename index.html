@@ -118,28 +118,6 @@
             object-fit: cover;
         }
 
-        /* BOTÓN SA (SISTEMA DE AMIGOS) EN EL MENÚ PRINCIPAL INTERMEDIO (ARRIBA IZQUIERDA) */
-        #menu-sa-btn {
-            position: absolute;
-            top: 15px;
-            left: 15px;
-            background: #b026ff;
-            color: #fff;
-            border: 3px solid #fff;
-            font-family: 'Arial Black', sans-serif;
-            font-size: 16px;
-            width: 55px;
-            height: 55px;
-            border-radius: 12px;
-            cursor: pointer;
-            pointer-events: auto;
-            display: none;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.4);
-            z-index: 120;
-        }
-
         /* COMPONENTE DE PERFIL EN EL MENÚ PRINCIPAL INTERMEDIO */
         .menu-main-profile {
             display: flex;
@@ -299,178 +277,6 @@
             border-radius: 8px;
             cursor: pointer;
             margin-top: 5px;
-        }
-
-        /* PESTAÑA DEL SISTEMA DE AMIGOS (SA) */
-        #sa-panel {
-            position: absolute;
-            background: rgba(15, 15, 15, 0.98);
-            border: 4px solid #b026ff;
-            border-radius: 20px;
-            padding: 15px;
-            width: 340px;
-            height: 85vh;
-            display: none;
-            flex-direction: column;
-            gap: 10px;
-            align-items: center;
-            z-index: 125;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.9);
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-        .sa-header {
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 2px solid #b026ff;
-            padding-bottom: 8px;
-        }
-        .sa-title {
-            color: #b026ff;
-            font-size: 20px;
-            margin: 0;
-            text-shadow: 2px 2px #000;
-        }
-        .sa-triple-btn {
-            background: #fff;
-            color: #000;
-            border: 2px solid #b026ff;
-            font-size: 16px;
-            border-radius: 6px;
-            padding: 2px 8px;
-            cursor: pointer;
-        }
-        .sa-search-box {
-            width: 100%;
-            display: flex;
-            gap: 5px;
-        }
-        .sa-input {
-            flex: 1;
-            background: #222;
-            border: 2px solid #fff;
-            color: #fff;
-            padding: 6px;
-            font-size: 14px;
-            border-radius: 8px;
-            font-family: Arial, sans-serif;
-        }
-        .sa-btn {
-            background: #00ff00;
-            color: #000;
-            border: 2px solid #fff;
-            border-radius: 8px;
-            padding: 6px 12px;
-            font-size: 12px;
-            font-family: 'Arial Black', sans-serif;
-            cursor: pointer;
-        }
-        .sa-list-container {
-            width: 100%;
-            flex: 1;
-            background: rgba(0,0,0,0.5);
-            border-radius: 10px;
-            border: 1px solid #444;
-            overflow-y: auto;
-            padding: 8px;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-            touch-action: pan-y !important;
-        }
-        .search-result-item, .friend-item {
-            background: #252525;
-            border: 2px solid #ffcc00;
-            border-radius: 8px;
-            padding: 8px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .friend-item { border-color: #b026ff; }
-        .user-info-mini {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: #fff;
-            font-family: Arial, sans-serif;
-            font-size: 13px;
-            font-weight: bold;
-        }
-        .user-avatar-mini {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            border: 1px solid #fff;
-            background: #444;
-        }
-        .action-icon-btn {
-            background: #ffcc00;
-            color: #000;
-            border: 1px solid #fff;
-            border-radius: 5px;
-            padding: 4px 8px;
-            font-size: 11px;
-            cursor: pointer;
-            font-family: Arial, sans-serif;
-            font-weight: bold;
-        }
-        /* MENÚ DESPLEGABLE DESCARGA (TRES OPCIONES) */
-        .download-dropdown-panel {
-            position: absolute;
-            background: #222;
-            border: 2px solid #fff;
-            border-radius: 8px;
-            display: none;
-            flex-direction: column;
-            gap: 5px;
-            padding: 5px;
-            z-index: 160;
-            box-shadow: 0 4px 10px #000;
-        }
-        .dropdown-opt-btn {
-            background: #444;
-            color: #fff;
-            border: none;
-            padding: 6px 12px;
-            font-size: 11px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-family: Arial, sans-serif;
-            text-align: left;
-            width: 130px;
-        }
-        .dropdown-opt-btn:hover { background: #b026ff; }
-
-        /* PESTAÑA REPORTE / DENUNCIA */
-        #report-panel {
-            position: absolute;
-            background: #1a1a1a;
-            border: 3px solid #ff3333;
-            border-radius: 15px;
-            padding: 15px;
-            width: 300px;
-            display: none;
-            flex-direction: column;
-            gap: 12px;
-            align-items: center;
-            z-index: 170;
-            top: 50%; left: 50%; transform: translate(-50%, -50%);
-            box-shadow: 0 5px 20px rgba(255,0,0,0.5);
-        }
-        .report-btn {
-            width: 100%;
-            padding: 10px;
-            background: #ff3333;
-            color: #fff;
-            border: 2px solid #fff;
-            border-radius: 8px;
-            font-family: 'Arial Black', sans-serif;
-            font-size: 12px;
-            cursor: pointer;
         }
 
         /* SECCIÓN DE VERIFICACIÓN */
@@ -772,7 +578,7 @@
         #settings-toggle-btn {
             position: absolute;
             top: 15px;
-            left: 75px; /* Reubicado un poco para no chocar con el botón SA */
+            left: 15px;
             background: rgba(0, 0, 0, 0.7);
             color: #fff;
             border: 2px solid #ffcc00;
@@ -1233,8 +1039,6 @@
         <img id="menu-avatar-preview" src="Foto.PNG" alt="Avatar">
     </div>
 
-    <button id="menu-sa-btn">SA</button>
-
     <button id="settings-toggle-btn" style="display: none;">⚙️</button>
 
     <div id="welcome-screen">
@@ -1271,35 +1075,6 @@
 
         <button id="start-button" class="menu-btn">EMPEZAR A PROBAR</button>
         <button id="exit-button" class="menu-btn">SALIR DEL JUEGO</button>
-    </div>
-
-    <div id="sa-panel">
-        <div class="sa-header">
-            <h3 class="sa-title">Sistema de Amigos</h3>
-            <button id="sa-triple-btn" class="sa-triple-btn">⋮</button>
-        </div>
-        
-        <div class="sa-search-box">
-            <input type="text" id="sa-search-input" class="sa-input" placeholder="Buscar usuarios por nombre...">
-            <button id="sa-search-btn" class="sa-btn">BUSCAR</button>
-        </div>
-
-        <div id="sa-list-container" class="sa-list-container">
-            </div>
-
-        <button id="close-sa-panel-btn" style="background:#ff3333; color:#fff; border:2px solid #fff; border-radius:8px; padding:6px 20px; font-family:'Arial Black', sans-serif; font-size:12px; cursor:pointer; width:90%; margin-top:5px;">VOLVER</button>
-    </div>
-
-    <div id="download-dropdown" class="download-dropdown-panel">
-        <button id="opt-add-user" class="dropdown-opt-btn">1: Añadir Usuario</button>
-        <button id="opt-report-user" class="dropdown-opt-btn" style="background:#ff3333;">2: Denunciar / Bloq</button>
-    </div>
-
-    <div id="report-panel">
-        <h4 style="color:#ff3333; margin:0 0 10px 0; font-size:16px;">TIPO DE DENUNCIA</h4>
-        <button id="report-by-photo" class="report-btn" style="margin-bottom:8px;">1: Reportar por Foto</button>
-        <button id="report-by-name" class="report-btn">2: Reportar Nombre</button>
-        <button id="close-report-panel-btn" style="background:#888; color:#000; border:1px solid #fff; border-radius:5px; padding:4px 12px; margin-top:8px; font-size:11px; cursor:pointer;">Cancelar</button>
     </div>
 
     <div id="play-menu-screen">
@@ -1612,42 +1387,6 @@
         const codeInput = document.getElementById('code-input');
         const codeSubmitBtn = document.getElementById('code-submit-btn');
 
-        // NUEVAS COMPONENTES SA
-        const menuSaBtn = document.getElementById('menu-sa-btn');
-        const saPanel = document.getElementById('sa-panel');
-        const closeSaPanelBtn = document.getElementById('close-sa-panel-btn');
-        const saSearchInput = document.getElementById('sa-search-input');
-        const saSearchBtn = document.getElementById('sa-search-btn');
-        const saListContainer = document.getElementById('sa-list-container');
-        const saTripleBtn = document.getElementById('sa-triple-btn');
-        const downloadDropdown = document.getElementById('download-dropdown');
-        const optAddUser = document.getElementById('opt-add-user');
-        const optReportUser = document.getElementById('opt-report-user');
-
-        // COMPONENTES REPORTES
-        const reportPanel = document.getElementById('report-panel');
-        const reportByPhoto = document.getElementById('report-by-photo');
-        const reportByName = document.getElementById('report-by-name');
-        const closeReportPanelBtn = document.getElementById('close-report-panel-btn');
-
-        // VARIABLES DE LOGICA SA Y DUELO MULTIJUGADOR
-        let currentSelectedUser = null; 
-        let isDuelModeActive = false; 
-        let duelTimeRemaining = 30; 
-        let duelInterval = null; 
-        let p1Kills = 0; // Tus bajas
-        let p2Kills = 0; // Bajas del amigo invitado simulado
-
-        // BD SIMULADA DE USUARIOS EN EL JUEGO (PARA EL BUSCADOR)
-        const mockUsersDatabase = [
-            { username: "Pepe456", email: "", pfp: "Foto.PNG" },
-            { username: "Tavito", email: "tavito@studio.com", pfp: "Foto.PNG" },
-            { username: "ChickenGamer", email: "", pfp: "Foto.PNG" },
-            { username: "Santi_Pro", email: "santi@gmail.com", pfp: "Foto.PNG" },
-            { username: "Gris_Sprunki", email: "", pfp: "Foto.PNG" },
-            { username: "Wenda_A", email: "wenda@sprunki.com", pfp: "Foto.PNG" }
-        ];
-
         // ELEMENTOS RENDIMIENTO LEGENDARIO ULTRA (RLU)
         const rluToggleBtn = document.getElementById('rlu-toggle-btn');
         let isRLUEnabled = false; 
@@ -1664,7 +1403,7 @@
         const audioMusic = document.getElementById('audio-music');
         const audioPistola = document.getElementById('audio-pistola');
         const audioBoton = document.getElementById('audio-boton');
-        const audioRLU = document.getElementById('audio-rlu'); 
+        const audioRLU = document.getElementById('audio-rlu'); // Referencia JS del sonido RLU
 
         let levelsConfig = {
             1: { targets: 5, speed: 1.8, coinsPerKill: 1, reward: 25 },
@@ -1703,22 +1442,6 @@
         let isMusicMuted = false;
         let isSoundMuted = false;
         let currentMusicTrack = "normal";
-
-        function checkBannedStatus() {
-            const banTime = localStorage.getItem('cs_ban_until');
-            if (banTime) {
-                if (Date.now() < parseInt(banTime)) {
-                    const daysLeft = Math.ceil((parseInt(banTime) - Date.now()) / (1000 * 60 * 60 * 24));
-                    document.body.innerHTML = `<div style="color:white; font-family:sans-serif; text-align:center; padding-top:100px;"><h2>🚫 CUENTA BANEADA</h2><p>Tu cuenta se encuentra suspendida debido a una denuncia procesada.</p><p>Tiempo restante de penalización: <b>${daysLeft} días</b>.</p><p>No tienes permitido crear otra cuenta durante este lapso.</p></div>`;
-                    return true;
-                } else {
-                    localStorage.removeItem('cs_ban_until');
-                    localStorage.removeItem('cs_reports_count');
-                }
-            }
-            return false;
-        }
-        if(checkBannedStatus()) { throw new Error("Banned user."); }
 
         function formatearMonedas(cantidad) {
             if (cantidad >= 1000000000000) {
@@ -1787,241 +1510,9 @@
             }
         }
 
-        // INTERFAZ DE SISTEMA DE AMIGOS LOGICA COMPLETA
-        menuSaBtn.addEventListener('click', () => {
-            playSoundBoton();
-            saPanel.style.display = saPanel.style.display === "flex" ? "none" : "flex";
-            if (saPanel.style.display === "flex") {
-                renderFriendsList();
-            }
-        });
-
-        closeSaPanelBtn.addEventListener('click', () => {
-            playSoundBoton();
-            saPanel.style.display = "none";
-            downloadDropdown.style.display = "none";
-        });
-
-        saSearchBtn.addEventListener('click', () => {
-            playSoundBoton();
-            const query = saSearchInput.value.trim().toLowerCase();
-            if(!query) { return; }
-            
-            saListContainer.innerHTML = "";
-            const filtered = mockUsersDatabase.filter(u => u.username.toLowerCase().includes(query));
-            
-            if(filtered.length === 0) {
-                saListContainer.innerHTML = "<p style='color:#ccc; font-size:12px; text-align:center;'>No se encontraron usuarios.</p>";
-                return;
-            }
-
-            filtered.forEach(u => {
-                const row = document.createElement('div');
-                row.className = "search-result-item";
-                row.innerHTML = `
-                    <div class="user-info-mini">
-                        <img class="user-avatar-mini" src="${u.pfp}" alt="pfp">
-                        <span>${u.username}</span>
-                    </div>
-                    <button class="action-icon-btn" id="btn-dl-${u.username}">📥</button>
-                `;
-                saListContainer.appendChild(row);
-
-                document.getElementById(`btn-dl-${u.username}`).addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    playSoundBoton();
-                    currentSelectedUser = u;
-                    const rect = e.target.getBoundingClientRect();
-                    downloadDropdown.style.top = (rect.bottom + window.scrollY) + "px";
-                    downloadDropdown.style.left = (rect.left + window.scrollX - 50) + "px";
-                    downloadDropdown.style.display = "flex";
-                });
-            });
-        });
-
-        optAddUser.addEventListener('click', () => {
-            playSoundBoton();
-            downloadDropdown.style.display = "none";
-            if(!currentSelectedUser) return;
-
-            let friends = JSON.parse(localStorage.getItem('cs_friends_' + currentUsername) || "[]");
-            if(friends.includes(currentSelectedUser.username)) {
-                alert("Este usuario ya está en tu lista de amigos.");
-                return;
-            }
-            friends.push(currentSelectedUser.username);
-            localStorage.setItem('cs_friends_' + currentUsername, JSON.stringify(friends));
-
-            alert(`¡Agregaste a ${currentSelectedUser.username} con éxito!`);
-            renderFriendsList();
-        });
-
-        optReportUser.addEventListener('click', () => {
-            downloadDropdown.style.display = "none";
-            playSoundBoton();
-            reportPanel.style.display = "flex";
-        });
-
-        closeReportPanelBtn.addEventListener('click', () => {
-            playSoundBoton();
-            reportPanel.style.display = "none";
-        });
-
-        function processReportAction(typeStr) {
-            reportPanel.style.display = "none";
-            alert(`¡Felicitaciones! Acabas de denunciar al primer jugador por ${typeStr}.`);
-            
-            let reports = parseInt(localStorage.getItem('cs_reports_count') || "0");
-            reports++;
-            localStorage.setItem('cs_reports_count', reports);
-
-            if(reports >= 3) {
-                const banUntilTime = Date.now() + (7 * 24 * 60 * 60 * 1000); // 7 dias
-                localStorage.setItem('cs_ban_until', banUntilTime);
-                checkBannedStatus();
-            }
-        }
-
-        reportByPhoto.addEventListener('click', () => { playSoundBoton(); processReportAction("Foto Inapropiada"); });
-        reportByName.addEventListener('click', () => { playSoundBoton(); processReportAction("Nombre Inapropiado"); });
-
-        function renderFriendsList() {
-            saListContainer.innerHTML = "<h4 style='color:#ffcc00; margin:0 0 5px 0; font-size:13px;'>Mis Amigos:</h4>";
-            let friends = JSON.parse(localStorage.getItem('cs_friends_' + currentUsername) || "[]");
-            
-            if (friends.length === 0) {
-                saListContainer.innerHTML += "<p style='color:#aaa; font-size:11px; text-align:center;'>Tu lista de amigos está vacía.</p>";
-                return;
-            }
-
-            friends.forEach(fName => {
-                const row = document.createElement('div');
-                row.className = "friend-item";
-                row.innerHTML = `
-                    <div class="user-info-mini">
-                        <img class="user-avatar-mini" src="Foto.PNG" alt="pfp">
-                        <span>${fName}</span>
-                    </div>
-                    <span style="color:#00ff00; font-size:11px;">🟢 En línea</span>
-                `;
-                saListContainer.appendChild(row);
-            });
-        }
-
-        saTripleBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            playSoundBoton();
-            const rect = saTripleBtn.getBoundingClientRect();
-            
-            // Reutilizamos el panel desplegable con opciones especiales para el menú de juego multijugador
-            downloadDropdown.style.top = (rect.bottom + window.scrollY) + "px";
-            downloadDropdown.style.left = (rect.left + window.scrollX) + "px";
-            downloadDropdown.style.display = "flex";
-            
-            optAddUser.textContent = "1: Jugar un Duelo";
-            optReportUser.textContent = "2: Próximamente";
-            optReportUser.style.background = "#555";
-        });
-
-        // RE-ASIGNACIÓN DINÁMICA CUANDO LOS BOTONES CAMBIAN DE ROL DESDE LOS TRES PUNTOS
-        document.addEventListener('click', (e) => {
-            if(e.target.id === "opt-add-user" && optAddUser.textContent === "1: Jugar un Duelo") {
-                e.stopPropagation();
-                playSoundBoton();
-                downloadDropdown.style.display = "none";
-                
-                let friends = JSON.parse(localStorage.getItem('cs_friends_' + currentUsername) || "[]");
-                if (friends.length === 0) {
-                    alert("Debes añadir un amigo primero para iniciar un Duelo.");
-                    return;
-                }
-                
-                alert(`Sala lista. Máximo 3 amigos permitidos. Invitando automáticamente a tu amigo para duelo de 30s...`);
-                saPanel.style.display = "none";
-                playMenuScreen.style.display = "none";
-                startDuelMultiplayerMode();
-            }
-            if(e.target.id === "opt-report-user" && optReportUser.textContent === "2: Próximamente") {
-                e.stopPropagation();
-                playSoundBoton();
-                alert("¡Próximamente se añadirán más mini juegos interactivos!");
-            }
-        });
-
-        function startDuelMultiplayerMode() {
-            isDuelModeActive = true;
-            duelTimeRemaining = 30;
-            p1Kills = 0;
-            p2Kills = 0;
-            
-            startLevel(1); // Arranca en el entorno de nivel 1 rápido
-            
-            // Sobrescribimos el UI de Objetivos para marcar tiempo y bajas multijugador
-            document.getElementById('label-ui-level').textContent = "MODO";
-            levelText.textContent = "DUELO";
-            document.getElementById('label-ui-targets').textContent = "Tiempo";
-            killsText.textContent = `30s`;
-
-            // Intervalo del cronómetro del mini juego
-            duelInterval = setInterval(() => {
-                if (gamePaused) return;
-                duelTimeRemaining--;
-                killsText.textContent = `${duelTimeRemaining}s`;
-
-                // Simulación competitiva: El amigo mata un NPC aleatoriamente cada 2 o 3 segundos
-                if (Math.random() > 0.6) {
-                    p2Kills++;
-                }
-
-                if(duelTimeRemaining <= 0) {
-                    clearInterval(duelInterval);
-                    endDuelMultiplayerMode();
-                }
-            }, 1000);
-        }
-
-        function endDuelMultiplayerMode() {
-            gameStarted = false;
-            isDuelModeActive = false;
-            clearAllNPCs();
-            
-            let msgResult = "";
-            let p1Reward = 0;
-            let p2Reward = 0;
-
-            if (p1Kills > p2Kills) {
-                p1Reward = 500;
-                p2Reward = 150;
-                msgResult = `🏆 ¡GANASTE EL DUELO!<br>Mataste: ${p1Kills} NPCs<br>Tu amigo: ${p2Kills} NPCs<br><span style='color:#00ff00;'>Recompensa: +500 🟡</span>`;
-            } else if (p1Kills < p2Kills) {
-                p1Reward = 150;
-                p2Reward = 500;
-                msgResult = `💥 ¡PERDISTE EL DUELO!<br>Mataste: ${p1Kills} NPCs<br>Tu amigo: ${p2Kills} NPCs<br><span style='color:#ffcc00;'>Consolación: +150 🟡</span>`;
-            } else {
-                p1Reward = 250;
-                msgResult = `🤝 ¡EMPATE TÉCNICO!<br>Ambos mataron: ${p1Kills} NPCs<br><span style='color:#00ff00;'>Recompensa: +250 🟡</span>`;
-            }
-
-            score += p1Reward;
-            actualizarTextoMonedas();
-            savePlayerProgress();
-
-            announcement.innerHTML = msgResult;
-            announcement.style.transform = "translate(-50%, -50%) scale(1)";
-
-            // Restaurar etiquetas UI originales
-            setTimeout(() => {
-                announcement.style.transform = "translate(-50%, -50%) scale(0)";
-                document.getElementById('label-ui-level').textContent = "Nivel";
-                document.getElementById('label-ui-targets').textContent = "Objetivos";
-                playMenuScreen.style.display = "flex";
-                menuSaBtn.style.display = "flex";
-            }, 5000);
-        }
-
         // CONTROL INTEGRADO DEL BOTÓN RLU CON SONIDO ESPECIAL INCLUIDO
         rluToggleBtn.addEventListener('click', () => {
-            playSoundRLU(); 
+            playSoundRLU(); // Reproduce RLU.mp3 de forma prioritaria al tocar
             isRLUEnabled = !isRLUEnabled;
             
             const coinGiroElements = [
@@ -2037,20 +1528,24 @@
                 rluToggleBtn.textContent = "RLU: ULTRA ACTIVADO ⚡";
                 rluToggleBtn.className = "rlu-btn rlu-on";
                 
+                // 1. Apagar animaciones pesadas de CSS (giro de monedas)
                 coinGiroElements.forEach(el => { if(el) el.classList.add('stop-animation'); });
 
+                // 2. Modificar el stage para usar menos GPU (Color sólido en vez de repetir imagen larga)
                 stage.style.backgroundImage = "none";
                 stage.style.backgroundColor = "#111";
 
+                // 3. Reducir variables de renderizado de NPCs en tiempo real
                 maxNPCs = 5;
                 distanceBetweenNPCs = 600; 
                 
                 if (gameStarted) {
+                    // Si está en una partida activa, reorganizar dinámicamente para evitar lags
                     clearAllNPCs();
                     for(let i = 0; i < maxNPCs; i++) { spawnNPC(i); }
                 }
             } else {
-                // DESACTIVAR MODO RLU 
+                // DESACTIVAR MODO RLU (VOLVER AL DISEÑO TRADICIONAL)
                 rluToggleBtn.textContent = "RLU: APAGADO ❌";
                 rluToggleBtn.className = "rlu-btn rlu-off";
                 
@@ -2078,7 +1573,6 @@
             playSoundBoton();
             settingsPanel.style.display = "none"; 
             resatsPanel.style.display = "none";
-            saPanel.style.display = "none";
             profilePanel.style.display = (profilePanel.style.display === "none" || profilePanel.style.display === "") ? "flex" : "none";
         });
 
@@ -2180,6 +1674,7 @@
                 upgradesOwned[id] = (savedUpgrade === "true");
             }
 
+            // CARGAR ESTADO DEL BOTÓN RLU GUARDADO
             if(savedRLU === "true") {
                 isRLUEnabled = false; 
                 rluToggleBtn.click(); 
@@ -2309,11 +1804,11 @@
             window.location.reload();
         });
 
+        // MANEJO DE CONFIGURACIÓN DEL MENÚ PRINCIPAL INTERMEDIO
         settingsToggleBtn.addEventListener('click', () => {
             playSoundBoton();
             profilePanel.style.display = "none"; 
             resatsPanel.style.display = "none";
-            saPanel.style.display = "none";
             settingsPanel.style.display = (settingsPanel.style.display === "none" || settingsPanel.style.display === "") ? "flex" : "none";
         });
 
@@ -2322,11 +1817,11 @@
             settingsPanel.style.display = "none";
         });
 
+        // EVENTOS DEL NUEVO BOTÓN RESATS 📕
         resatsMainBtn.addEventListener('click', () => {
             playSoundBoton();
             profilePanel.style.display = "none";
             settingsPanel.style.display = "none";
-            saPanel.style.display = "none";
             resatsPanel.style.display = "flex";
         });
 
@@ -2347,6 +1842,7 @@
                 "900": { amount: 9000, type: "coins" }, "50M": { amount: 50000000, type: "coins" },
                 "MRT": { amount: 60, type: "coincg" }, "ABG": { amount: 100, type: "coincg" },
                 "15A": { amount: 15, type: "coincg" }, "67X": { amount: 67, type: "coincg" },
+                // CÓDIGOS NUEVOS ESPECIALES
                 "MRJ": { amount: 5000000000000, type: "coins", req: "lvl4" },
                 "123": { amount: 123000000, type: "coins", req: "upgrade1" },
                 "456": { amount: 500, type: "coincg", req: "lvl10" }
@@ -2355,6 +1851,7 @@
             if(rewards[inputCode] !== undefined) {
                 let rData = rewards[inputCode];
                 
+                // Validación de condiciones especiales
                 if (rData.req === "lvl4" && maxUnlockedLevel < 5 && currentLevel < 4) {
                     alert("❌ Bloqueado: Debes completar primero el Nivel 4.");
                     return;
@@ -2364,6 +1861,7 @@
                     return;
                 }
                 if (rData.req === "lvl10" && maxUnlockedLevel < 10 && kills < levelsConfig[10].targets) {
+                    // Si no ha superado el 10 ni está en estado completado
                     let savedProgress10 = localStorage.getItem('cs_max_level_' + currentUsername);
                     if (parseInt(savedProgress10) <= 10 && currentLevel !== 10) {
                         alert("❌ Bloqueado: Debes completar primero el Nivel 10.");
@@ -2428,14 +1926,13 @@
             menuProfileBtn.style.display = 'none'; 
             
             settingsToggleBtn.style.display = 'flex';
-            menuSaBtn.style.display = 'flex'; // Activar SA visible
         });
 
-        jugarMainBtn.addEventListener('click', () => { playSoundBoton(); playMenuScreen.style.display = 'none'; settingsToggleBtn.style.display = 'none'; menuSaBtn.style.display = 'none'; levelSelectionScreen.style.display = 'flex'; });
-        tiendaMainBtn.addEventListener('click', () => { playSoundBoton(); playMenuScreen.style.display = 'none'; settingsToggleBtn.style.display = 'none'; menuSaBtn.style.display = 'none'; shopScreen.style.display = 'flex'; });
-        closeShopBtn.addEventListener('click', () => { playSoundBoton(); shopScreen.style.display = 'none'; playMenuScreen.style.display = 'flex'; settingsToggleBtn.style.display = 'flex'; menuSaBtn.style.display = 'flex'; });
+        jugarMainBtn.addEventListener('click', () => { playSoundBoton(); playMenuScreen.style.display = 'none'; settingsToggleBtn.style.display = 'none'; levelSelectionScreen.style.display = 'flex'; });
+        tiendaMainBtn.addEventListener('click', () => { playSoundBoton(); playMenuScreen.style.display = 'none'; settingsToggleBtn.style.display = 'none'; shopScreen.style.display = 'flex'; });
+        closeShopBtn.addEventListener('click', () => { playSoundBoton(); shopScreen.style.display = 'none'; playMenuScreen.style.display = 'flex'; settingsToggleBtn.style.display = 'flex'; });
         salirMainBtn.addEventListener('click', () => { window.location.reload(); });
-        backToMenuBtn.addEventListener('click', () => { playSoundBoton(); levelSelectionScreen.style.display = 'none'; playMenuScreen.style.display = 'flex'; settingsToggleBtn.style.display = 'flex'; menuSaBtn.style.display = 'flex'; });
+        backToMenuBtn.addEventListener('click', () => { playSoundBoton(); levelSelectionScreen.style.display = 'none'; playMenuScreen.style.display = 'flex'; settingsToggleBtn.style.display = 'flex'; });
 
         levelButtons.forEach(btn => {
             btn.addEventListener('click', () => {
@@ -2447,7 +1944,6 @@
         function startLevel(lvl) {
             levelSelectionScreen.style.display = 'none';
             settingsToggleBtn.style.display = 'none';
-            menuSaBtn.style.display = 'none';
             currentLevel = lvl;
             kills = 0;
             gamePaused = false;
@@ -2626,25 +2122,17 @@
                 }
             }
 
-            // MODO DE JUEGO MULTIJUGADOR COMPETITIVO
-            if(isDuelModeActive) {
-                p1Kills++;
-                rawCoins = 5; // Monedas base por kill en multijugador
-            }
-
             score += rawCoins;
             lastCoinsText.textContent = formatearMonedas(rawCoins);
             actualizarTextoMonedas(); 
             
-            if(!isDuelModeActive) {
-                kills++;
-                killsText.textContent = `${kills}/${currentLevelMaxTargets}`;
-                savePlayerProgress();
+            kills++;
+            killsText.textContent = `${kills}/${currentLevelMaxTargets}`;
+            savePlayerProgress();
 
-                if (kills >= currentLevelMaxTargets) {
-                    gameStarted = false;
-                    setTimeout(() => { triggerLevelReward(); }, 150);
-                }
+            if (kills >= currentLevelMaxTargets) {
+                gameStarted = false;
+                setTimeout(() => { triggerLevelReward(); }, 150);
             }
 
             setTimeout(() => {
@@ -2694,10 +2182,6 @@
         pauseQuitBtn.addEventListener('click', (e) => {
             e.stopPropagation(); isMusicMuted = false; isSoundMuted = false; audioMusic.muted = false;
             gameStarted = false; gamePaused = false; clearAllNPCs();
-            if(duelInterval) clearInterval(duelInterval);
-            isDuelModeActive = false;
-            document.getElementById('label-ui-level').textContent = "Nivel";
-            document.getElementById('label-ui-targets').textContent = "Objetivos";
             pauseOverlayScreen.style.display = "none"; levelSelectionScreen.style.display = "flex"; 
             actualizarTextoMonedas(); audioMusic.play().catch(e => {});
         });
@@ -2719,9 +2203,6 @@
                 toggleSoundBtn.textContent = "Silenciar Sonido"; toggleSoundBtn.className = "audio-toggle-btn audio-active";
             }
         });
-
-        // Ocultar menús flotantes contextuales al hacer clic general en pantalla
-        document.addEventListener('click', () => { downloadDropdown.style.display = "none"; });
 
         document.addEventListener('gesturestart', function (e) { e.preventDefault(); });
     </script>
