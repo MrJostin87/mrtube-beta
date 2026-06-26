@@ -118,6 +118,135 @@
             object-fit: cover;
         }
 
+        /* NUEVO BOTÓN REPORTAR BUGS / DENUNCIAR (ARRIBA DERECHA) */
+        #menu-report-bugs-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: linear-gradient(135deg, #ff3333 0%, #990000 100%);
+            color: #fff;
+            border: 3px solid #fff;
+            font-family: 'Arial Black', sans-serif;
+            font-size: 13px;
+            padding: 8px 14px;
+            border-radius: 12px;
+            cursor: pointer;
+            pointer-events: auto;
+            z-index: 110;
+            box-shadow: 0 4px 10px rgba(255, 51, 51, 0.4);
+            text-shadow: 1px 1px #000;
+            transition: transform 0.1s;
+        }
+        #menu-report-bugs-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* PESTAÑA / PANEL DE DENUNCIAR PRINCIPAL */
+        #report-main-panel {
+            position: absolute;
+            background: linear-gradient(135deg, #151515 0%, #2a1111 100%);
+            border: 4px solid #ff3333;
+            border-radius: 20px;
+            padding: 20px;
+            width: 320px;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            z-index: 125;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.9), inset 0 0 15px rgba(255, 51, 51, 0.2);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        #report-main-panel h3 {
+            color: #ff3333;
+            margin: 0;
+            font-size: 22px;
+            text-shadow: 2px 2px #000;
+            text-align: center;
+        }
+        .report-panel-btn {
+            width: 95%;
+            padding: 12px;
+            font-size: 16px;
+            font-family: 'Arial Black', sans-serif;
+            border-radius: 12px;
+            border: 3px solid #fff;
+            cursor: pointer;
+            text-align: center;
+            background: #ffcc00;
+            color: #000;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+            transition: transform 0.1s;
+        }
+        .report-panel-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* PESTAÑA / PANEL DE VERIFICACIÓN DE CÓDIGO DE BUG */
+        #report-code-panel {
+            position: absolute;
+            background: linear-gradient(135deg, #111 0%, #1a1a2e 100%);
+            border: 4px solid #00ff00;
+            border-radius: 20px;
+            padding: 20px;
+            width: 320px;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            z-index: 126;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.9);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        #report-code-panel h3 {
+            color: #00ff00;
+            margin: 0;
+            font-size: 20px;
+            text-shadow: 2px 2px #000;
+            text-align: center;
+        }
+        #report-code-panel p {
+            font-size: 12px;
+            font-family: sans-serif;
+            color: #ccc;
+            text-align: center;
+            margin: 0;
+            line-height: 1.4;
+        }
+        #bug-digit-input {
+            background: #000;
+            border: 3px solid #00ff00;
+            color: #00ff00;
+            padding: 10px;
+            font-size: 22px;
+            border-radius: 10px;
+            width: 75%;
+            text-align: center;
+            letter-spacing: 4px;
+            font-family: monospace;
+            font-weight: bold;
+            pointer-events: auto;
+        }
+        #bug-digit-input:focus {
+            outline: none;
+            box-shadow: 0 0 12px #00ff00;
+        }
+        #bug-code-submit-btn {
+            background: #00ff00;
+            color: #000;
+            border: 2px solid #fff;
+            padding: 10px 24px;
+            font-size: 14px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-family: 'Arial Black', sans-serif;
+            box-shadow: 0 4px 8px rgba(0,255,0,0.3);
+        }
+
         /* COMPONENTE DE PERFIL EN EL MENÚ PRINCIPAL INTERMEDIO */
         .menu-main-profile {
             display: flex;
@@ -1035,6 +1164,23 @@
         </div>
     </div>
 
+    <button id="menu-report-bugs-btn">⚒️ Denunciar / Bugs</button>
+
+    <div id="report-main-panel">
+        <h3>SISTEMA DE REPORTES</h3>
+        <button id="report-go-bugs-btn" class="report-panel-btn">Bugs 🐛</button>
+        <button id="report-close-main-btn" style="background:#ff3333; color:#fff; border:2px solid #fff; border-radius:8px; padding:6px 20px; font-family:'Arial Black', sans-serif; font-size:12px; cursor:pointer; width:80%;">CERRAR</button>
+    </div>
+
+    <div id="report-code-panel">
+        <h3 id="bug-panel-title">VERIFICACIÓN REQUERIDA</h3>
+        <p>El sistema detectó un código de reporte. Ingresa el código asignado para validar tu sesión de soporte:</p>
+        <div style="font-size:18px; color:#ffcc00; background:#222; padding:5px 15px; border-radius:5px; border:1px dashed #ffcc00; margin:5px 0;" id="assigned-code-txt">Código: ----</div>
+        <input type="text" id="bug-digit-input" placeholder="0000" maxlength="4">
+        <button id="bug-code-submit-btn">ENVIAR REPORTE</button>
+        <button id="report-close-code-btn" style="background:#ff3333; color:#fff; border:2px solid #fff; border-radius:8px; padding:6px 20px; font-family:'Arial Black', sans-serif; font-size:12px; cursor:pointer; width:80%;">CANCELAR</button>
+    </div>
+
     <div id="menu-profile-btn">
         <img id="menu-avatar-preview" src="Foto.PNG" alt="Avatar">
     </div>
@@ -1153,7 +1299,7 @@
             </p>
 
             <h4>💡 CONSEJOS PARA NOVATOS</h4>
-            <p>• <b>¿Cómo pasarse un nivel?:</b> Apunta con precisión al centro de la pantalla usando la mira (Crosshair) y presiona tus manos o el arma justo cuando el NPC pase por el centro.</p>
+            <p>• <b>¿Cómo pasarse un nivel?:</b> Apunta con precisión al centro de la pantalla usando la mira (Crosshair) and presiona tus manos o el arma justo cuando el NPC pase por el centro.</p>
             <p>• <b>Mejoras:</b> Ahorra tus monedas y CoinCG para comprar mejoras en la Tienda. ¡La Mejora 1 reduce drásticamente el enfriamiento de disparo!</p>
             
             <h4>🔑 CÓDIGOS DE MONEDAS Y COINCG</h4>
@@ -1191,7 +1337,7 @@
             </div>
             <div class="menu-wallet-box purple-wallet">
                 <img src="CoinCG.PNG" alt="CoinCG">
-                <span id="menu-coincg-text-3">0</span>
+                <span id="menu-coincg-text-2">0</span>
             </div>
         </div>
 
@@ -1396,6 +1542,20 @@
         const resatsPanel = document.getElementById('resats-panel');
         const closeResatsBtn = document.getElementById('close-resats-btn');
 
+        // NUEVOS ELEMENTOS: SISTEMA DE REPORTAR BUGS
+        const menuReportBugsBtn = document.getElementById('menu-report-bugs-btn');
+        const reportMainPanel = document.getElementById('report-main-panel');
+        const reportGoBugsBtn = document.getElementById('report-go-bugs-btn');
+        const reportCloseMainBtn = document.getElementById('report-close-main-btn');
+        const reportCodePanel = document.getElementById('report-code-panel');
+        const assignedCodeTxt = document.getElementById('assigned-code-txt');
+        const bugDigitInput = document.getElementById('bug-digit-input');
+        const bugCodeSubmitBtn = document.getElementById('bug-code-submit-btn');
+        const reportCloseCodeBtn = document.getElementById('report-close-code-btn');
+
+        let bugCodesList = ["2020", "5028", "9270", "1029"];
+        let currentAssignedBugCode = "";
+
         const musicBtnNormal = document.getElementById('music-btn-normal');
         const musicBtn2 = document.getElementById('music-btn-2');
         const musicBtnVoice = document.getElementById('music-btn-voice');
@@ -1510,6 +1670,59 @@
             }
         }
 
+        // LÓGICA DE EVENTOS DEL NUEVO SISTEMA DE REPORTES DE BUGS
+        menuReportBugsBtn.addEventListener('click', () => {
+            playSoundBoton();
+            profilePanel.style.display = "none";
+            settingsPanel.style.display = "none";
+            resatsPanel.style.display = "none";
+            reportCodePanel.style.display = "none";
+            reportMainPanel.style.display = (reportMainPanel.style.display === "none" || reportMainPanel.style.display === "") ? "flex" : "none";
+        });
+
+        reportCloseMainBtn.addEventListener('click', () => {
+            playSoundBoton();
+            reportMainPanel.style.display = "none";
+        });
+
+        reportGoBugsBtn.addEventListener('click', () => {
+            playSoundBoton();
+            reportMainPanel.style.display = "none";
+            // Escoger código aleatorio de la lista
+            let randomIndex = Math.floor(Math.random() * bugCodesList.length);
+            currentAssignedBugCode = bugCodesList[randomIndex];
+            
+            assignedCodeTxt.textContent = "Código Asignado: " + currentAssignedBugCode;
+            bugDigitInput.value = "";
+            reportCodePanel.style.display = "flex";
+        });
+
+        reportCloseCodeBtn.addEventListener('click', () => {
+            playSoundBoton();
+            reportCodePanel.style.display = "none";
+        });
+
+        bugCodeSubmitBtn.addEventListener('click', () => {
+            playSoundBoton();
+            let typedCode = bugDigitInput.value.trim();
+            if(typedCode === currentAssignedBugCode) {
+                // Copiar la plantilla automáticamente al portapapeles
+                let plantilla = "⚒️ DB ⚒️: [Ingresa Tu Problema]";
+                navigator.clipboard.writeText(plantilla).then(() => {
+                    alert("✅ Código correcto. Se ha copiado en tu portapapeles la plantilla de reporte de error. Pégala en la sección de comentarios del video.");
+                    reportCodePanel.style.display = "none";
+                    // Redirigir al link del video de youtube enviado
+                    window.open("https://youtu.be/gRdU1jUcA4A?si=jqZ6pcVZbRLkOCj8", "_blank");
+                }).catch(err => {
+                    // Fallback en caso de bloqueos del navegador
+                    alert("Código correcto. Por favor escribe esto en comentarios: '⚒️ DB ⚒️: [Ingresa Tu Problema]'");
+                    window.open("https://youtu.be/gRdU1jUcA4A?si=jqZ6pcVZbRLkOCj8", "_blank");
+                });
+            } else {
+                alert("❌ El código ingresado no coincide con el código asignado por el sistema aleatorio. Inténtalo de nuevo.");
+            }
+        });
+
         // CONTROL INTEGRADO DEL BOTÓN RLU CON SONIDO ESPECIAL INCLUIDO
         rluToggleBtn.addEventListener('click', () => {
             playSoundRLU(); // Reproduce RLU.mp3 de forma prioritaria al tocar
@@ -1573,6 +1786,8 @@
             playSoundBoton();
             settingsPanel.style.display = "none"; 
             resatsPanel.style.display = "none";
+            reportMainPanel.style.display = "none";
+            reportCodePanel.style.display = "none";
             profilePanel.style.display = (profilePanel.style.display === "none" || profilePanel.style.display === "") ? "flex" : "none";
         });
 
@@ -1809,6 +2024,8 @@
             playSoundBoton();
             profilePanel.style.display = "none"; 
             resatsPanel.style.display = "none";
+            reportMainPanel.style.display = "none";
+            reportCodePanel.style.display = "none";
             settingsPanel.style.display = (settingsPanel.style.display === "none" || settingsPanel.style.display === "") ? "flex" : "none";
         });
 
@@ -1822,6 +2039,8 @@
             playSoundBoton();
             profilePanel.style.display = "none";
             settingsPanel.style.display = "none";
+            reportMainPanel.style.display = "none";
+            reportCodePanel.style.display = "none";
             resatsPanel.style.display = "flex";
         });
 
@@ -1924,7 +2143,7 @@
             welcomeScreen.style.display = 'none';
             playMenuScreen.style.display = 'flex'; 
             menuProfileBtn.style.display = 'none'; 
-            
+            menuReportBugsBtn.style.display = 'none'; // Se oculta el botón al iniciar partida
             settingsToggleBtn.style.display = 'flex';
         });
 
