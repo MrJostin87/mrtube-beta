@@ -2663,7 +2663,7 @@ function comprarAyudanteGold3() {
             document.getElementById("btn-buy-gold-2").disabled = false;
         }
 
-        if (tieneAyudanteComprado === "gold_3") {
+                if (tieneAyudanteComprado === "gold_3") {
             document.getElementById("btn-buy-gold-3").innerHTML = "¡ADQUIRIDO! ⚒️";
             document.getElementById("btn-buy-gold-3").style.backgroundColor = "#555";
             document.getElementById("btn-buy-gold-3").style.color = "#fff";
@@ -2675,6 +2675,24 @@ function comprarAyudanteGold3() {
             document.getElementById("btn-buy-gold-3").disabled = false;
         }
     }
+    function limpiarInterfazAyudanteGold() {
+        let botonExistente = document.getElementById("btnAyudanteGold");
+        if (botonExistente) botonExistente.remove();
+
+        let pantallaContador = document.getElementById("pantallaContadorGold");
+        if (pantallaContador) pantallaContador.remove();
+        
+        if (typeof intervaloAyudante !== 'undefined') {
+            clearInterval(intervaloAyudante);
+        }
+    }
+
+    // --- OYENTE AUTOMÁTICO PARA DETECTAR CUANDO SE ABRE LA TIENDA ---
+    document.addEventListener("click", function(evento) {
+        if (evento.target && (evento.target.id === "btn-tienda" || evento.target.innerText.includes("Tienda"))) {
+            setTimeout(actualizarBotonesTiendaGold, 50);
+        }
+    });
 
     document.addEventListener('gesturestart', function (e) { e.preventDefault(); });
 </script>
