@@ -1957,7 +1957,7 @@
             }
         }
 
-        function buyUpgrade(id, costCoins, costCoinCG) {
+         function buyUpgrade(id, costCoins, costCoinCG) {
             playSoundBoton();
             if (currentUsername === "") {
                 alert("Por favor, ingresa tu nombre primero en el botón de perfil.");
@@ -1977,6 +1977,58 @@
                 alert(`🎉 ¡Súper Mejora activada con éxito de calidad Trillonaria!`);
             } else {
                 alert("❌ No tienes suficientes Monedas o CoinCG.");
+            }
+        }
+
+        // --- COMPRAS DEL AYUDANTE GOLD ---
+        function comprarAyudanteGold1() {
+            if (tieneAyudanteComprado !== "ninguno") {
+                alert("❌ ¡Ya tienes un Ayudante Gold en tu inventario! Úsalo primero.");
+                return;
+            }
+            if (score >= 1000 && coinCG >= 10) {
+                score -= 1000;
+                coinCG -= 10;
+                tieneAyudanteComprado = "gold_1";
+                savePlayerProgress();
+                actualizarTextoMonedas();
+                alert("⚒️ ¡Compraste Ayudante Gold 1.1 con éxito!");
+            } else {
+                alert("❌ No tienes suficientes monedas o CoinCG.");
+            }
+        }
+
+        function comprarAyudanteGold2() {
+            if (tieneAyudanteComprado !== "ninguno") {
+                alert("❌ ¡Ya tienes un Ayudante Gold en tu inventario! Úsalo primero.");
+                return;
+            }
+            if (score >= 2000 && coinCG >= 20) {
+                score -= 2000;
+                coinCG -= 20;
+                tieneAyudanteComprado = "gold_2";
+                savePlayerProgress();
+                actualizarTextoMonedas();
+                alert("⚒️ ¡Compraste Ayudante Gold 2.2 con éxito!");
+            } else {
+                alert("❌ No tienes suficientes monedas o CoinCG.");
+            }
+        }
+
+        function comprarAyudanteGold3() {
+            if (tieneAyudanteComprado !== "ninguno") {
+                alert("❌ ¡Ya tienes un Ayudante Gold en tu inventario! Úsalo primero.");
+                return;
+            }
+            if (score >= 5000 && coinCG >= 26) {
+                score -= 5000;
+                coinCG -= 26;
+                tieneAyudanteComprado = "gold_3";
+                savePlayerProgress();
+                actualizarTextoMonedas();
+                alert("⚒️ ¡Compraste Ayudante Gold 3.3 con éxito!");
+            } else {
+                alert("❌ No tienes suficientes monedas o CoinCG.");
             }
         }
 
