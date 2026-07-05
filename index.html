@@ -1578,7 +1578,7 @@
             10: { targets: 150, speed: 9.0, coinsPerKill: 1000000, reward: 10000000000000 } 
         };
 
-        let score = 0;
+                let score = 0;
         let coinCG = 0; 
         let kills = 0;
         let currentLevel = 1;
@@ -1589,6 +1589,13 @@
         let currentUsername = "";
         let popupTriggered = false; 
         let activeNPCIntervals = [];
+
+        // --- SISTEMA DE AYUDANTE GOLD ---
+        let tieneAyudanteComprado = "ninguno"; 
+        let ayudanteActivo = false;
+        let tiempoAyudante = 0;
+        let intervaloAyudante = null;
+
         
         let scrollSpeed = 1.8; 
         let savedSpeedBeforePause = 1.8; 
@@ -2369,10 +2376,18 @@
             coinCG += earnedCoinCG;
             actualizarTextoMonedas();
             
-            let message = `¡NIVEL ${currentLevel} COMPLETADO!<br><span style='color: #ffcc00;'>🎁 MONEDAS: +${formatearMonedas(currentConfig.reward)}</span><br><span style='color: #b026ff;'>💜 ¡GANASTE ${earnedCoinCG} CoinCG!</span>`;
-            
-            if (currentLevel === maxUnlockedLevel && maxUnlockedLevel < 10) maxUnlockedLevel++;
+                        let message = `¡NIVEL ${currentLevel} COMPLETADO!<br><span style='color: #ffcc00;'>🎁 MONEDAS: +${earnedCoinCG}</span>`;
+
+            if (currentLevel >= maxUnlockedLevel && maxUnlockedLevel < 10) {
+                maxUnlockedLevel = currentLevel + 1;
+            }
             savePlayerProgress();
+            if (typeof updateLevelButtonsUI === 'function') {
+                updateLevelButtonsUI(); 
+            }
+
+
+
             
             announcement.innerHTML = message;
             announcement.style.transform = "translate(-50%, -50%) scale(1)";
@@ -2426,4 +2441,4 @@
         document.addEventListener('gesturestart', function (e) { e.preventDefault(); });
     </script>
 </body>
-</html>
+ </html>
