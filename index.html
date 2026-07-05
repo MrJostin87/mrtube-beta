@@ -2625,7 +2625,49 @@
             }
         });
 
-        document.addEventListener('gesturestart', function (e) { e.preventDefault(); });
-    </script>
+            // ... todo tu código anterior de los ayudantes ...
+
+    function actualizarBotonesTiendaGold() {
+        if (!document.getElementById("btn-buy-gold-1")) return;
+
+        if (tieneAyudanteComprado === "gold_1") {
+            document.getElementById("btn-buy-gold-1").innerHTML = "¡ADQUIRIDO! ⚒️";
+            document.getElementById("btn-buy-gold-1").style.backgroundColor = "#555";
+            document.getElementById("btn-buy-gold-1").style.color = "#fff";
+            document.getElementById("btn-buy-gold-1").disabled = true;
+        } else {
+            document.getElementById("btn-buy-gold-1").innerHTML = "1000 🟡 + 10 🟣";
+            document.getElementById("btn-buy-gold-1").style.backgroundColor = ""; 
+            document.getElementById("btn-buy-gold-1").style.color = "";
+            document.getElementById("btn-buy-gold-1").disabled = false;
+        }
+
+        if (tieneAyudanteComprado === "gold_2") {
+            document.getElementById("btn-buy-gold-2").innerHTML = "¡ADQUIRIDO! ⚒️";
+            document.getElementById("btn-buy-gold-2").style.backgroundColor = "#555";
+            document.getElementById("btn-buy-gold-2").style.color = "#fff";
+            document.getElementById("btn-buy-gold-2").disabled = true;
+        } else {
+            document.getElementById("btn-buy-gold-2").innerHTML = "2200 🟡 + 20 🟣";
+            document.getElementById("btn-buy-gold-2").style.backgroundColor = "";
+            document.getElementById("btn-buy-gold-2").style.color = "";
+            document.getElementById("btn-buy-gold-2").disabled = false;
+        }
+
+        if (tieneAyudanteComprado === "gold_3") {
+            document.getElementById("btn-buy-gold-3").innerHTML = "¡ADQUIRIDO! ⚒️";
+            document.getElementById("btn-buy-gold-3").style.backgroundColor = "#555";
+            document.getElementById("btn-buy-gold-3").style.color = "#fff";
+            document.getElementById("btn-buy-gold-3").disabled = true;
+        } else {
+            document.getElementById("btn-buy-gold-3").innerHTML = "5000 🟡 + 26 🟣";
+            document.getElementById("btn-buy-gold-3").style.backgroundColor = "";
+            document.getElementById("btn-buy-gold-3").style.color = "";
+            document.getElementById("btn-buy-gold-3").disabled = false;
+        }
+    }
+
+    document.addEventListener('gesturestart', function (e) { e.preventDefault(); });
+</script>
 </body>
- </html>
+</html>
