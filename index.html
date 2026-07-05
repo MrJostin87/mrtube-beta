@@ -2609,13 +2609,17 @@ function comprarAyudanteGold3() {
         });
 
         pauseContinueBtn.addEventListener('click', (e) => { e.stopPropagation(); playSoundBoton(); gamePaused = false; scrollSpeed = savedSpeedBeforePause; pauseOverlayScreen.style.display = "none"; });
-        pauseQuitBtn.addEventListener('click', (e) => {
-            e.stopPropagation(); isMusicMuted = false; isSoundMuted = false; audioMusic.muted = false;
-            gameStarted = false; gamePaused = false; clearAllNPCs();
-            pauseOverlayScreen.style.display = "none"; levelSelectionScreen.style.display = "flex"; 
-            actualizarTextoMonedas(); audioMusic.play().catch(e => {});
-        });
+pauseQuitBtn.addEventListener('click', (e) => {
+    e.stopPropagation(); isMusicMuted = false; isSoundMuted = false; audioMusic.muted = false;
+    gameStarted = false; gamePaused = false; clearAllNPCs();
+    
+    // ¡LISTO! Aquí pusimos la palabra para limpiar el botón fantasma
+    limpiarInterfazAyudanteGold(); 
 
+    pauseOverlayScreen.style.display = "none"; levelSelectionScreen.style.display = "flex"; 
+    actualizarTextoMonedas(); audioMusic.play().catch(e => {});
+});
+        
         toggleMusicBtn.addEventListener('click', (e) => {
             e.stopPropagation(); isMusicMuted = !isMusicMuted;
             if (isMusicMuted) {
