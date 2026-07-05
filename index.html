@@ -2258,9 +2258,119 @@
             clearAllNPCs();
             audioMusic.play().catch(e => {});
 
-            gameStarted = true;
+                        gameStarted = true;
             for(let i = 0; i < maxNPCs; i++) {
                 spawnNPC(i);
+            }
+            // Activa la revisión del Ayudante Gold al iniciar el nivel
+            verificarBotonAyudante();
+        }
+
+        // --- MECÁNICA EN PARTIDA DEL AYUDANTE GOLD ---
+        function verificarBotonAyudante() {
+            let botonExistente = document.getElementById("btnAyudanteGold");
+            if (botonExistente) botonExistente.remove();
+
+            let mostrarBoton = false;
+            let textoBoton = "";
+            let tiempoEspera = 0;
+
+            if (currentLevel === 5 && tieneAyudanteComprado === "gold_1") {
+                mostrarBoton = true;
+                textoBoton = "⚒️ ¿Queres una Ayuda? ⚒️";
+                tiempoEspera = 15;
+            } else if (currentLevel === 6 && tieneAyudanteComprado === "gold_2") {
+                mostrarBoton = true;
+                textoBoton = "⚒️ ¿Queres una Ayuda Rápida? ⚒️";
+                tiempoEspera = 7;
+            } else if (currentLevel === 7 && tieneAyudanteComprado === "gold_3") {
+                mostrarBoton = true;
+                textoBoton = "⚒️ ¿Queres una Ayuda Ultra Rápida? ⚒️";
+                tiempoEspera = 3;
+            }
+
+            if (mostrarBoton) {
+                let btn = document.createElement("button");
+                btn.id = "btnAyudanteGold";
+                btn.innerHTML = textoBoton;
+                
+                // Diseño premium flotante para celular
+                btn.style.position = "fixed";
+                btn.style.right = "20px";
+                btn.style.top = "40%";
+                btn.style.zIndex = "1000";
+                btn.style.padding = "12px";
+                btn.style.backgroundColor = "#ffcc00";
+                btn.style.color = "#000";
+                btn.style.fontWeight = "bold";
+                btn.style.border = "2px solid #fff";
+                btn.style.borderRadius = "10px";
+                btn.style.fontSize = "14px";
+
+                btn.onclick = function() {
+                    btn.remove(); // Se borra para que no lo pulse dos veces
+                    activarAyudaGold(tiempoEspera);
+                };
+
+                document.body.appendChild(btn);
+            }
+        }
+
+        function activarAyudaGold(segundos) {
+            gamePaused = true; 
+            ayudanteActivo = true;
+            tiempoAyudante = segundos;
+
+            // Pantalla oscura con contador gigante en el centro
+            let pantallaContador = document.createElement("div");
+            pantallaContador.id = "pantallaContadorGold";
+            pantallaContador.style.position = "fixed";
+            pantallaContador.style.top = "50%";
+            pantallaContador.style.left = "50%";
+            pantallaContador.style.transform = "translate(-50%, -50%)";
+            pantallaContador.style.backgroundColor = "rgba(0,0,0,0.85)";
+            pantallaContador.style.color = "#fff";
+            pantallaContador.style.padding = "30px";
+            pantallaContador.style.borderRadius = "15px";
+            pantallaContador.style.fontSize = "24px";
+            pantallaContador.style.textAlign = "center";
+            pantallaContador.style.zIndex = "2000";
+            pantallaContador.innerHTML = `⏳ PROCESANDO AYUDA GOLD...<br><span style='font-size: 45px; color: #ffcc00; font-weight: bold;'>${tiempoAyudante}</span>`;
+            document.body.appendChild(pantallaContador);
+
+            // Reloj hacia atrás
+            intervaloAyudante = setInterval(function() {
+                tiempoAyudante--;
+                if (tiempoAyudante > 0) {
+                    pantallaContador.innerHTML = `⏳ PROCESANDO AYUDA GOLD...<br><span style='font-size: 45px; color: #ffcc00; font-weight: bold;'>${tiempoAyudante}</span>`;
+                } else {
+                    clearInterval(intervaloAyudante);
+                    pantallaContador.remove();
+                    finalizarAyudaConVictoria();
+                }
+            }, 1000);
+        }
+
+        function finalizarAyudaConVictoria() {
+            gamePaused = false;
+            ayudanteActivo = false;
+
+            if (tieneAyudanteComprado === "gold_1") {
+                tieneAyudanteComprado = "ninguno"; // Se gasta el uso
+                savePlayerProgress();
+                triggerLevelReward(); // Gana el nivel 5
+            } 
+            else if (tieneAyudanteComprado === "gold_2") {
+                tieneAyudanteComprado = "ninguno";
+                maxUnlockedLevel = 8; // Salta al 8
+                savePlayerProgress();
+                triggerLevelReward(); 
+            } 
+            else if (tieneAyudanteComprado === "gold_3") {
+                tieneAyudanteComprado = "ninguno";
+                maxUnlockedLevel = 10; // Desbloquea el final del juego
+                savePlayerProgress();
+                triggerLevelReward(); 
             }
         }
 
