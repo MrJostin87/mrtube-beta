@@ -1228,25 +1228,9 @@
         <!-- LOGO OFICIAL EN IMAGEN (Paso 3) -->
         <img src="Chicken_Strike_NPC.PNG" alt="Chicken Strike NPC" style="width: 85%; max-width: 380px; margin-top: 15px; margin-bottom: 5px; filter: drop-shadow(0px 4px 4px rgba(0,0,0,0.3));">
 
-        <!-- ======================================================== -->
-        <!-- SECCIÓN CENTRAL: RESATS, PERFIL Y CONFIGURACIÓN (Paso 2) -->
-        <!-- ======================================================== -->
-        <div style="display: flex; align-items: center; justify-content: center; gap: 15px; margin: 15px auto; width: 100%; max-width: 360px;">
-            
-            <!-- Botón de Resats (Izquierda - Usa tu imagen Resats.PNG) -->
-            <img id="resats-main-btn" src="Resats.PNG" alt="Resats" style="width: 55px; height: 55px; cursor: pointer; transition: transform 0.1s;" ontouchstart="this.style.transform='scale(0.9)'" ontouchend="this.style.transform='scale(1)'" onclick="playSoundBoton();">
-
-            <!-- Caja de Perfil (Centro - Mantiene tus IDs y clases originales) -->
-            <div class="menu-main-profile" style="display: flex; flex-direction: column; align-items: center; justify-content: center; margin: 0; padding: 10px; min-width: 110px;">
-                <img id="menu-main-avatar-img" class="menu-main-avatar" src="Foto.PNG" alt="Avatar Juego" style="margin-bottom: 5px;">
-                <div id="menu-main-name-txt" class="menu-main-name">Mr. Jostin</div>
-            </div>
-
-            <!-- Botón de Configuración (Derecha - El emoji ⚙️ que pediste) -->
-            <div id="settings-toggle-btn" style="font-size: 32px; cursor: pointer; transition: transform 0.1s; user-select: none; display: flex; align-items: center; justify-content: center; width: 55px; height: 55px;" ontouchstart="this.style.transform='scale(0.85)'" ontouchend="this.style.transform='scale(1)'" onclick="playSoundBoton(); toggleSettingsMenu();">
-                ⚙️
-            </div>
-            
+        <div class="menu-main-profile">
+            <img id="menu-main-avatar-img" class="menu-main-avatar" src="Foto.PNG" alt="Avatar Juego">
+            <div id="menu-main-name-txt" class="menu-main-name">Mr. Jostin</div>
         </div>
 
         <div class="menu-wallet">
