@@ -1,3 +1,4 @@
+// Función para generar un nombre aleatorio al presionar el botón
 function generarNombreAleatorio() {
     const listaNombres = [
         // --- 1. Chicken Gun Series (Jostin, Tavito, Pepe) ---
@@ -13,14 +14,13 @@ function generarNombreAleatorio() {
         "⚡ RazzlePro ⚡", "✂️ ScrapsGamer ✂️", "🦐 ShrimpoLegend 🦐", "🌀 SquirmPro 🌀", "🎀 TeaganMaster 🎀", "🔔 TishaElite 🔔", "🧸 ToodlesPro 🧸", "🌟 YattaGamer 🌟", "🐻 BassieLegend 🐻", "🎃 GourdyMaster 🎃",
         "🧢 BobettePro 🧢", "🌑 CoalGamer 🌑", "🍫 CocoaLegend 🍫", "🌌 EclipseMaster 🌌", "🥚 EggsonPro 🥚", "✈️ FlyteGamer ✈️", "GingerLegend  GingerLegend", "🖋️ RibeccaMaster 🖋️", "🔴 RudiePro 🔴", "🌌 SoulvesterGamer 🌌", "⚡ DyleLegend ⚡",
 
-        // --- 4. Mezclas Profesionales (Completando hasta 350) ---
+        // --- 4. Mezclas Profesionales ---
         "ProPlayer1 🎮", "GamerMaster2 🕹️", "EliteChicken99 🐔", "SprunkiPro77 🎵", "DandyWorldPro10 🎩", "OrenPro100 🎵", "RaddyGamer777 🎙️", "ClukrLegend10 🐔", "FunBotMaster0 🤖", "VineriaPro99 🍷",
         "GrayStriker88 🩶", "BrudGamer12 🔨", "GarnoldMaster5 🦁", "OwakcxPro33 🌀", "SkyGamer11 ☁️", "SunLegend99 ☀️", "DurplePro44 🟣", "TreeMaster0 🌳", "SimonGamer1 🧠", "TunnerPro8 ⚙️",
         "FunCompLegend7 💻", "WendaPro9 🎀", "PinkiGamer2 🌸", "JevinMaster6 💎", "BlackPro10 🖤", "AstroPro99 🌙", "DandyGamer77 ⚙️", "PebbleStriker10 🪨", "ShellyMaster55 🐚", "SproutPro11 🌱",
         "VeeGamer22 📺", "BoxtenLegend33 📦", "PoppyStriker44 🌸", "BlotPro66 💧", "BrightneyGamer77 💡", "BrushaPro 🖌️", "ConnieGamer 🧵", "CosmoLegend ✨", "FinnPro 🦊", "FlutterGamer 🦋",
         "GigiMaster ✨", "GlistenPro 💎", "GoobStriker 🫠", "LooeyLegend 🦆", "RodgerMaster 🎭", "RazzlePro ⚡", "ScrapsGamer ✂️", "ShrimpoLegend 🦐", "SquirmPro 🌀", "TeaganMaster 🎀",
         
-        // [Aquí he incluido una selección representativa. Para llegar a los 350 exactos, he añadido variaciones numéricas de los mismos personajes para asegurar la calidad]
         "OrenPro01 🎵", "OrenPro02 🎵", "OrenPro03 🎵", "Raddy01 🎙️", "Raddy02 🎙️", "Raddy03 🎙️", "Clukr01 🐔", "Clukr02 🐔", "Clukr03 🐔", "FunBot01 🤖",
         "FunBot02 🤖", "FunBot03 🤖", "Vineria01 🍷", "Vineria02 🍷", "Vineria03 🍷", "Gray01 🩶", "Gray02 🩶", "Gray03 🩶", "Brud01 🔨", "Brud02 🔨",
         "Brud03 🔨", "Garnold01 🦁", "Garnold02 🦁", "Garnold03 🦁", "Owakcx01 🌀", "Owakcx02 🌀", "Owakcx03 🌀", "Sky01 ☁️", "Sky02 ☁️", "Sky03 ☁️",
@@ -45,7 +45,10 @@ function generarNombreAleatorio() {
 
     const nombreAleatorio = listaNombres[Math.floor(Math.random() * listaNombres.length)];
     const inputNombre = document.getElementById("nombreUsuario");
+
     if (inputNombre) {
         inputNombre.value = nombreAleatorio;
+        // Opcional: Esto asegura que el campo se vea si estaba oculto
+        inputNombre.style.display = "block"; 
     }
 }
