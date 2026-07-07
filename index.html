@@ -2613,92 +2613,106 @@ pauseQuitBtn.addEventListener('click', (e) => {
     e.stopPropagation(); isMusicMuted = false; isSoundMuted = false; audioMusic.muted = false;
     gameStarted = false; gamePaused = false; clearAllNPCs();
     
-    // ¡LISTO! Aquí pusimos la palabra para limpiar el botón fantasma
+        // ¡LISTO! Aquí pusimos la palabra para limpiar el botón fantasma
     limpiarInterfazAyudanteGold(); 
 
-    pauseOverlayScreen.style.display = "none"; levelSelectionScreen.style.display = "flex"; 
-    actualizarTextoMonedas(); audioMusic.play().catch(e => {});
+    pauseOverlayScreen.style.display = "none"; 
+    levelSelectionScreen.style.display = "flex"; 
+    actualizarTextoMonedas(); 
+    audioMusic.play().catch(e => {});
 });
         
-        toggleMusicBtn.addEventListener('click', (e) => {
-            e.stopPropagation(); isMusicMuted = !isMusicMuted;
-            if (isMusicMuted) {
-                audioMusic.muted = true; toggleMusicBtn.textContent = "Música Silenciada"; toggleMusicBtn.className = "audio-toggle-btn audio-muted";
-            } else {
-                audioMusic.muted = false; toggleMusicBtn.textContent = "Silenciar Música"; toggleMusicBtn.className = "audio-toggle-btn audio-active"; audioMusic.play().catch(o => {});
-            }
-        });
-
-        toggleSoundBtn.addEventListener('click', (e) => {
-            e.stopPropagation(); isSoundMuted = !isSoundMuted;
-            if (isSoundMuted) {
-                toggleSoundBtn.textContent = "Sonidos Silenciados"; toggleSoundBtn.className = "audio-toggle-btn audio-muted";
-            } else {
-                toggleSoundBtn.textContent = "Silenciar Sonido"; toggleSoundBtn.className = "audio-toggle-btn audio-active";
-            }
-        });
-
-            // ... todo tu código anterior de los ayudantes ...
-
-    function actualizarBotonesTiendaGold() {
-        if (!document.getElementById("btn-buy-gold-1")) return;
-
-        if (tieneAyudanteComprado === "gold_1") {
-            document.getElementById("btn-buy-gold-1").innerHTML = "¡ADQUIRIDO! ⚒️";
-            document.getElementById("btn-buy-gold-1").style.backgroundColor = "#555";
-            document.getElementById("btn-buy-gold-1").style.color = "#fff";
-            document.getElementById("btn-buy-gold-1").disabled = true;
-        } else {
-            document.getElementById("btn-buy-gold-1").innerHTML = "1000 🟡 + 10 🟣";
-            document.getElementById("btn-buy-gold-1").style.backgroundColor = ""; 
-            document.getElementById("btn-buy-gold-1").style.color = "";
-            document.getElementById("btn-buy-gold-1").disabled = false;
-        }
-
-        if (tieneAyudanteComprado === "gold_2") {
-            document.getElementById("btn-buy-gold-2").innerHTML = "¡ADQUIRIDO! ⚒️";
-            document.getElementById("btn-buy-gold-2").style.backgroundColor = "#555";
-            document.getElementById("btn-buy-gold-2").style.color = "#fff";
-            document.getElementById("btn-buy-gold-2").disabled = true;
-        } else {
-            document.getElementById("btn-buy-gold-2").innerHTML = "2200 🟡 + 20 🟣";
-            document.getElementById("btn-buy-gold-2").style.backgroundColor = "";
-            document.getElementById("btn-buy-gold-2").style.color = "";
-            document.getElementById("btn-buy-gold-2").disabled = false;
-        }
-
-                if (tieneAyudanteComprado === "gold_3") {
-            document.getElementById("btn-buy-gold-3").innerHTML = "¡ADQUIRIDO! ⚒️";
-            document.getElementById("btn-buy-gold-3").style.backgroundColor = "#555";
-            document.getElementById("btn-buy-gold-3").style.color = "#fff";
-            document.getElementById("btn-buy-gold-3").disabled = true;
-        } else {
-            document.getElementById("btn-buy-gold-3").innerHTML = "5000 🟡 + 26 🟣";
-            document.getElementById("btn-buy-gold-3").style.backgroundColor = "";
-            document.getElementById("btn-buy-gold-3").style.color = "";
-            document.getElementById("btn-buy-gold-3").disabled = false;
-        }
+toggleMusicBtn.addEventListener('click', (e) => {
+    e.stopPropagation(); 
+    isMusicMuted = !isMusicMuted;
+    if (isMusicMuted) {
+        audioMusic.muted = true; 
+        toggleMusicBtn.textContent = "Música Silenciada"; 
+        toggleMusicBtn.className = "audio-toggle-btn audio-muted";
+    } else {
+        audioMusic.muted = false; 
+        toggleMusicBtn.textContent = "Silenciar Música"; 
+        toggleMusicBtn.className = "audio-toggle-btn audio-active"; 
+        audioMusic.play().catch(o => {});
     }
-    function limpiarInterfazAyudanteGold() {
-        let botonExistente = document.getElementById("btnAyudanteGold");
-        if (botonExistente) botonExistente.remove();
+});
 
-        let pantallaContador = document.getElementById("pantallaContadorGold");
-        if (pantallaContador) pantallaContador.remove();
-        
-        if (typeof intervaloAyudante !== 'undefined') {
-            clearInterval(intervaloAyudante);
-        }
+toggleSoundBtn.addEventListener('click', (e) => {
+    e.stopPropagation(); 
+    isSoundMuted = !isSoundMuted;
+    if (isSoundMuted) {
+        toggleSoundBtn.textContent = "Sonidos Silenciados"; 
+        toggleSoundBtn.className = "audio-toggle-btn audio-muted";
+    } else {
+        toggleSoundBtn.textContent = "Silenciar Sonido"; 
+        toggleSoundBtn.className = "audio-toggle-btn audio-active";
+    }
+});
+
+// --- FUNCIONES DE AYUDANTE GOLD ---
+function actualizarBotonesTiendaGold() {
+    if (!document.getElementById("btn-buy-gold-1")) return;
+
+    if (tieneAyudanteComprado === "gold_1") {
+        document.getElementById("btn-buy-gold-1").innerHTML = "¡ADQUIRIDO! ⚒️";
+        document.getElementById("btn-buy-gold-1").style.backgroundColor = "#555";
+        document.getElementById("btn-buy-gold-1").style.color = "#fff";
+        document.getElementById("btn-buy-gold-1").disabled = true;
+    } else {
+        document.getElementById("btn-buy-gold-1").innerHTML = "1000 🟡 + 10 🟣";
+        document.getElementById("btn-buy-gold-1").style.backgroundColor = ""; 
+        document.getElementById("btn-buy-gold-1").style.color = "";
+        document.getElementById("btn-buy-gold-1").disabled = false;
     }
 
-    // --- OYENTE AUTOMÁTICO PARA DETECTAR CUANDO SE ABRE LA TIENDA ---
-    document.addEventListener("click", function(evento) {
-        if (evento.target && (evento.target.id === "btn-tienda" || evento.target.innerText.includes("Tienda"))) {
-            setTimeout(actualizarBotonesTiendaGold, 50);
-        }
-    });
+    if (tieneAyudanteComprado === "gold_2") {
+        document.getElementById("btn-buy-gold-2").innerHTML = "¡ADQUIRIDO! ⚒️";
+        document.getElementById("btn-buy-gold-2").style.backgroundColor = "#555";
+        document.getElementById("btn-buy-gold-2").style.color = "#fff";
+        document.getElementById("btn-buy-gold-2").disabled = true;
+    } else {
+        document.getElementById("btn-buy-gold-2").innerHTML = "2200 🟡 + 20 🟣";
+        document.getElementById("btn-buy-gold-2").style.backgroundColor = "";
+        document.getElementById("btn-buy-gold-2").style.color = "";
+        document.getElementById("btn-buy-gold-2").disabled = false;
+    }
 
-    document.addEventListener('gesturestart', function (e) { e.preventDefault(); });
+    if (tieneAyudanteComprado === "gold_3") {
+        document.getElementById("btn-buy-gold-3").innerHTML = "¡ADQUIRIDO! ⚒️";
+        document.getElementById("btn-buy-gold-3").style.backgroundColor = "#555";
+        document.getElementById("btn-buy-gold-3").style.color = "#fff";
+        document.getElementById("btn-buy-gold-3").disabled = true;
+    } else {
+        document.getElementById("btn-buy-gold-3").innerHTML = "5000 🟡 + 26 🟣";
+        document.getElementById("btn-buy-gold-3").style.backgroundColor = "";
+        document.getElementById("btn-buy-gold-3").style.color = "";
+        document.getElementById("btn-buy-gold-3").disabled = false;
+    }
+}
+
+function limpiarInterfazAyudanteGold() {
+    let botonExistente = document.getElementById("btnAyudanteGold");
+    if (botonExistente) botonExistente.remove();
+
+    let pantallaContador = document.getElementById("pantallaContadorGold");
+    if (pantallaContador) pantallaContador.remove();
+    
+    if (typeof intervaloAyudante !== 'undefined') {
+        clearInterval(intervaloAyudante);
+    }
+}
+
+// --- OYENTE AUTOMÁTICO PARA DETECTAR CUANDO SE ABRE LA TIENDA ---
+document.addEventListener("click", function(evento) {
+    if (evento.target && (evento.target.id === "btn-tienda" || evento.target.innerText.includes("Tienda"))) {
+        setTimeout(actualizarBotonesTiendaGold, 50);
+    }
+});
+
+document.addEventListener('gesturestart', function (e) { e.preventDefault(); });
 </script>
+
+<script src="nombres.js"></script>
+
 </body>
 </html>
