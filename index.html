@@ -1219,14 +1219,33 @@
         <div id="version-tag">1.6 Beta</div>
         <p id="welcome-desc">¡Bienvenido! Esta es una versión beta oficial del juego, por lo que podría contener algunos errores y bugs en el mapa durante el desarrollo en la plataforma MrTube.<br>Diseñado por ABG Productions® y Sprunki Animations Studios.</p>
 
-        <div id="ready-container">
-            <input type="checkbox" id="ready-checkbox">
-            <label for="ready-checkbox" id="ready-label">Estoy Preparando</label>
-        </div>
+        // Lógica para habilitar/deshabilitar el botón de "EMPEZAR"
+const readyCheckbox = document.getElementById('ready-checkbox');
+const startButton = document.getElementById('start-button');
 
-        <button id="start-button" class="menu-btn">EMPEZAR A PROBAR</button>
-        <button id="exit-button" class="menu-btn">SALIR DEL JUEGO</button>
-    </div>
+// 1. Bloqueamos el botón al cargar la página para que no se pueda usar sin marcar la casilla
+if (startButton) {
+    startButton.disabled = true;
+    startButton.style.opacity = "0.5"; // Le da un toque visual de "desactivado"
+    startButton.style.cursor = "not-allowed";
+}
+
+// 2. Escuchamos si el usuario marca o desmarca la casilla
+if (readyCheckbox && startButton) {
+    readyCheckbox.addEventListener('change', function() {
+        if (this.checked) {
+            // Si está marcado, lo habilitamos
+            startButton.disabled = false;
+            startButton.style.opacity = "1";
+            startButton.style.cursor = "pointer";
+        } else {
+            // Si se desmarca, lo bloqueamos de nuevo
+            startButton.disabled = true;
+            startButton.style.opacity = "0.5";
+            startButton.style.cursor = "not-allowed";
+        }
+    });
+}
 
     <div id="play-menu-screen">
         <h1>CHICKEN STRIKE<br>NPC</h1>
