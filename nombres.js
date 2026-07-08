@@ -42,7 +42,7 @@ function generarNombreAleatorio() {
     }
 }
 
-// 3. Función para Guardar al pulsar "GUARDAR Y CERRAR"
+// 3. Función para Guardar y CERRAR al pulsar el botón
 document.getElementById("close-profile-panel-btn").addEventListener("click", function() {
     const nombre = document.getElementById("nombreUsuario").value;
     const correo = document.getElementById("email-input").value;
@@ -51,6 +51,9 @@ document.getElementById("close-profile-panel-btn").addEventListener("click", fun
     localStorage.setItem("usuarioCorreo", correo);
     
     alert("¡Datos guardados con éxito, " + nombre + "!");
+
+    // ESTA ES LA LÍNEA NUEVA QUE FALTA:
+    document.getElementById("profile-panel").style.display = "none";
 });
 
 // 4. Función para CARGAR los datos al abrir la página
