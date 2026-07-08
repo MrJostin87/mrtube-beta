@@ -1196,56 +1196,37 @@
             </div>
             <button id="edit-pfp-btn" class="edit-pfp-btn">Editar Foto</button>
 
-           <div id="user-setup-v152">
+            <div id="user-setup-v152">
     <div class="setup-group">
         <label>Ingresar un Correo Electrónico (Opcional):</label>
         <input type="email" id="email-input" class="v152-input" placeholder="correo@ejemplo.com">
     </div>
     <div class="setup-group">
         <label>Ingresa un Nombre:</label>
-        <button onclick="generarNombreAleatorio()" style="background: none; border: none; font-size: 18px; cursor: pointer; margin-bottom: 3px;">🎲</button>
+        <!-- BOTÓN DEL DADO INTEGRADO -->
+        <button onclick="generarNombreAleatorio()" style="background: none; border: none; font-size: 18px; cursor: pointer; padding: 0 5px;">🎲</button>
         
+        <!-- CAMPO DE NOMBRE (Cambié el id para que coincida con tu función) -->
         <input type="text" id="nombreUsuario" class="v152-input" placeholder="Ej: Pepe" maxlength="15">
         
         <div id="creator-badge" class="badge-casilla">Propiedad del creador</div>
     </div>
 </div>
 <button id="close-profile-panel-btn">GUARDAR Y CERRAR</button>
-</div> 
 
-<h1 id="welcome-title">CHICKEN STRIKE  NPC</h1>
 
         <h1 id="welcome-title">CHICKEN STRIKE  NPC</h1>
         <div id="version-tag">1.6 Beta</div>
         <p id="welcome-desc">¡Bienvenido! Esta es una versión beta oficial del juego, por lo que podría contener algunos errores y bugs en el mapa durante el desarrollo en la plataforma MrTube.<br>Diseñado por ABG Productions® y Sprunki Animations Studios.</p>
 
-        // Lógica para habilitar/deshabilitar el botón de "EMPEZAR"
-const readyCheckbox = document.getElementById('ready-checkbox');
-const startButton = document.getElementById('start-button');
+        <div id="ready-container">
+            <input type="checkbox" id="ready-checkbox">
+            <label for="ready-checkbox" id="ready-label">Estoy Preparando</label>
+        </div>
 
-// 1. Bloqueamos el botón al cargar la página para que no se pueda usar sin marcar la casilla
-if (startButton) {
-    startButton.disabled = true;
-    startButton.style.opacity = "0.5"; // Le da un toque visual de "desactivado"
-    startButton.style.cursor = "not-allowed";
-}
-
-// 2. Escuchamos si el usuario marca o desmarca la casilla
-if (readyCheckbox && startButton) {
-    readyCheckbox.addEventListener('change', function() {
-        if (this.checked) {
-            // Si está marcado, lo habilitamos
-            startButton.disabled = false;
-            startButton.style.opacity = "1";
-            startButton.style.cursor = "pointer";
-        } else {
-            // Si se desmarca, lo bloqueamos de nuevo
-            startButton.disabled = true;
-            startButton.style.opacity = "0.5";
-            startButton.style.cursor = "not-allowed";
-        }
-    });
-}
+        <button id="start-button" class="menu-btn">EMPEZAR A PROBAR</button>
+        <button id="exit-button" class="menu-btn">SALIR DEL JUEGO</button>
+    </div>
 
     <div id="play-menu-screen">
         <h1>CHICKEN STRIKE<br>NPC</h1>
