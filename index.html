@@ -1197,23 +1197,18 @@
             <button id="edit-pfp-btn" class="edit-pfp-btn">Editar Foto</button>
 
             <div id="user-setup-v152">
-    <div class="setup-group">
-        <label>Ingresar un Correo Electrónico (Opcional):</label>
-        <input type="email" id="email-input" class="v152-input" placeholder="correo@ejemplo.com">
-    </div>
-    <div class="setup-group">
-        <label>Ingresa un Nombre:</label>
-        <!-- BOTÓN DEL DADO INTEGRADO -->
-        <button onclick="generarNombreAleatorio()" style="background: none; border: none; font-size: 18px; cursor: pointer; padding: 0 5px;">🎲</button>
-        
-        <!-- CAMPO DE NOMBRE (Cambié el id para que coincida con tu función) -->
-        <input type="text" id="nombreUsuario" class="v152-input" placeholder="Ej: Pepe" maxlength="15">
-        
-        <div id="creator-badge" class="badge-casilla">Propiedad del creador</div>
-    </div>
-</div>
-<button id="close-profile-panel-btn">GUARDAR Y CERRAR</button>
-
+                <div class="setup-group">
+                    <label>Ingresar un Correo Electrónico (Opcional):</label>
+                    <input type="email" id="email-input" class="v152-input" placeholder="correo@ejemplo.com">
+                </div>
+                <div class="setup-group">
+                    <label>Ingresa un Nombre:</label>
+                    <input type="text" id="username-input" class="v152-input" placeholder="Ej: Pepe" maxlength="15">
+                    <div id="creator-badge" class="badge-casilla">Propiedad del creador</div>
+                </div>
+            </div>
+            <button id="close-profile-panel-btn">GUARDAR Y CERRAR</button>
+        </div>
 
         <h1 id="welcome-title">CHICKEN STRIKE  NPC</h1>
         <div id="version-tag">1.6 Beta</div>
@@ -1352,7 +1347,7 @@
                     <div class="shop-item-title">Mejora 10.1 (Rafagas de Balas)</div>
                     <div class="shop-item-desc">Dispara ráfagas continuas de balas muy rápido. Además activa Mejora 20 en Nivel 4 (NPCs se duplican por más monedas).</div>
                 </div>
-    <button id="buy-upgrade-1" class="shop-buy-btn" onclick="buyUpgrade(1, 1100, 10)">1100 🟡 + 10 🟣</button>
+                <button id="buy-upgrade-1" class="shop-buy-btn" onclick="buyUpgrade(1, 1100, 10)">1100 🟡 + 10 🟣</button>
             </div>
 
             <div class="shop-item">
@@ -1394,36 +1389,11 @@
                 </div>
                 <button id="buy-upgrade-6" class="shop-buy-btn" onclick="buyUpgrade(6, 6600, 60)">6600 🟡 + 60 🟣</button>
             </div>
-
-            <!-- SECCIÓN ESPECIAL: AYUDANTE GOLD EN VERSIÓN 1.7 BETA -->
-            <div class="shop-item">
-                <div class="shop-item-info">
-                    <div class="shop-item-title">⚒️ Ayudante Gold 1.1 ⚒️</div>
-                    <div class="shop-item-desc">Nivel 5: Pausa la partida por 15 segundos y te otorga la victoria automática del nivel.</div>
-                </div>
-                <button id="btn-buy-gold-1" class="shop-buy-btn" onclick="comprarAyudanteGold1()">1000 🟡 + 10 🟣</button>
-            </div>
-
-            <div class="shop-item">
-                <div class="shop-item-info">
-                    <div class="shop-item-title">⚒️ Ayudante Gold 2.2 ⚒️</div>
-                    <div class="shop-item-desc">Nivel 6: Pausa el juego por 7 segundos y salta los Niveles 6 y 7 de un solo golpe.</div>
-                </div>
-                <button id="btn-buy-gold-2" class="shop-buy-btn" onclick="comprarAyudanteGold2()">2000 🟡 + 20 🟣</button>
-            </div>
-
-            <div class="shop-item">
-                <div class="shop-item-info">
-                    <div class="shop-item-title">⚒️ Ayudante Gold 3.3 ⚒️</div>
-                    <div class="shop-item-desc">Nivel 7: ¡Ayuda Legendaria! Pausa 3 segundos, salta hasta el Nivel 10 y completa el juego.</div>
-                </div>
-                <button id="btn-buy-gold-3" class="shop-buy-btn" onclick="comprarAyudanteGold3()">5000 🟡 + 26 🟣</button>
-            </div>
-        </div> <!-- Contenedor de productos cerrado correctamente aquí -->
-      
+        </div>
+        
         <button id="reset-shop-btn" onclick="resetShopUpgrades()">🔄 REINICIAR COMPRAS</button>
         <button id="close-shop-btn">VOLVER AL MENÚ</button>
-    </div> <!-- Cierre completo de la pantalla de la tienda -->
+    </div>
 
     <div id="level-selection-screen">
         <h2>SELECCIONA UN NIVEL</h2>
@@ -1608,7 +1578,7 @@
             10: { targets: 150, speed: 9.0, coinsPerKill: 1000000, reward: 10000000000000 } 
         };
 
-                let score = 0;
+        let score = 0;
         let coinCG = 0; 
         let kills = 0;
         let currentLevel = 1;
@@ -1619,13 +1589,6 @@
         let currentUsername = "";
         let popupTriggered = false; 
         let activeNPCIntervals = [];
-
-        // --- SISTEMA DE AYUDANTE GOLD ---
-        let tieneAyudanteComprado = "ninguno"; 
-        let ayudanteActivo = false;
-        let tiempoAyudante = 0;
-        let intervaloAyudante = null;
-
         
         let scrollSpeed = 1.8; 
         let savedSpeedBeforePause = 1.8; 
@@ -1987,7 +1950,7 @@
             }
         }
 
-         function buyUpgrade(id, costCoins, costCoinCG) {
+        function buyUpgrade(id, costCoins, costCoinCG) {
             playSoundBoton();
             if (currentUsername === "") {
                 alert("Por favor, ingresa tu nombre primero en el botón de perfil.");
@@ -2009,67 +1972,6 @@
                 alert("❌ No tienes suficientes Monedas o CoinCG.");
             }
         }
-
-        // --- COMPRAS DEL AYUDANTE GOLD ---
-function comprarAyudanteGold1() {
-    if (tieneAyudanteComprado !== "ninguno") {
-        alert("❌ ¡Ya tienes un Ayudante Gold en tu inventario! Úsalo primero.");
-        return;
-    }
-    if (score >= 1000 && coinCG >= 10) {
-        score -= 1000;
-        coinCG -= 10;
-        tieneAyudanteComprado = "gold_1";
-        savePlayerProgress();
-        actualizarTextoMonedas();
-        alert("⚒️ ¡Compraste Ayudante Gold 1.1 con éxito!");
-        
-        // ¡MICROPASO AGREGADO! Cambia el botón a gris al instante
-        actualizarBotonesTiendaGold();
-    } else {
-        alert("❌ No tienes suficientes monedas o CoinCG.");
-    }
-}
-
-function comprarAyudanteGold2() {
-    if (tieneAyudanteComprado !== "ninguno") {
-        alert("❌ ¡Ya tienes un Ayudante Gold en tu inventario! Úsalo primero.");
-        return;
-    }
-    if (score >= 2000 && coinCG >= 20) {
-        score -= 2000;
-        coinCG -= 20;
-        tieneAyudanteComprado = "gold_2";
-        savePlayerProgress();
-        actualizarTextoMonedas();
-        alert("⚒️ ¡Compraste Ayudante Gold 2.2 con éxito!");
-        
-        // ¡MICROPASO AGREGADO! Cambia el botón a gris al instante
-        actualizarBotonesTiendaGold();
-    } else {
-        alert("❌ No tienes suficientes monedas o CoinCG.");
-    }
-}
-
-function comprarAyudanteGold3() {
-    if (tieneAyudanteComprado !== "ninguno") {
-        alert("❌ ¡Ya tienes un Ayudante Gold en tu inventario! Úsalo primero.");
-        return;
-    }
-    if (score >= 5000 && coinCG >= 26) {
-        score -= 5000;
-        coinCG -= 26;
-        tieneAyudanteComprado = "gold_3";
-        savePlayerProgress();
-        actualizarTextoMonedas();
-        alert("⚒️ ¡Compraste Ayudante Gold 3.3 con éxito!");
-        
-        // ¡MICROPASO AGREGADO! Cambia el botón a gris al instante
-        actualizarBotonesTiendaGold();
-    } else {
-        alert("❌ No tienes suficientes monedas o CoinCG.");
-    }
-}
 
         function resetShopUpgrades() {
             playSoundBoton();
@@ -2297,119 +2199,9 @@ function comprarAyudanteGold3() {
             clearAllNPCs();
             audioMusic.play().catch(e => {});
 
-                        gameStarted = true;
+            gameStarted = true;
             for(let i = 0; i < maxNPCs; i++) {
                 spawnNPC(i);
-            }
-            // Activa la revisión del Ayudante Gold al iniciar el nivel
-            verificarBotonAyudante();
-        }
-
-        // --- MECÁNICA EN PARTIDA DEL AYUDANTE GOLD ---
-        function verificarBotonAyudante() {
-            let botonExistente = document.getElementById("btnAyudanteGold");
-            if (botonExistente) botonExistente.remove();
-
-            let mostrarBoton = false;
-            let textoBoton = "";
-            let tiempoEspera = 0;
-
-            if (currentLevel === 5 && tieneAyudanteComprado === "gold_1") {
-                mostrarBoton = true;
-                textoBoton = "⚒️ ¿Queres una Ayuda? ⚒️";
-                tiempoEspera = 15;
-            } else if (currentLevel === 6 && tieneAyudanteComprado === "gold_2") {
-                mostrarBoton = true;
-                textoBoton = "⚒️ ¿Queres una Ayuda Rápida? ⚒️";
-                tiempoEspera = 7;
-            } else if (currentLevel === 7 && tieneAyudanteComprado === "gold_3") {
-                mostrarBoton = true;
-                textoBoton = "⚒️ ¿Queres una Ayuda Ultra Rápida? ⚒️";
-                tiempoEspera = 3;
-            }
-
-            if (mostrarBoton) {
-                let btn = document.createElement("button");
-                btn.id = "btnAyudanteGold";
-                btn.innerHTML = textoBoton;
-                
-                // Diseño premium flotante para celular
-                btn.style.position = "fixed";
-                btn.style.right = "20px";
-                btn.style.top = "40%";
-                btn.style.zIndex = "1000";
-                btn.style.padding = "12px";
-                btn.style.backgroundColor = "#ffcc00";
-                btn.style.color = "#000";
-                btn.style.fontWeight = "bold";
-                btn.style.border = "2px solid #fff";
-                btn.style.borderRadius = "10px";
-                btn.style.fontSize = "14px";
-
-                btn.onclick = function() {
-                    btn.remove(); // Se borra para que no lo pulse dos veces
-                    activarAyudaGold(tiempoEspera);
-                };
-
-                document.body.appendChild(btn);
-            }
-        }
-
-        function activarAyudaGold(segundos) {
-            gamePaused = true; 
-            ayudanteActivo = true;
-            tiempoAyudante = segundos;
-
-            // Pantalla oscura con contador gigante en el centro
-            let pantallaContador = document.createElement("div");
-            pantallaContador.id = "pantallaContadorGold";
-            pantallaContador.style.position = "fixed";
-            pantallaContador.style.top = "50%";
-            pantallaContador.style.left = "50%";
-            pantallaContador.style.transform = "translate(-50%, -50%)";
-            pantallaContador.style.backgroundColor = "rgba(0,0,0,0.85)";
-            pantallaContador.style.color = "#fff";
-            pantallaContador.style.padding = "30px";
-            pantallaContador.style.borderRadius = "15px";
-            pantallaContador.style.fontSize = "24px";
-            pantallaContador.style.textAlign = "center";
-            pantallaContador.style.zIndex = "2000";
-            pantallaContador.innerHTML = `⏳ PROCESANDO AYUDA GOLD...<br><span style='font-size: 45px; color: #ffcc00; font-weight: bold;'>${tiempoAyudante}</span>`;
-            document.body.appendChild(pantallaContador);
-
-            // Reloj hacia atrás
-            intervaloAyudante = setInterval(function() {
-                tiempoAyudante--;
-                if (tiempoAyudante > 0) {
-                    pantallaContador.innerHTML = `⏳ PROCESANDO AYUDA GOLD...<br><span style='font-size: 45px; color: #ffcc00; font-weight: bold;'>${tiempoAyudante}</span>`;
-                } else {
-                    clearInterval(intervaloAyudante);
-                    pantallaContador.remove();
-                    finalizarAyudaConVictoria();
-                }
-            }, 1000);
-        }
-
-        function finalizarAyudaConVictoria() {
-            gamePaused = false;
-            ayudanteActivo = false;
-
-            if (tieneAyudanteComprado === "gold_1") {
-                tieneAyudanteComprado = "ninguno"; // Se gasta el uso
-                savePlayerProgress();
-                triggerLevelReward(); // Gana el nivel 5
-            } 
-            else if (tieneAyudanteComprado === "gold_2") {
-                tieneAyudanteComprado = "ninguno";
-                maxUnlockedLevel = 8; // Salta al 8
-                savePlayerProgress();
-                triggerLevelReward(); 
-            } 
-            else if (tieneAyudanteComprado === "gold_3") {
-                tieneAyudanteComprado = "ninguno";
-                maxUnlockedLevel = 10; // Desbloquea el final del juego
-                savePlayerProgress();
-                triggerLevelReward(); 
             }
         }
 
@@ -2614,110 +2406,32 @@ function comprarAyudanteGold3() {
         });
 
         pauseContinueBtn.addEventListener('click', (e) => { e.stopPropagation(); playSoundBoton(); gamePaused = false; scrollSpeed = savedSpeedBeforePause; pauseOverlayScreen.style.display = "none"; });
-pauseQuitBtn.addEventListener('click', (e) => {
-    e.stopPropagation(); isMusicMuted = false; isSoundMuted = false; audioMusic.muted = false;
-    gameStarted = false; gamePaused = false; clearAllNPCs();
-    
-        // ¡LISTO! Aquí pusimos la palabra para limpiar el botón fantasma
-    limpiarInterfazAyudanteGold(); 
+        pauseQuitBtn.addEventListener('click', (e) => {
+            e.stopPropagation(); isMusicMuted = false; isSoundMuted = false; audioMusic.muted = false;
+            gameStarted = false; gamePaused = false; clearAllNPCs();
+            pauseOverlayScreen.style.display = "none"; levelSelectionScreen.style.display = "flex"; 
+            actualizarTextoMonedas(); audioMusic.play().catch(e => {});
+        });
 
-    pauseOverlayScreen.style.display = "none"; 
-    levelSelectionScreen.style.display = "flex"; 
-    actualizarTextoMonedas(); 
-    audioMusic.play().catch(e => {});
-});
-        
-toggleMusicBtn.addEventListener('click', (e) => {
-    e.stopPropagation(); 
-    isMusicMuted = !isMusicMuted;
-    if (isMusicMuted) {
-        audioMusic.muted = true; 
-        toggleMusicBtn.textContent = "Música Silenciada"; 
-        toggleMusicBtn.className = "audio-toggle-btn audio-muted";
-    } else {
-        audioMusic.muted = false; 
-        toggleMusicBtn.textContent = "Silenciar Música"; 
-        toggleMusicBtn.className = "audio-toggle-btn audio-active"; 
-        audioMusic.play().catch(o => {});
-    }
-});
+        toggleMusicBtn.addEventListener('click', (e) => {
+            e.stopPropagation(); isMusicMuted = !isMusicMuted;
+            if (isMusicMuted) {
+                audioMusic.muted = true; toggleMusicBtn.textContent = "Música Silenciada"; toggleMusicBtn.className = "audio-toggle-btn audio-muted";
+            } else {
+                audioMusic.muted = false; toggleMusicBtn.textContent = "Silenciar Música"; toggleMusicBtn.className = "audio-toggle-btn audio-active"; audioMusic.play().catch(o => {});
+            }
+        });
 
-toggleSoundBtn.addEventListener('click', (e) => {
-    e.stopPropagation(); 
-    isSoundMuted = !isSoundMuted;
-    if (isSoundMuted) {
-        toggleSoundBtn.textContent = "Sonidos Silenciados"; 
-        toggleSoundBtn.className = "audio-toggle-btn audio-muted";
-    } else {
-        toggleSoundBtn.textContent = "Silenciar Sonido"; 
-        toggleSoundBtn.className = "audio-toggle-btn audio-active";
-    }
-});
+        toggleSoundBtn.addEventListener('click', (e) => {
+            e.stopPropagation(); isSoundMuted = !isSoundMuted;
+            if (isSoundMuted) {
+                toggleSoundBtn.textContent = "Sonidos Silenciados"; toggleSoundBtn.className = "audio-toggle-btn audio-muted";
+            } else {
+                toggleSoundBtn.textContent = "Silenciar Sonido"; toggleSoundBtn.className = "audio-toggle-btn audio-active";
+            }
+        });
 
-// --- FUNCIONES DE AYUDANTE GOLD ---
-function actualizarBotonesTiendaGold() {
-    if (!document.getElementById("btn-buy-gold-1")) return;
-
-    if (tieneAyudanteComprado === "gold_1") {
-        document.getElementById("btn-buy-gold-1").innerHTML = "¡ADQUIRIDO! ⚒️";
-        document.getElementById("btn-buy-gold-1").style.backgroundColor = "#555";
-        document.getElementById("btn-buy-gold-1").style.color = "#fff";
-        document.getElementById("btn-buy-gold-1").disabled = true;
-    } else {
-        document.getElementById("btn-buy-gold-1").innerHTML = "1000 🟡 + 10 🟣";
-        document.getElementById("btn-buy-gold-1").style.backgroundColor = ""; 
-        document.getElementById("btn-buy-gold-1").style.color = "";
-        document.getElementById("btn-buy-gold-1").disabled = false;
-    }
-
-    if (tieneAyudanteComprado === "gold_2") {
-        document.getElementById("btn-buy-gold-2").innerHTML = "¡ADQUIRIDO! ⚒️";
-        document.getElementById("btn-buy-gold-2").style.backgroundColor = "#555";
-        document.getElementById("btn-buy-gold-2").style.color = "#fff";
-        document.getElementById("btn-buy-gold-2").disabled = true;
-    } else {
-        document.getElementById("btn-buy-gold-2").innerHTML = "2200 🟡 + 20 🟣";
-        document.getElementById("btn-buy-gold-2").style.backgroundColor = "";
-        document.getElementById("btn-buy-gold-2").style.color = "";
-        document.getElementById("btn-buy-gold-2").disabled = false;
-    }
-
-    if (tieneAyudanteComprado === "gold_3") {
-        document.getElementById("btn-buy-gold-3").innerHTML = "¡ADQUIRIDO! ⚒️";
-        document.getElementById("btn-buy-gold-3").style.backgroundColor = "#555";
-        document.getElementById("btn-buy-gold-3").style.color = "#fff";
-        document.getElementById("btn-buy-gold-3").disabled = true;
-    } else {
-        document.getElementById("btn-buy-gold-3").innerHTML = "5000 🟡 + 26 🟣";
-        document.getElementById("btn-buy-gold-3").style.backgroundColor = "";
-        document.getElementById("btn-buy-gold-3").style.color = "";
-        document.getElementById("btn-buy-gold-3").disabled = false;
-    }
-}
-
-function limpiarInterfazAyudanteGold() {
-    let botonExistente = document.getElementById("btnAyudanteGold");
-    if (botonExistente) botonExistente.remove();
-
-    let pantallaContador = document.getElementById("pantallaContadorGold");
-    if (pantallaContador) pantallaContador.remove();
-    
-    if (typeof intervaloAyudante !== 'undefined') {
-        clearInterval(intervaloAyudante);
-    }
-}
-
-// --- OYENTE AUTOMÁTICO PARA DETECTAR CUANDO SE ABRE LA TIENDA ---
-document.addEventListener("click", function(evento) {
-    if (evento.target && (evento.target.id === "btn-tienda" || evento.target.innerText.includes("Tienda"))) {
-        setTimeout(actualizarBotonesTiendaGold, 50);
-    }
-});
-
-document.addEventListener('gesturestart', function (e) { e.preventDefault(); });
-</script>
-
-<script src="nombres.js"></script>
-
+        document.addEventListener('gesturestart', function (e) { e.preventDefault(); });
+    </script>
 </body>
-</html>
+ </html>
