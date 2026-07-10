@@ -1863,40 +1863,44 @@
             if(savedScore !== null) score = parseInt(savedScore);
             else score = 0;
 
-            if(savedCoinCG !== null) coinCG = parseInt(savedCoinCG);
-            else coinCG = 0;
+            if (savedScore !== null) {
+    score = parseInt(savedScore, 10);
 
-            if(savedEmail !== null) emailInput.value = savedEmail;
-            else emailInput.value = "";
+    // Limitar monedas para todos excepto el creador
+    if (name !== "Mr.Jostin" && score > 50000) {
+        score = 50000;
+        localStorage.setItem('cs_score_' + name, score);
+    }
 
-            if(savedPfp !== null) {
-                profilePic.src = savedPfp;
-                menuAvatarPreview.src = savedPfp;
-                menuMainAvatarImg.src = savedPfp; 
-            } else {
-                profilePic.src = "Foto.PNG";
-                menuAvatarPreview.src = "Foto.PNG";
-                menuMainAvatarImg.src = "Foto.PNG";
-            }
+} else {
+    score = 0;
+}
 
-            actualizarTextoMonedas();
+if (savedCoinCG !== null) coinCG = parseInt(savedCoinCG, 10);
+else coinCG = 0;
 
-            if(savedMaxLevel !== null) maxUnlockedLevel = parseInt(savedMaxLevel);
-            else maxUnlockedLevel = 1;
+if (savedEmail !== null) emailInput.value = savedEmail;
+else emailInput.value = "";
 
-            for (let id = 1; id <= 6; id++) {
-                let savedUpgrade = localStorage.getItem(`cs_upgrade_${id}_` + name);
-                upgradesOwned[id] = (savedUpgrade === "true");
-            }
+if (savedPfp !== null) {
+    profilePic.src = savedPfp;
+    menuAvatarPreview.src = savedPfp;
+    menuMainAvatarImg.src = savedPfp;
+} else {
+    profilePic.src = "Foto.PNG";
+    menuAvatarPreview.src = "Foto.PNG";
+    menuMainAvatarImg.src = "Foto.PNG";
+}
 
-            // CARGAR ESTADO DEL BOTÓN RLU GUARDADO
-            if(savedRLU === "true") {
-                isRLUEnabled = false; 
-                rluToggleBtn.click(); 
-            } else {
-                isRLUEnabled = true;
-                rluToggleBtn.click();
-            }
+actualizarTextoMonedas();
+
+if (savedMaxLevel !== null) maxUnlockedLevel = parseInt(savedMaxLevel, 10);
+else maxUnlockedLevel = 1;
+
+for (let id = 1; id <= 6; id++) {
+    let savedUpgrade = localStorage.getItem(`cs_upgrade_${id}_` + name);
+    upgradesOwned[id] = (savedUpgrade === "true");
+}
 
             updateLevelButtonsUI();
             updateShopButtonsUI();
