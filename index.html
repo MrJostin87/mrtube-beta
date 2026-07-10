@@ -1189,26 +1189,32 @@
 
     <div id="welcome-screen">
         
-        <div id="profile-panel">
-            <h3 style="color: #ffcc00; margin: 0 0 5px 0; font-size: 18px; text-shadow: 2px 2px #000;">PERFIL DE JUGADOR</h3>
-            <div id="profile-pic-container">
-                <img id="profile-pic" src="Foto.PNG" alt="Perfil">
-            </div>
-            <button id="edit-pfp-btn" class="edit-pfp-btn">Editar Foto</button>
+       <div id="profile-panel">
+    <h3 style="color: #ffcc00; margin: 0 0 5px 0; font-size: 18px; text-shadow: 2px 2px #000;">PERFIL DE JUGADOR</h3>
+    <div id="profile-pic-container">
+        <img id="profile-pic" src="Foto.PNG" alt="Perfil">
+    </div>
+    <button id="edit-pfp-btn" class="edit-pfp-btn">Editar Foto</button>
 
-            <div id="user-setup-v152">
-                <div class="setup-group">
-                    <label>Ingresar un Correo Electrónico (Opcional):</label>
-                    <input type="email" id="email-input" class="v152-input" placeholder="correo@ejemplo.com">
-                </div>
-                <div class="setup-group">
-                    <label>Ingresa un Nombre:</label>
-                    <input type="text" id="username-input" class="v152-input" placeholder="Ej: Pepe" maxlength="15">
-                    <div id="creator-badge" class="badge-casilla">Propiedad del creador</div>
-                </div>
-            </div>
-            <button id="close-profile-panel-btn">GUARDAR Y CERRAR</button>
+    <div id="user-setup-v152">
+        <div class="setup-group">
+            <label>Ingresar un Correo Electrónico (Opcional):</label>
+            <input type="email" id="email-input" class="v152-input" placeholder="correo@ejemplo.com">
         </div>
+        
+        <div class="setup-group">
+            <label>Ingresa un Nombre:</label>
+            <!-- Este es el botón del dado que agregué -->
+            <button id="btn-dado" onclick="generarNombreAleatorio()" style="background: none; border: none; font-size: 20px; cursor: pointer;">🎲</button>
+            
+            <!-- Cambié el ID a "nombreUsuario" para que conecte con tu JS -->
+            <input type="text" id="nombreUsuario" class="v152-input" placeholder="Ej: Pepe" maxlength="15">
+            
+            <div id="creator-badge" class="badge-casilla">Propiedad del creador</div>
+        </div>
+    </div>
+    <button id="close-profile-panel-btn">GUARDAR Y CERRAR</button>
+</div>
 
         <h1 id="welcome-title">CHICKEN STRIKE  NPC</h1>
         <div id="version-tag">1.7 Beta</div>
