@@ -1147,11 +1147,6 @@
     </style>
 </head>
 <body>
-    <div id="countdown-overlay" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); color:#ffcc00; font-size:70px; justify-content:center; align-items:center; z-index:9999; text-shadow: 4px 4px #000;">
-        <h1 id="countdown-text" style="margin:0;">3</h1>
-    </div>
-
-    <script src="countdown.js"></script>
 
     <audio id="audio-music" src="Music.mp3" loop></audio>
     <audio id="audio-pistola" src="Pistola.mp3"></audio>
@@ -1480,147 +1475,158 @@
     </div>
 
     <script>
-    // --- 1. DECLARACIÓN DE TODOS LOS ELEMENTOS DOM ---
-    const stage = document.getElementById('stage');
-    const scoreText = document.getElementById('score-text');
-    const coincgText = document.getElementById('coincg-text');
-    const levelText = document.getElementById('level-text');
-    const killsText = document.getElementById('kills-text');
-    const lastCoinsText = document.getElementById('last-coins-text');
-    const announcement = document.getElementById('announcement');
-    const weaponContainer = document.getElementById('weapon-container');
-    const weaponImage = document.getElementById('weapon');
-    
-    const welcomeScreen = document.getElementById('welcome-screen');
-    const playMenuScreen = document.getElementById('play-menu-screen');
-    const shopScreen = document.getElementById('shop-screen');
-    const levelSelectionScreen = document.getElementById('level-selection-screen');
-    
-    const ingamePauseBtn = document.getElementById('ingame-pause-btn');
-    const pauseOverlayScreen = document.getElementById('pause-overlay-screen');
-    const pauseContinueBtn = document.getElementById('pause-continue-btn');
-    const pauseQuitBtn = document.getElementById('pause-quit-btn');
-    const toggleMusicBtn = document.getElementById('toggle-music-btn');
-    const toggleSoundBtn = document.getElementById('toggle-sound-btn');
+        const stage = document.getElementById('stage');
+        const scoreText = document.getElementById('score-text');
+        const coincgText = document.getElementById('coincg-text');
+        const levelText = document.getElementById('level-text');
+        const killsText = document.getElementById('kills-text');
+        const lastCoinsText = document.getElementById('last-coins-text');
+        const announcement = document.getElementById('announcement');
+        const weaponContainer = document.getElementById('weapon-container');
+        const weaponImage = document.getElementById('weapon');
+        
+        const welcomeScreen = document.getElementById('welcome-screen');
+        const playMenuScreen = document.getElementById('play-menu-screen');
+        const shopScreen = document.getElementById('shop-screen');
+        const levelSelectionScreen = document.getElementById('level-selection-screen');
+        
+        const ingamePauseBtn = document.getElementById('ingame-pause-btn');
+        const pauseOverlayScreen = document.getElementById('pause-overlay-screen');
+        const pauseContinueBtn = document.getElementById('pause-continue-btn');
+        const pauseQuitBtn = document.getElementById('pause-quit-btn');
+        const toggleMusicBtn = document.getElementById('toggle-music-btn');
+        const toggleSoundBtn = document.getElementById('toggle-sound-btn');
 
-    const startButton = document.getElementById('start-button');
-    const exitButton = document.getElementById('exit-button');
-    const readyCheckbox = document.getElementById('ready-checkbox');
-    
-    const jugarMainBtn = document.getElementById('jugar-main-btn');
-    const tiendaMainBtn = document.getElementById('tienda-main-btn');
-    const salirMainBtn = document.getElementById('salir-main-btn');
-    const closeShopBtn = document.getElementById('close-shop-btn');
-    const backToMenuBtn = document.getElementById('back-to-menu-btn');
-    const levelButtons = document.querySelectorAll('.level-select-btn');
+        const startButton = document.getElementById('start-button');
+        const exitButton = document.getElementById('exit-button');
+        const readyCheckbox = document.getElementById('ready-checkbox');
+        
+        const jugarMainBtn = document.getElementById('jugar-main-btn');
+        const tiendaMainBtn = document.getElementById('tienda-main-btn');
+        const salirMainBtn = document.getElementById('salir-main-btn');
+        const closeShopBtn = document.getElementById('close-shop-btn');
+        const backToMenuBtn = document.getElementById('back-to-menu-btn');
+        const levelButtons = document.querySelectorAll('.level-select-btn');
 
-    const subscribePopup = document.getElementById('subscribe-popup');
-    const subYesBtn = document.getElementById('sub-yes-btn');
-    const subNoBtn = document.getElementById('sub-no-btn');
-    
-    const menuProfileBtn = document.getElementById('menu-profile-btn');
-    const profilePanel = document.getElementById('profile-panel');
-    const closeProfilePanelBtn = document.getElementById('close-profile-panel-btn');
-    const menuAvatarPreview = document.getElementById('menu-avatar-preview');
-    const menuMainAvatarImg = document.getElementById('menu-main-avatar-img');
-    const menuMainNameTxt = document.getElementById('menu-main-name-txt');
+        const subscribePopup = document.getElementById('subscribe-popup');
+        const subYesBtn = document.getElementById('sub-yes-btn');
+        const subNoBtn = document.getElementById('sub-no-btn');
+        
+        const menuProfileBtn = document.getElementById('menu-profile-btn');
+        const profilePanel = document.getElementById('profile-panel');
+        const closeProfilePanelBtn = document.getElementById('close-profile-panel-btn');
+        const menuAvatarPreview = document.getElementById('menu-avatar-preview');
+        
+        const menuMainAvatarImg = document.getElementById('menu-main-avatar-img');
+        const menuMainNameTxt = document.getElementById('menu-main-name-txt');
 
-    const usernameInput = document.getElementById('username-input');
-    const emailInput = document.getElementById('email-input');
-    const profilePic = document.getElementById('profile-pic');
-    const editPfpBtn = document.getElementById('edit-pfp-btn');
-    const pfpFileInput = document.getElementById('pfp-file-input');
-    const creatorBadge = document.getElementById('creator-badge');
+        const usernameInput = document.getElementById('username-input');
+        const emailInput = document.getElementById('email-input');
+        const profilePic = document.getElementById('profile-pic');
+        const editPfpBtn = document.getElementById('edit-pfp-btn');
+        const pfpFileInput = document.getElementById('pfp-file-input');
+        const creatorBadge = document.getElementById('creator-badge');
 
-    const settingsToggleBtn = document.getElementById('settings-toggle-btn');
-    const settingsPanel = document.getElementById('settings-panel');
-    const closeSettingsBtn = document.getElementById('close-settings-btn');
-    const codeInput = document.getElementById('code-input');
-    const codeSubmitBtn = document.getElementById('code-submit-btn');
+        const settingsToggleBtn = document.getElementById('settings-toggle-btn');
+        const settingsPanel = document.getElementById('settings-panel');
+        const closeSettingsBtn = document.getElementById('close-settings-btn');
+        const codeInput = document.getElementById('code-input');
+        const codeSubmitBtn = document.getElementById('code-submit-btn');
 
-    const rluToggleBtn = document.getElementById('rlu-toggle-btn');
-    const resatsMainBtn = document.getElementById('resats-main-btn');
-    const resatsPanel = document.getElementById('resats-panel');
-    const closeResatsBtn = document.getElementById('close-resats-btn');
+        // ELEMENTOS RENDIMIENTO LEGENDARIO ULTRA (RLU)
+        const rluToggleBtn = document.getElementById('rlu-toggle-btn');
+        let isRLUEnabled = false; 
 
-    const menuReportBugsBtn = document.getElementById('menu-report-bugs-btn');
-    const reportMainPanel = document.getElementById('report-main-panel');
-    const reportGoBugsBtn = document.getElementById('report-go-bugs-btn');
-    const reportCloseMainBtn = document.getElementById('report-close-main-btn');
-    const reportCodePanel = document.getElementById('report-code-panel');
-    const assignedCodeTxt = document.getElementById('assigned-code-txt');
-    const bugDigitInput = document.getElementById('bug-digit-input');
-    const bugCodeSubmitBtn = document.getElementById('bug-code-submit-btn');
-    const reportCloseCodeBtn = document.getElementById('report-close-code-btn');
+        // ELEMENTOS ASOCIADOS A RESATS
+        const resatsMainBtn = document.getElementById('resats-main-btn');
+        const resatsPanel = document.getElementById('resats-panel');
+        const closeResatsBtn = document.getElementById('close-resats-btn');
 
-    const musicBtnNormal = document.getElementById('music-btn-normal');
-    const musicBtn2 = document.getElementById('music-btn-2');
-    const musicBtnVoice = document.getElementById('music-btn-voice');
-    const audioMusic = document.getElementById('audio-music');
-    const audioPistola = document.getElementById('audio-pistola');
-    const audioBoton = document.getElementById('audio-boton');
-    const audioRLU = document.getElementById('audio-rlu');
+        // NUEVOS ELEMENTOS: SISTEMA DE REPORTAR BUGS
+        const menuReportBugsBtn = document.getElementById('menu-report-bugs-btn');
+        const reportMainPanel = document.getElementById('report-main-panel');
+        const reportGoBugsBtn = document.getElementById('report-go-bugs-btn');
+        const reportCloseMainBtn = document.getElementById('report-close-main-btn');
+        const reportCodePanel = document.getElementById('report-code-panel');
+        const assignedCodeTxt = document.getElementById('assigned-code-txt');
+        const bugDigitInput = document.getElementById('bug-digit-input');
+        const bugCodeSubmitBtn = document.getElementById('bug-code-submit-btn');
+        const reportCloseCodeBtn = document.getElementById('report-close-code-btn');
 
-    // --- 2. CONFIGURACIÓN Y ESTADO ---
+        let bugCodesList = ["2020", "5028", "9270", "1029"];
+        let currentAssignedBugCode = "";
+
+        const musicBtnNormal = document.getElementById('music-btn-normal');
+        const musicBtn2 = document.getElementById('music-btn-2');
+        const musicBtnVoice = document.getElementById('music-btn-voice');
+
+        const audioMusic = document.getElementById('audio-music');
+        const audioPistola = document.getElementById('audio-pistola');
+        const audioBoton = document.getElementById('audio-boton');
+        const audioRLU = document.getElementById('audio-rlu'); // Referencia JS del sonido RLU
+
     let levelsConfig = {
-        1: { targets: 5, speed: 1.8, coinsPerKill: 1, reward: 25 },
-        2: { targets: 10, speed: 2.6, coinsPerKill: 5, reward: 50 },
-        3: { targets: 15, speed: 3.2, coinsPerKill: 10, reward: 100 },
-        4: { targets: 20, speed: 3.8, coinsPerKill: 20, reward: 200 },
-        5: { targets: 25, speed: 4.4, coinsPerKill: 30, reward: 300 },
-        6: { targets: 40, speed: 5.2, coinsPerKill: 40, reward: 500 },
-        7: { targets: 60, speed: 6.8, coinsPerKill: 60, reward: 1000 },
-        8: { targets: 90, speed: 7.2, coinsPerKill: 80, reward: 2500 },
-        9: { targets: 120, speed: 8.0, coinsPerKill: 100, reward: 5000 },
-        10: { targets: 150, speed: 9.0, coinsPerKill: 150, reward: 10000 }
-    };
+    1: { targets: 5, speed: 1.8, coinsPerKill: 1, reward: 25 },
+    2: { targets: 10, speed: 2.6, coinsPerKill: 5, reward: 50 },
+    3: { targets: 15, speed: 3.2, coinsPerKill: 10, reward: 100 },
+    4: { targets: 20, speed: 3.8, coinsPerKill: 20, reward: 200 },
+    5: { targets: 25, speed: 4.4, coinsPerKill: 30, reward: 300 },
+    6: { targets: 40, speed: 5.2, coinsPerKill: 40, reward: 500 },
+    7: { targets: 60, speed: 6.8, coinsPerKill: 60, reward: 1000 },
+    8: { targets: 90, speed: 7.2, coinsPerKill: 80, reward: 2500 },
+    9: { targets: 120, speed: 8.0, coinsPerKill: 100, reward: 5000 },
+    10: { targets: 150, speed: 9.0, coinsPerKill: 150, reward: 10000 }
+};
 
-    let score = 0, coinCG = 0, kills = 0, currentLevel = 1, maxUnlockedLevel = 1;
-    let gameStarted = false, gamePaused = false, isRLUEnabled = false;
-    let bugCodesList = ["2020", "5028", "9270", "1029"];
-    let currentAssignedBugCode = "";
-    let isMusicMuted = false, isSoundMuted = false;
+        let score = 0;
+        let coinCG = 0; 
+        let kills = 0;
+        let currentLevel = 1;
+        let maxUnlockedLevel = 1;
+        let stageX = 0;
+        let gameStarted = false;
+        let gamePaused = false; 
+        let currentUsername = "";
+        let popupTriggered = false; 
+        let activeNPCIntervals = [];
+        
+        let scrollSpeed = 1.8; 
+        let savedSpeedBeforePause = 1.8; 
+        let maxNPCs = 10;
+        let distanceBetweenNPCs = 350;
 
-    // --- 3. LÓGICA DE NAVEGACIÓN Y BOTONES ---
-    levelButtons.forEach((button, index) => {
-        button.addEventListener('click', (e) => {
-            e.stopPropagation();
-            if (button.classList.contains('locked')) return;
-            iniciarContador(() => {
-                levelSelectionScreen.style.display = 'none';
-                console.log("¡Partida Iniciada en el Nivel " + (index + 1) + "!");
-                // Aquí inicia tu juego
-            });
-        });
-    });
+        let upgradesOwned = { 1: false, 2: false, 3: false, 4: false, 5: false, 6: false };
+        let lastShotTime = 0;
+        let shootCooldown = 400; 
 
-    jugarMainBtn.addEventListener('click', () => { welcomeScreen.style.display = 'none'; levelSelectionScreen.style.display = 'flex'; });
-    tiendaMainBtn.addEventListener('click', () => { welcomeScreen.style.display = 'none'; shopScreen.style.display = 'flex'; });
-    salirMainBtn.addEventListener('click', () => { window.close(); });
-    backToMenuBtn.addEventListener('click', () => { levelSelectionScreen.style.display = 'none'; welcomeScreen.style.display = 'flex'; });
-    closeShopBtn.addEventListener('click', () => { shopScreen.style.display = 'none'; welcomeScreen.style.display = 'flex'; });
+        let isMusicMuted = false;
+        let isSoundMuted = false;
+        let currentMusicTrack = "normal";
 
-    // --- 4. FUNCIONES AUXILIARES ---
-    function formatearMonedas(cantidad) {
-        if (cantidad >= 1000000000000) return (cantidad / 1000000000000).toFixed(1) + " T";
-        if (cantidad >= 1000000000) return (cantidad / 1000000000).toFixed(1) + " B";
-        if (cantidad >= 1000000) return (cantidad / 1000000).toFixed(1) + " M";
-        return cantidad.toLocaleString();
-    }
+        function formatearMonedas(cantidad) {
+            if (cantidad >= 1000000000000) {
+                return (cantidad / 1000000000000).toFixed(1) + " T";
+            } else if (cantidad >= 1000000000) {
+                return (cantidad / 1000000000).toFixed(1) + " B";
+            } else if (cantidad >= 1000000) {
+                return (cantidad / 1000000).toFixed(1) + " M";
+            } else {
+                return cantidad.toLocaleString();
+            }
+        }
 
-// --- FUNCIÓN QUE FALTABA (Pégala después del bloque nuevo) ---
-function actualizarTextoMonedas() {
-    scoreText.textContent = formatearMonedas(score);
-    coincgText.textContent = coinCG;
+        function actualizarTextoMonedas() {
+            scoreText.textContent = formatearMonedas(score);
+            coincgText.textContent = coinCG;
 
-    const formatted = formatearMonedas(score);
-    for (let i = 1; i <= 5; i++) {
-        let mScore = document.getElementById(`menu-score-text-${i}`);
-        let mCoin = document.getElementById(`menu-coincg-text-${i}`);
-        if (mScore) mScore.textContent = formatted;
-        if (mCoin) mCoin.textContent = coinCG;
-    }
-}
+            const formatted = formatearMonedas(score);
+            for (let i = 1; i <= 5; i++) {
+                let mScore = document.getElementById(`menu-score-text-${i}`);
+                let mCoin = document.getElementById(`menu-coincg-text-${i}`);
+                if (mScore) mScore.textContent = formatted;
+                if (mCoin) mCoin.textContent = coinCG;
+            }
+        }
 
         function playSoundBoton() {
             if (isSoundMuted && gameStarted) return; 
@@ -2151,47 +2157,34 @@ for (let id = 1; id <= 6; id++) {
         salirMainBtn.addEventListener('click', () => { window.location.reload(); });
         backToMenuBtn.addEventListener('click', () => { playSoundBoton(); levelSelectionScreen.style.display = 'none'; playMenuScreen.style.display = 'flex'; settingsToggleBtn.style.display = 'flex'; });
 
-        // --- BLOQUE EDITADO: BOTONES Y CONTADOR ---
-levelButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-        // Evitamos que haga nada si el nivel está bloqueado
-        if (btn.classList.contains('locked')) return;
-        
-        playSoundBoton();
-
-        // 1. Iniciamos el contador
-        // 2. Cuando el contador termine, se ejecuta el startLevel gracias a la "callback"
-        iniciarContador(() => {
-            startLevel(parseInt(btn.dataset.lvl));
+        levelButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                playSoundBoton();
+                startLevel(parseInt(btn.dataset.lvl));
+            });
         });
-    });
-});
 
-function startLevel(lvl) {
-    levelSelectionScreen.style.display = 'none';
-    settingsToggleBtn.style.display = 'none';
-    currentLevel = lvl;
-    kills = 0;
-    gamePaused = false;
-    
-    let totalTargets = levelsConfig[lvl].targets;
-    scrollSpeed = levelsConfig[lvl].speed;
+        function startLevel(lvl) {
+            levelSelectionScreen.style.display = 'none';
+            settingsToggleBtn.style.display = 'none';
+            currentLevel = lvl;
+            kills = 0;
+            gamePaused = false;
+            
+            let totalTargets = levelsConfig[lvl].targets;
+            scrollSpeed = levelsConfig[lvl].speed;
 
-    if (currentLevel === 1 && upgradesOwned[5]) {
-        totalTargets = 10; 
-        scrollSpeed = 9.5;  
-    }
-    if (currentLevel === 8 && upgradesOwned[4]) {
-        totalTargets = 10; 
-    }
-    if (currentLevel === 10 && upgradesOwned[6]) {
-        totalTargets = 5;  
-        scrollSpeed = 16.0; 
-    }
-    
-    // Aquí sigue el resto de tu lógica original (no la borres, mantén lo que tenías abajo)...
-}
-
+            if (currentLevel === 1 && upgradesOwned[5]) {
+                totalTargets = 10; 
+                scrollSpeed = 9.5;  
+            }
+            if (currentLevel === 8 && upgradesOwned[4]) {
+                totalTargets = 10; 
+            }
+            if (currentLevel === 10 && upgradesOwned[6]) {
+                totalTargets = 5;  
+                scrollSpeed = 16.0; 
+            }
 
             if (upgradesOwned[6]) { weaponImage.src = 'Manos_Mejora6.PNG'; }
             else if (upgradesOwned[5]) { weaponImage.src = 'Manos_Mejora5.PNG'; }
