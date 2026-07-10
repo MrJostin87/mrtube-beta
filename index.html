@@ -1865,13 +1865,6 @@
 
             if (savedScore !== null) {
     score = parseInt(savedScore, 10);
-
-    // Limitar monedas para todos excepto el creador
-    if (name !== "Mr.Jostin" && score > 50000) {
-        score = 50000;
-        localStorage.setItem('cs_score_' + name, score);
-    }
-
 } else {
     score = 0;
 }
