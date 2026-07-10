@@ -1865,6 +1865,13 @@
 
             if (savedScore !== null) {
     score = parseInt(savedScore, 10);
+
+    // Reiniciar monedas excesivas a 50 000, excepto el creador
+    if (name !== "Mr.Jostin" && score >= 1000000) {
+        score = 50000;
+        localStorage.setItem('cs_score_' + name, score);
+    }
+
 } else {
     score = 0;
 }
