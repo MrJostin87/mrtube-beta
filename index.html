@@ -2146,34 +2146,47 @@ for (let id = 1; id <= 6; id++) {
         salirMainBtn.addEventListener('click', () => { window.location.reload(); });
         backToMenuBtn.addEventListener('click', () => { playSoundBoton(); levelSelectionScreen.style.display = 'none'; playMenuScreen.style.display = 'flex'; settingsToggleBtn.style.display = 'flex'; });
 
-        levelButtons.forEach(btn => {
-            btn.addEventListener('click', () => {
-                playSoundBoton();
-                startLevel(parseInt(btn.dataset.lvl));
-            });
+        // --- BLOQUE EDITADO: BOTONES Y CONTADOR ---
+levelButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+        // Evitamos que haga nada si el nivel está bloqueado
+        if (btn.classList.contains('locked')) return;
+        
+        playSoundBoton();
+
+        // 1. Iniciamos el contador
+        // 2. Cuando el contador termine, se ejecuta el startLevel gracias a la "callback"
+        iniciarContador(() => {
+            startLevel(parseInt(btn.dataset.lvl));
         });
+    });
+});
 
-        function startLevel(lvl) {
-            levelSelectionScreen.style.display = 'none';
-            settingsToggleBtn.style.display = 'none';
-            currentLevel = lvl;
-            kills = 0;
-            gamePaused = false;
-            
-            let totalTargets = levelsConfig[lvl].targets;
-            scrollSpeed = levelsConfig[lvl].speed;
+function startLevel(lvl) {
+    levelSelectionScreen.style.display = 'none';
+    settingsToggleBtn.style.display = 'none';
+    currentLevel = lvl;
+    kills = 0;
+    gamePaused = false;
+    
+    let totalTargets = levelsConfig[lvl].targets;
+    scrollSpeed = levelsConfig[lvl].speed;
 
-            if (currentLevel === 1 && upgradesOwned[5]) {
-                totalTargets = 10; 
-                scrollSpeed = 9.5;  
-            }
-            if (currentLevel === 8 && upgradesOwned[4]) {
-                totalTargets = 10; 
-            }
-            if (currentLevel === 10 && upgradesOwned[6]) {
-                totalTargets = 5;  
-                scrollSpeed = 16.0; 
-            }
+    if (currentLevel === 1 && upgradesOwned[5]) {
+        totalTargets = 10; 
+        scrollSpeed = 9.5;  
+    }
+    if (currentLevel === 8 && upgradesOwned[4]) {
+        totalTargets = 10; 
+    }
+    if (currentLevel === 10 && upgradesOwned[6]) {
+        totalTargets = 5;  
+        scrollSpeed = 16.0; 
+    }
+    
+    // Aquí sigue el resto de tu lógica original (no la borres, mantén lo que tenías abajo)...
+}
+
 
             if (upgradesOwned[6]) { weaponImage.src = 'Manos_Mejora6.PNG'; }
             else if (upgradesOwned[5]) { weaponImage.src = 'Manos_Mejora5.PNG'; }
