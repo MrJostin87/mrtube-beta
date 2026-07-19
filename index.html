@@ -1703,7 +1703,7 @@
             reportCodePanel.style.display = "none";
         });
 
-                bugCodeSubmitBtn.addEventListener('click', () => {
+        bugCodeSubmitBtn.addEventListener('click', () => {
             playSoundBoton();
             let typedCode = bugDigitInput.value.trim();
             if(typedCode === currentAssignedBugCode) {
@@ -2174,13 +2174,8 @@ for (let id = 1; id <= 6; id++) {
                 score -= 3600; coinCG -= 3;
                 actualizarTextoMonedas(); savePlayerProgress();
                 subscribePopup.style.transform = "translate(-50%, -50%) scale(0)";
-                        // Lógica del botón de reporte de bugs
-        botonReportarBug.addEventListener('click', () => {
-            playSoundBoton();
-            // ... (aquí iría tu lógica de validación de reporte) ...
-            
-            alert("Reporte enviado con éxito.");
-            window.open("https://youtube.com/@mr.jostin_oficial?si=JB-zmX5c7fRFRtq0", "_blank");
+                window.open("https://youtube.com/@mr.jostin_oficial?si=JB-zmX5c7fRFRtq0", "_blank");
+            }
         });
 
         subNoBtn.addEventListener('click', () => { playSoundBoton(); subscribePopup.style.transform = "translate(-50%, -50%) scale(0)"; });
@@ -2426,7 +2421,7 @@ for (let id = 1; id <= 6; id++) {
             coinCG += earnedCoinCG;
             actualizarTextoMonedas();
             
-            let message = `¡NIVEL ${currentLevel} COMPLETADO!<br><span style='color: #ffcc00;'>🎁 MONEDAS: +${earnedCoinCG}</span>`;
+                        let message = `¡NIVEL ${currentLevel} COMPLETADO!<br><span style='color: #ffcc00;'>🎁 MONEDAS: +${earnedCoinCG}</span>`;
 
             if (currentLevel >= maxUnlockedLevel && maxUnlockedLevel < 10) {
                 maxUnlockedLevel = currentLevel + 1;
@@ -2436,6 +2431,9 @@ for (let id = 1; id <= 6; id++) {
                 updateLevelButtonsUI(); 
             }
 
+
+
+            
             announcement.innerHTML = message;
             announcement.style.transform = "translate(-50%, -50%) scale(1)";
             
@@ -2488,4 +2486,4 @@ for (let id = 1; id <= 6; id++) {
         document.addEventListener('gesturestart', function (e) { e.preventDefault(); });
     </script>
 </body>
-</html>
+ </html>
