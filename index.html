@@ -1210,7 +1210,7 @@
             <button id="close-profile-panel-btn">GUARDAR Y CERRAR</button>
         </div>
 
-        <h1 id="welcome-title">CHICKEN STRIKE NPC</h1>
+        <h1 id="welcome-title">CHICKEN STRIKE  NPC</h1>
         <div id="version-tag">1.7 Beta</div>
         <p id="welcome-desc">¡Bienvenido! Esta es una versión beta oficial del juego, por lo que podría contener algunos errores y bugs en el mapa durante el desarrollo en la plataforma MrTube.<br>Diseñado por ABG Productions® y Sprunki Animations Studios.</p>
 
@@ -1220,193 +1220,844 @@
         </div>
 
         <button id="start-button" class="menu-btn">EMPEZAR A PROBAR</button>
-        <button id="exit-button" class="menu-btn">SALIR</button>
+        <button id="exit-button" class="menu-btn">SALIR DEL JUEGO</button>
     </div>
 
-    <!-- MENÚ INTERMEDIO DE JUEGO -->
     <div id="play-menu-screen">
+        <h1>CHICKEN STRIKE<br>NPC</h1>
+
         <div class="menu-main-profile">
-            <img id="menu-avatar-large" class="menu-main-avatar" src="Foto.PNG" alt="Avatar">
-            <div id="menu-username-large" class="menu-main-name">Jugador</div>
+            <img id="menu-main-avatar-img" class="menu-main-avatar" src="Foto.PNG" alt="Avatar Juego">
+            <div id="menu-main-name-txt" class="menu-main-name">Mr. Jostin</div>
         </div>
 
         <div class="menu-wallet">
             <div class="menu-wallet-box">
-                <img class="coin-spin" src="Moneda.PNG" alt="Coins">
-                <span id="menu-coins-txt">0</span>
+                <img id="wallet-coin-1" src="Moneda.PNG" alt="Moneda" class="coin-spin">
+                <span id="menu-score-text-2">0</span>
             </div>
             <div class="menu-wallet-box purple-wallet">
                 <img src="CoinCG.PNG" alt="CoinCG">
-                <span id="menu-coincg-txt">0</span>
+                <span id="menu-coincg-text-2">0</span>
             </div>
         </div>
 
-        <h1>CHICKEN STRIKE</h1>
-        <button id="jugar-main-btn" class="large-game-btn">JUGAR</button>
-        <button id="tienda-main-btn" class="large-game-btn">TIENDA 🛒</button>
-        <button id="resats-main-btn" class="large-game-btn">RESATS 📕</button>
-        <button id="salir-main-btn" class="large-game-btn">CERRAR SESIÓN</button>
+        <button id="jugar-main-btn" class="large-game-btn">𝗝𝘂𝗴𝗮𝗿</button>
+        <button id="tienda-main-btn" class="large-game-btn">𝗧𝗶𝗺𝗲𝗖𝗵𝗶𝗰𝗸𝗲𝗻</button>
+        <button id="resats-main-btn" class="large-game-btn">𝗥𝗲𝘀𝗮𝘁𝘀 📕</button>
+        <button id="salir-main-btn" class="large-game-btn">𝗦𝗮𝗹𝗶𝗿 𝗱𝗲𝗹 𝗝𝘂𝗲𝗴𝗼</button>
     </div>
 
-    <!-- PANEL DE SELECCIÓN DE NIVEL -->
+    <div id="settings-panel">
+        <div class="menu-wallet" style="margin-bottom: 5px;">
+            <div class="menu-wallet-box" style="font-size:12px; padding:4px 8px;">
+                <img id="wallet-coin-5" src="Moneda.PNG" alt="Moneda" class="coin-spin">
+                <span id="menu-score-text-5">0</span>
+            </div>
+            <div class="menu-wallet-box purple-wallet" style="font-size:12px; padding:4px 8px;">
+                <img src="CoinCG.PNG" alt="CoinCG">
+                <span id="menu-coincg-text-5">0</span>
+            </div>
+        </div>
+
+        <div class="setting-row">
+            <label>OPCIONES DE MÚSICA / AUDIO:</label>
+            <button id="music-btn-normal" class="music-panel-btn music-btn-active">Música Normal 🎵</button>
+            <button id="music-btn-2" class="music-panel-btn music-btn-inactive">Música 2.0 ⚡</button>
+            <button id="music-btn-voice" class="music-panel-btn music-btn-inactive">Música 2.0 VoiceOver 🎤</button>
+        </div>
+
+        <div class="rlu-container">
+            <label>OPTIMIZACIÓN DISPOSITIVO:</label>
+            <button id="rlu-toggle-btn" class="rlu-btn rlu-off">RLU: APAGADO ❌</button>
+        </div>
+
+        <div id="code-section">
+            <label id="label-code">CÓDIGO DE MONEDAS:</label>
+            <input type="text" id="code-input" placeholder="Introduce código" maxlength="15">
+            <button id="code-submit-btn">ACEPTAR</button>
+        </div>
+        <button id="close-settings-btn" style="background:#ff3333; color:#fff; border:2px solid #fff; border-radius:8px; padding:6px 20px; font-family:'Arial Black', sans-serif; font-size:12px; cursor:pointer; margin-top:5px; box-shadow:0 4px 6px rgba(0,0,0,0.4);">CERRAR</button>
+    </div>
+
+    <div id="resats-panel">
+        <h3 style="color: #00bfff; margin: 0 0 10px 0; font-size: 24px; text-shadow: 2px 2px #000; text-align:center;">𝗥𝗘𝗦𝗔𝗧𝗦 📕</h3>
+        <div class="resats-content">
+            <p style="color: #ffcc00; font-weight: bold; font-size: 14px; margin-bottom: 12px;">📕 ¡Bienvenido a la sección Resats! 📕</p>
+            <p>Esta es la sección ideal para todos los novatos que van arrancando su aventura en el juego. Si eres nuevo por aquí y quieres empezar con el pie derecho y ser un Pro, ¡Este es tu Lugar de Confianza! 😎</p>
+            
+            <h4>⚡ GUÍA EXTENSA: ¿QUÉ ES EL BOTÓN RLU? 🤔</h4>
+            <p>El botón <b>RLU</b> corresponde a las siglas de <b>Rendimiento Legendario Ultra</b>. Es una herramienta de optimización de última generación diseñada por el estudio para aquellos usuarios que experimentan retrasos, tirones o bajadas bruscas de FPS en sus dispositivos móviles durante las pruebas en MrTube.</p>
+            <p><b>¿Cómo funciona Exactamente y Realmente?:</b> Al activar el modo RLU, el motor interno del juego realiza una reestructuración de carga gráfica instantánea. Primero, apaga las animaciones pesadas de CSS que hacen girar de manera constante las monedas en la interfaz. Segundo, elimina por completo el renderizado continuo de la imagen de fondo infinita ('Fondo.PNG') en el viewport y la reemplaza por un entorno de color sólido oscuro que alivia al procesador de video. Por último, optimiza el ciclo reduciendo a la mitad los NPCs máximos simultáneos y espaciándolos estratégicamente para mantener un flujo fluido sin sacrificar tus recompensas de nivel. ¡Es la solución definitiva para mantener una estabilidad total en cualquier gama!</p>
+
+            <p>Aquí te daremos todo lo necesario para dominar el juego desde el primer día:</p>
+            <p>• 🎮 <b>Guías básicas:</b> Cómo jugar y aprender los controles principales.</p>
+            <p>• 🪙 <b>Economía:</b> Los mejores consejos sobre cómo conseguir monedas rápidamente.</p>
+            <p>• 🔑 <b>Regalos especiales:</b> ¡Códigos activos para canjear por monedas gratis!</p>
+            <p style="background: rgba(255, 51, 51, 0.2); border: 1px dashed #ff3333; padding: 8px; border-radius: 6px; font-size: 11px; margin-top: 10px;">
+                ⚠️ <b>Nota importante:</b> Esta sección se encuentra actualmente en versión Beta. Estamos trabajando para mejorarla, por lo que algunas funciones o guías podrían cambiar o actualizarse muy pronto.
+            </p>
+
+            <h4>💡 CONSEJOS PARA NOVATOS 💡</h4>
+            <p>• <b>¿Cómo pasarse un nivel?:</b> Apunta con precisión al centro de la pantalla usando la mira (Crosshair) and presiona tus manos o el arma justo cuando el NPC pase por el centro.</p>
+            <p>• <b>Mejoras:</b> Ahorra tus monedas y CoinCG para comprar mejoras en la Tienda. ¡La Mejora 1 reduce drásticamente el enfriamiento de disparo!</p>
+            
+            <h4>🔑 CÓDIGOS DE MONEDAS Y COINCG 🔑</h4>
+            <div class="resats-code-list">
+                328: +50 Monedas<br>
+                589: +200 Monedas<br>
+                194: +70 Monedas<br>
+                MJ8: +800 Monedas<br>
+                184: +500 Monedas<br>
+                50M: +50 Millones Monedas<br>
+                ABG: +100 CoinCG 🟣<br>
+                67X: +67 CoinCG 🟣<br>
+                M18: +1000 Monedas<br>
+                900: +9000 Monedas<br>
+                MRT: +60 CoinCG 🟣<br>
+                15A: +15 CoinCG 🟣<br>
+                <span style="color: #ffcc00; font-weight:bold;">[¡¡ESPECIALES!!]</span><br>
+                MrJ: +5 Mil Monedas (Completa Nivel 4)<br>
+                123: +123 Millones Monedas (Compra Mejora 10.1)<br>
+                456: +500 CoinCG 🟣 (Completa Nivel 10)
+            </div>
+            <p style="margin-top:15px; font-size:11px; color:#aaa; text-align:center;">© 2026 ABG Productions & Sprunki Animations Studios Todos los derechos reservados</p>
+        </div>
+        <button id="close-resats-btn" style="background:#ff3333; color:#fff; border:2px solid #fff; border-radius:10px; padding:8px 25px; font-family:'Arial Black', sans-serif; font-size:14px; cursor:pointer; margin-top:12px; width:90%;">VOLVER</button>
+    </div>
+
+    <div id="shop-screen">
+        <h2>TimeChicken</h2>
+        <p class="shop-subtitle">Decoraciones de Armas y Súper Mejoras Especiales</p>
+        
+        <div class="menu-wallet">
+            <div class="menu-wallet-box">
+                <img id="wallet-coin-3" src="Moneda.PNG" alt="Moneda" class="coin-spin">
+                <span id="menu-score-text-3">0</span>
+            </div>
+            <div class="menu-wallet-box purple-wallet">
+                <img src="CoinCG.PNG" alt="CoinCG">
+                <span id="menu-coincg-text-2">0</span>
+            </div>
+        </div>
+
+        <div class="shop-container">
+            <div class="shop-item">
+                <div class="shop-item-info">
+                    <div class="shop-item-title">Mejora 10.1 (Rafagas de Balas)</div>
+                    <div class="shop-item-desc">Dispara ráfagas continuas de balas muy rápido. Además activa Mejora 20 en Nivel 4 (NPCs se duplican por más monedas).</div>
+                </div>
+                <button id="buy-upgrade-1" class="shop-buy-btn" onclick="buyUpgrade(1, 1100, 10)">1100 🟡 + 10 🟣</button>
+            </div>
+
+            <div class="shop-item">
+                <div class="shop-item-info">
+                    <div class="shop-item-title">Mejora 20.2 (Mutiplicación)</div>
+                    <div class="shop-item-desc">En el Nivel 2, la ganancia base de 7 monedas se multiplica por 7 (49 monedas por baja).</div>
+                </div>
+                <button id="buy-upgrade-2" class="shop-buy-btn" onclick="buyUpgrade(2, 2200, 20)">2200 🟡 + 20 🟣</button>
+            </div>
+
+            <div class="shop-item">
+                <div class="shop-item-info">
+                    <div class="shop-item-title">Mejora 30.3 (Veloces NPCs)</div>
+                    <div class="shop-item-desc">Nivel 10 original: NPCs veloces en grupos de 3. ¡Si disparas a uno, mueren los 3 y da 500 monedas!</div>
+                </div>
+                <button id="buy-upgrade-3" class="shop-buy-btn" onclick="buyUpgrade(3, 3300, 30)">3300 🟡 + 30 🟣</button>
+            </div>
+
+            <div class="shop-item">
+                <div class="shop-item-info">
+                    <div class="shop-item-title">Mejora 40.4 (Frenar Cerdo)</div>
+                    <div class="shop-item-desc">Nivel 8: NPCs frenan el cerdo en grupos de 2. Bajas dan 10,000🟡 y 10🟣. ¡Solo hay que matar 10 NPCs!</div>
+                </div>
+                <button id="buy-upgrade-4" class="shop-buy-btn" onclick="buyUpgrade(4, 4400, 40)">4400 🟡 + 40 🟣</button>
+            </div>
+
+            <div class="shop-item">
+                <div class="shop-item-info">
+                    <div class="shop-item-title">Mejora 50.5 (Nivel 1 Extremo)</div>
+                    <div class="shop-item-desc">Nivel 1: NPCs hiperveloces. Requiere 10 bajas. ¡Cada baja otorga 36,000🟡 y 20🟣!</div>
+                </div>
+                <button id="buy-upgrade-5" class="shop-buy-btn" onclick="buyUpgrade(5, 5500, 50)">5500 🟡 + 50 🟣</button>
+            </div>
+
+            <div class="shop-item">
+                <div class="shop-item-info">
+                    <div class="shop-item-title">Mejora 60.6 (Nivel 10 Divino)</div>
+                    <div class="shop-item-desc">Nivel 10: NPCs ultra rápidos. ¡Solo matas 5 para ganar! Cada baja da 4,000🟡 y 90🟣.</div>
+                </div>
+                <button id="buy-upgrade-6" class="shop-buy-btn" onclick="buyUpgrade(6, 6600, 60)">6600 🟡 + 60 🟣</button>
+            </div>
+        </div>
+        
+        <button id="reset-shop-btn" onclick="resetShopUpgrades()">🔄 REINICIAR COMPRAS</button>
+        <button id="close-shop-btn">VOLVER AL MENÚ</button>
+    </div>
+
     <div id="level-selection-screen">
-        <h2>SELECCIONA UN MAPA</h2>
+        <h2>SELECCIONA UN NIVEL</h2>
+
+        <div class="menu-wallet">
+            <div class="menu-wallet-box">
+                <img id="wallet-coin-4" src="Moneda.PNG" alt="Moneda" class="coin-spin">
+                <span id="menu-score-text-4">0</span>
+            </div>
+            <div class="menu-wallet-box purple-wallet">
+                <img src="CoinCG.PNG" alt="CoinCG">
+                <span id="menu-coincg-text-4">0</span>
+            </div>
+        </div>
+
         <div class="levels-grid">
-            <button class="level-select-btn" data-level="1">MAPA 1 🏜️<span>Desierto</span></button>
-            <button class="level-select-btn locked" data-level="2" disabled>MAPA 2 🏙️<span>Ciudad (Bloqueado)</span></button>
-            <button class="level-select-btn locked" data-level="3" disabled>MAPA 3 ❄️<span>Nieve (Bloqueado)</span></button>
-            <button class="level-select-btn locked" data-level="4" disabled>MAPA 4 🌋<span>Lava (Bloqueado)</span></button>
+            <button class="level-select-btn" data-lvl="1">Nivel 1 <span>+1 por NPC</span></button>
+            <button class="level-select-btn locked" data-lvl="2" disabled>Nivel 2 <span>+7c por NPC</span></button>
+            <button class="level-select-btn locked" data-lvl="3" disabled>Nivel 3 <span>+10c por NPC</span></button>
+            <button class="level-select-btn locked" data-lvl="4" disabled>Nivel 4 <span>+20c por NPC</span></button>
+            <button class="level-select-btn locked" data-lvl="5" disabled>Nivel 5 <span>+30c por NPC</span></button>
+            <button class="level-select-btn locked" data-lvl="6" disabled>Nivel 6 <span>+40c por NPC</span></button>
+            <button class="level-select-btn locked" data-lvl="7" disabled>Nivel 7 <span>+5k por NPC</span></button>
+            <button class="level-select-btn locked" data-lvl="8" disabled>Nivel 8 <span>+9k por NPC</span></button>
+            <button class="level-select-btn locked" data-lvl="9" disabled>Nivel 9 <span>+50k por NPC</span></button>
+            <button class="level-select-btn locked" data-lvl="10" disabled>Nivel 10 <span>+1M por NPC</span></button>
         </div>
         <button id="back-to-menu-btn">VOLVER AL MENÚ</button>
     </div>
 
-    <!-- PANEL DE LA TIENDA OFICIAL -->
-    <div id="shop-screen">
-        <h2>TIMECHICKEN SHOP</h2>
-        <p class="shop-subtitle">¡Mejora tu arsenal y personalización de tiros!</p>
-        
-        <div class="shop-container">
-            <div class="shop-item">
-                <div class="shop-item-info">
-                    <div class="shop-item-title">Pistola Láser 🔫</div>
-                    <div class="shop-item-desc">Disparos de plasma continuo ultra rápidos.</div>
-                </div>
-                <button class="shop-buy-btn" data-item="laser" data-cost="1500" data-currency="coins">1,500 Monedas</button>
-            </div>
-            <div class="shop-item">
-                <div class="shop-item-info">
-                    <div class="shop-item-title">Rifle de Asalto 💥</div>
-                    <div class="shop-item-desc">Arma de ráfaga pesada. Elimina objetivos al instante.</div>
-                </div>
-                <button class="shop-buy-btn" data-item="rifle" data-cost="3000" data-currency="coins">3,000 Monedas</button>
-            </div>
-            <div class="shop-item">
-                <div class="shop-item-info">
-                    <div class="shop-item-title">Mira Holográmica 🎯</div>
-                    <div class="shop-item-desc">Cambia el aspecto visual de la retícula por uno futurista.</div>
-                </div>
-                <button class="shop-buy-btn" data-item="mira" data-cost="5" data-currency="coincg">5 CoinCG 🟣</button>
-            </div>
-        </div>
-
-        <button id="reset-shop-btn">🔄 Reiniciar Compras</button>
-        <button id="close-shop-btn">VOLVER AL MENÚ</button>
-    </div>
-
-    <!-- PANEL DE CONFIGURACIÓN -->
-    <div id="settings-panel">
-        <h3 style="color:#ffcc00; margin:0 0 10px 0; text-shadow:2px 2px #000;">CONFIGURACIÓN</h3>
-        
-        <div class="setting-row">
-            <label>MÚSICA DE FONDO</label>
-            <button id="settings-music-toggle" class="music-panel-btn music-btn-active">ACTIVADA</button>
-        </div>
-
-        <div class="rlu-container">
-            <label style="color:#00ff00; font-size:12px;">RENDIMIENTO EXTREMO (RLU)</label>
-            <button id="settings-rlu-toggle" class="rlu-btn rlu-off">RLU: DESACTIVADO</button>
-        </div>
-
-        <div id="code-section">
-            <label>CÓDIGO DE RECOMPENSA</label>
-            <input type="text" id="code-input" placeholder="PROMO2026" maxlength="15">
-            <button id="code-submit-btn">RECLAMAR</button>
-        </div>
-
-        <button id="close-settings-panel-btn" style="background:#00ff00; color:#000; font-family:'Arial Black'; font-size:12px; padding:6px 20px; border-radius:8px; border:2px solid #fff; cursor:pointer; margin-top:10px; width:80%;">GUARDAR</button>
-    </div>
-
-    <!-- PANEL DE RESATS -->
-    <div id="resats-panel">
-        <h3 style="color:#00bfff; margin:0 0 10px 0; text-shadow:2px 2px #000; font-size:22px;">RESATS 📕</h3>
-        <div class="resats-content">
-            <h4>GUÍA DE ENTRADA</h4>
-            <p>Bienvenido a la guía oficial de Chicken Strike NPC en la red MrTube. Esta enciclopedia contiene trucos, secretos y mecánicas esenciales.</p>
-            
-            <h4>CÓDIGOS SECRETOS</h4>
-            <div class="resats-code-list">
-                • FREECOINS -> +500 Monedas<br>
-                • SPRUNKI   -> +2 CoinCG 🟣<br>
-                • RLU2026   -> Desbloquea sorpresas
-            </div>
-
-            <h4>MECÁNICAS DE JUEGO</h4>
-            <p>1. Ajusta tu nombre en el perfil flotante antes de empezar a probar el mapa.<br>
-               2. Activa el modo RLU si experimentas caídas de cuadros en tu dispositivo móvil.<br>
-               3. Completa los objetivos del Mapa 1 para acumular dinero en tu billetera global.</p>
-        </div>
-        <button id="close-resats-panel-btn" style="background:#ff3333; color:#fff; border:2px solid #fff; border-radius:8px; padding:8px 25px; font-family:'Arial Black'; font-size:14px; cursor:pointer; margin-top:10px; box-shadow:0 4px 8px rgba(0,0,0,0.3);">CERRAR GUÍA</button>
-    </div>
-
-    <!-- CONTENEDOR DEL JUEGO ACTIVO -->
-    <div id="game-container" style="display: none;">
-        <div id="ui-header">
-            <div style="display: flex; gap: 10px;">
-                <div id="ui-score" class="ui-box">
-                    <img src="Moneda.PNG" alt="Coins">
-                    <span id="score-txt">0</span>
-                </div>
-                <div id="ui-purple-wallet" class="ui-box" style="border-color: #b026ff;">
-                    <img src="CoinCG.PNG" alt="CoinCG">
-                    <span id="coincg-txt">0</span>
-                </div>
-            </div>
-            <button id="ingame-pause-btn">⏸️</button>
-        </div>
-
-        <div id="stage"></div>
-        <div id="crosshair"></div>
-
-        <div id="weapon-container">
-            <img id="weapon" src="Pistola.PNG" alt="Arma">
-        </div>
-
-        <div id="announcement">¡OBJETIVO ELIMINADO!</div>
-    </div>
-
-    <!-- PANTALLA DE PAUSA IN-GAME -->
     <div id="pause-overlay-screen">
         <h2>JUEGO PAUSADO</h2>
         <div class="pause-menu-row">
-            <button id="pause-continue-btn" class="pause-action-btn">CONTINUAR</button>
-            <button id="pause-quit-btn" class="pause-action-btn">SALIR AL MENÚ</button>
+            <button id="pause-continue-btn" class="pause-action-btn">Continuar</button>
+            <button id="pause-quit-btn" class="pause-action-btn">Volver a menú</button>
         </div>
         <div class="audio-toggles-container">
-            <button id="pause-music-toggle" class="audio-toggle-btn audio-active">MÚSICA: SÍ</button>
+            <button id="toggle-music-btn" class="audio-toggle-btn audio-toggle-btn audio-active">Silenciar Música</button>
+            <button id="toggle-sound-btn" class="audio-toggle-btn audio-toggle-btn audio-active">Silenciar Sonido</button>
         </div>
     </div>
 
-    <!-- LÓGICA DE JUEGO (JAVASCRIPT) -->
-    <script>
-        // VARIABLES GLOBALES DE ECONOMÍA Y ESTADO
-        let globalCoins = parseInt(localStorage.getItem('cs_coins')) || 0;
-        let globalCoinCG = parseInt(localStorage.getItem('cs_coincg')) || 0;
-        let isMuted = false;
-        let rluMode = localStorage.getItem('cs_rlu') === 'true';
-        let itemsOwned = JSON.parse(localStorage.getItem('cs_owned')) || { laser: false, rifle: false, mira: false };
+    <div id="game-container">
+        <div id="stage"></div>
 
-        // Elementos de Audio
+        <div id="ui-header">
+            <div style="display: flex; flex-direction: column; gap: 5px;">
+                <div class="ui-box" id="ui-score">
+                    <img id="wallet-coin-game" src="Moneda.PNG" alt="Moneda" class="coin-spin">
+                    <span id="score-text">0.0</span>
+                </div>
+                <div class="ui-box" id="ui-coincg">
+                    <img src="CoinCG.PNG" alt="CoinCG">
+                    <span id="coincg-text">0</span>
+                </div>
+            </div>
+            
+            <button id="ingame-pause-btn">⚙️</button>
+
+            <div style="display: flex; flex-direction: column; gap: 5px; align-items: flex-end;">
+                <div class="ui-box" id="ui-level">
+                    <span id="label-ui-level">Nivel</span>: <span id="level-text">1</span>
+                </div>
+                <div class="ui-box" id="ui-kills">
+                    <span id="label-ui-targets">Objetivos</span>: <span id="kills-text">0/5</span>
+                </div>
+                <div class="ui-box" id="ui-last-coins" style="border-color: #00ff00; font-size: 13px; padding: 4px 10px;">
+                    <span>Último NPC</span>: +<span id="last-coins-text" style="color: #00ff00;">0</span> 🟡
+                </div>
+            </div>
+        </div>
+
+        <div id="announcement"></div>
+        <div id="crosshair"></div>
+
+        <div id="weapon-container">
+            <img id="weapon" src="Manos.PNG" alt="Arma">
+        </div>
+    </div>
+
+    <script>
+        const stage = document.getElementById('stage');
+        const scoreText = document.getElementById('score-text');
+        const coincgText = document.getElementById('coincg-text');
+        const levelText = document.getElementById('level-text');
+        const killsText = document.getElementById('kills-text');
+        const lastCoinsText = document.getElementById('last-coins-text');
+        const announcement = document.getElementById('announcement');
+        const weaponContainer = document.getElementById('weapon-container');
+        const weaponImage = document.getElementById('weapon');
+        
+        const welcomeScreen = document.getElementById('welcome-screen');
+        const playMenuScreen = document.getElementById('play-menu-screen');
+        const shopScreen = document.getElementById('shop-screen');
+        const levelSelectionScreen = document.getElementById('level-selection-screen');
+        
+        const ingamePauseBtn = document.getElementById('ingame-pause-btn');
+        const pauseOverlayScreen = document.getElementById('pause-overlay-screen');
+        const pauseContinueBtn = document.getElementById('pause-continue-btn');
+        const pauseQuitBtn = document.getElementById('pause-quit-btn');
+        const toggleMusicBtn = document.getElementById('toggle-music-btn');
+        const toggleSoundBtn = document.getElementById('toggle-sound-btn');
+
+        const startButton = document.getElementById('start-button');
+        const exitButton = document.getElementById('exit-button');
+        const readyCheckbox = document.getElementById('ready-checkbox');
+        
+        const jugarMainBtn = document.getElementById('jugar-main-btn');
+        const tiendaMainBtn = document.getElementById('tienda-main-btn');
+        const salirMainBtn = document.getElementById('salir-main-btn');
+        const closeShopBtn = document.getElementById('close-shop-btn');
+        const backToMenuBtn = document.getElementById('back-to-menu-btn');
+        const levelButtons = document.querySelectorAll('.level-select-btn');
+
+        const subscribePopup = document.getElementById('subscribe-popup');
+        const subYesBtn = document.getElementById('sub-yes-btn');
+        const subNoBtn = document.getElementById('sub-no-btn');
+        
+        const menuProfileBtn = document.getElementById('menu-profile-btn');
+        const profilePanel = document.getElementById('profile-panel');
+        const closeProfilePanelBtn = document.getElementById('close-profile-panel-btn');
+        const menuAvatarPreview = document.getElementById('menu-avatar-preview');
+        
+        const menuMainAvatarImg = document.getElementById('menu-main-avatar-img');
+        const menuMainNameTxt = document.getElementById('menu-main-name-txt');
+
+        const usernameInput = document.getElementById('username-input');
+        const diceBtn = document.getElementById('dice-btn'); // El nuevo dado
+        const emailInput = document.getElementById('email-input');
+        const profilePic = document.getElementById('profile-pic');
+        const editPfpBtn = document.getElementById('edit-pfp-btn');
+        const pfpFileInput = document.getElementById('pfp-file-input');
+        const creatorBadge = document.getElementById('creator-badge');
+
+        const settingsToggleBtn = document.getElementById('settings-toggle-btn');
+        const settingsPanel = document.getElementById('settings-panel');
+        const closeSettingsBtn = document.getElementById('close-settings-btn');
+        const codeInput = document.getElementById('code-input');
+        const codeSubmitBtn = document.getElementById('code-submit-btn');
+
+        // ELEMENTOS RENDIMIENTO LEGENDARIO ULTRA (RLU)
+        const rluToggleBtn = document.getElementById('rlu-toggle-btn');
+        let isRLUEnabled = false; 
+
+        // ELEMENTOS ASOCIADOS A RESATS
+        const resatsMainBtn = document.getElementById('resats-main-btn');
+        const resatsPanel = document.getElementById('resats-panel');
+        const closeResatsBtn = document.getElementById('close-resats-btn');
+
+        // NUEVOS ELEMENTOS: SISTEMA DE REPORTAR BUGS
+        const menuReportBugsBtn = document.getElementById('menu-report-bugs-btn');
+        const reportMainPanel = document.getElementById('report-main-panel');
+        const reportGoBugsBtn = document.getElementById('report-go-bugs-btn');
+        const reportCloseMainBtn = document.getElementById('report-close-main-btn');
+        const reportCodePanel = document.getElementById('report-code-panel');
+        const assignedCodeTxt = document.getElementById('assigned-code-txt');
+        const bugDigitInput = document.getElementById('bug-digit-input');
+        const bugCodeSubmitBtn = document.getElementById('bug-code-submit-btn');
+        const reportCloseCodeBtn = document.getElementById('report-close-code-btn');
+
+        let bugCodesList = ["2020", "5028", "9270", "1029"];
+        let currentAssignedBugCode = "";
+
+        const musicBtnNormal = document.getElementById('music-btn-normal');
+        const musicBtn2 = document.getElementById('music-btn-2');
+        const musicBtnVoice = document.getElementById('music-btn-voice');
+
         const audioMusic = document.getElementById('audio-music');
         const audioPistola = document.getElementById('audio-pistola');
         const audioBoton = document.getElementById('audio-boton');
-        const audioRLU = document.getElementById('audio-rlu');
+        const audioRLU = document.getElementById('audio-rlu'); // Referencia JS del sonido RLU
 
-        // Función para reproducir sonidos de botones de forma segura
-        function playButtonSound() {
-            if(!isMuted) {
-                audioBoton.currentTime = 0;
-                audioBoton.play().catch(()=>{});
+    let levelsConfig = {
+    1: { targets: 5, speed: 1.8, coinsPerKill: 1, reward: 25 },
+    2: { targets: 10, speed: 2.6, coinsPerKill: 5, reward: 50 },
+    3: { targets: 15, speed: 3.2, coinsPerKill: 10, reward: 100 },
+    4: { targets: 20, speed: 3.8, coinsPerKill: 20, reward: 200 },
+    5: { targets: 25, speed: 4.4, coinsPerKill: 30, reward: 300 },
+    6: { targets: 40, speed: 5.2, coinsPerKill: 40, reward: 500 },
+    7: { targets: 60, speed: 6.8, coinsPerKill: 60, reward: 1000 },
+    8: { targets: 90, speed: 7.2, coinsPerKill: 80, reward: 2500 },
+    9: { targets: 120, speed: 8.0, coinsPerKill: 100, reward: 5000 },
+    10: { targets: 150, speed: 9.0, coinsPerKill: 150, reward: 10000 }
+};
+
+        let score = 0;
+        let coinCG = 0; 
+        let kills = 0;
+        let currentLevel = 1;
+        let maxUnlockedLevel = 1;
+        let stageX = 0;
+        let gameStarted = false;
+        let gamePaused = false; 
+        let currentUsername = "";
+        let popupTriggered = false; 
+        let activeNPCIntervals = [];
+        
+        let scrollSpeed = 1.8; 
+        let savedSpeedBeforePause = 1.8; 
+        let maxNPCs = 10;
+        let distanceBetweenNPCs = 350;
+
+        let upgradesOwned = { 1: false, 2: false, 3: false, 4: false, 5: false, 6: false };
+        let lastShotTime = 0;
+        let shootCooldown = 400; 
+
+        let isMusicMuted = false;
+        let isSoundMuted = false;
+        let currentMusicTrack = "normal";
+
+        function formatearMonedas(cantidad) {
+            if (cantidad >= 1000000000000) {
+                return (cantidad / 1000000000000).toFixed(1) + " T";
+            } else if (cantidad >= 1000000000) {
+                return (cantidad / 1000000000).toFixed(1) + " B";
+            } else if (cantidad >= 1000000) {
+                return (cantidad / 1000000).toFixed(1) + " M";
+            } else {
+                return cantidad.toLocaleString();
             }
         }
 
-        // CONTROL DE INICIO (VERIFICACIÓN CHECKBOX)
-        const readyCheckbox = document.getElementById('ready-checkbox');
-        const startButton = document.getElementById('start-button');
-        const welcomeScreen = document.getElementById('welcome-screen');
-        const playMenuScreen = document.getElementById('play-menu-screen');
+        function actualizarTextoMonedas() {
+            scoreText.textContent = formatearMonedas(score);
+            coincgText.textContent = coinCG;
 
-        readyCheckbox.addEventListener('change', function() {
-            if(this.checked) {
+            const formatted = formatearMonedas(score);
+            for (let i = 1; i <= 5; i++) {
+                let mScore = document.getElementById(`menu-score-text-${i}`);
+                let mCoin = document.getElementById(`menu-coincg-text-${i}`);
+                if (mScore) mScore.textContent = formatted;
+                if (mCoin) mCoin.textContent = coinCG;
+            }
+        }
+
+        function playSoundBoton() {
+            if (isSoundMuted && gameStarted) return; 
+            audioBoton.currentTime = 0;
+            audioBoton.play().catch(e => {});
+        }
+
+        function playSoundRLU() {
+            if (isSoundMuted && gameStarted) return;
+            audioRLU.currentTime = 0;
+            audioRLU.play().catch(e => {});
+        }
+
+        function playSoundPistola() {
+            if (isSoundMuted && gameStarted) return; 
+            audioPistola.currentTime = 0;
+            audioPistola.play().catch(e => {});
+        }
+
+        function changeMusicTrack(trackType) {
+            if (trackType === "normal") {
+                audioMusic.src = "Music.mp3";
+                musicBtnNormal.className = "music-panel-btn music-btn-active";
+                musicBtn2.className = "music-panel-btn music-btn-inactive";
+                musicBtnVoice.className = "music-panel-btn music-btn-inactive";
+            } else if (trackType === "2.0") {
+                audioMusic.src = "Music3.mp3";
+                musicBtnNormal.className = "music-panel-btn music-btn-inactive";
+                musicBtn2.className = "music-panel-btn music-btn-active";
+                musicBtnVoice.className = "music-panel-btn music-btn-inactive";
+            } else if (trackType === "voice") {
+                audioMusic.src = "Music2.mp3";
+                musicBtnNormal.className = "music-panel-btn music-btn-inactive";
+                musicBtn2.className = "music-panel-btn music-btn-inactive";
+                musicBtnVoice.className = "music-panel-btn music-btn-active";
+            }
+            currentMusicTrack = trackType;
+            if (!isMusicMuted) {
+                audioMusic.currentTime = 0;
+                audioMusic.play().catch(e => {});
+            }
+        }
+
+        // LÓGICA DE EVENTOS DEL NUEVO SISTEMA DE REPORTES DE BUGS
+        menuReportBugsBtn.addEventListener('click', () => {
+            playSoundBoton();
+            profilePanel.style.display = "none";
+            settingsPanel.style.display = "none";
+            resatsPanel.style.display = "none";
+            reportCodePanel.style.display = "none";
+            reportMainPanel.style.display = (reportMainPanel.style.display === "none" || reportMainPanel.style.display === "") ? "flex" : "none";
+        });
+
+        reportCloseMainBtn.addEventListener('click', () => {
+            playSoundBoton();
+            reportMainPanel.style.display = "none";
+        });
+
+        reportGoBugsBtn.addEventListener('click', () => {
+            playSoundBoton();
+            reportMainPanel.style.display = "none";
+            // Escoger código aleatorio de la lista
+            let randomIndex = Math.floor(Math.random() * bugCodesList.length);
+            currentAssignedBugCode = bugCodesList[randomIndex];
+            
+            assignedCodeTxt.textContent = "Código Asignado: " + currentAssignedBugCode;
+            bugDigitInput.value = "";
+            reportCodePanel.style.display = "flex";
+        });
+
+        reportCloseCodeBtn.addEventListener('click', () => {
+            playSoundBoton();
+            reportCodePanel.style.display = "none";
+        });
+
+                bugCodeSubmitBtn.addEventListener('click', () => {
+            playSoundBoton();
+            let typedCode = bugDigitInput.value.trim();
+            if(typedCode === currentAssignedBugCode) {
+                // Copiar la plantilla automáticamente al portapapeles
+                let plantilla = "⚒️ DB ⚒️: [Ingresa Tu Problema]";
+                navigator.clipboard.writeText(plantilla).then(() => {
+                    alert("✅ ¡Código correcto! Se ha copiado en tu portapapeles la plantilla de reporte de error. Pégala en la sección de comentarios del video.");
+                    reportCodePanel.style.display = "none";
+                    // Redirigir al link del video de youtube enviado
+                    window.open("https://youtu.be/gRdU1jUcA4A?si=jqZ6pcVZbRLkOCj8", "_blank");
+                }).catch(err => {
+                    // Fallback en caso de bloqueos del navegador
+                    alert("Código correcto. Por favor escribe esto en comentarios: '⚒️ DB ⚒️: [Ingresa Tu Problema]'");
+                    window.open("https://youtu.be/gRdU1jUcA4A?si=jqZ6pcVZbRLkOCj8", "_blank");
+                });
+            } else {
+                alert("❌ ¡Codigo Incorrecto! El código ingresado no coincide con el código asignado por el sistema de Bugs. ¡Inténtalo de nuevo!");
+            }
+        });
+
+        // CONTROL INTEGRADO DEL BOTÓN RLU CON SONIDO ESPECIAL INCLUIDO
+        rluToggleBtn.addEventListener('click', () => {
+            playSoundRLU(); // Reproduce RLU.mp3 de forma prioritaria al tocar
+            isRLUEnabled = !isRLUEnabled;
+            
+            const coinGiroElements = [
+                document.getElementById('wallet-coin-1'),
+                document.getElementById('wallet-coin-3'),
+                document.getElementById('wallet-coin-4'),
+                document.getElementById('wallet-coin-5'),
+                document.getElementById('wallet-coin-game')
+            ];
+
+            if(isRLUEnabled) {
+                // ACTIVAR MODO RLU
+                rluToggleBtn.textContent = "RLU: ULTRA ACTIVADO ⚡";
+                rluToggleBtn.className = "rlu-btn rlu-on";
+                
+                // 1. Apagar animaciones pesadas de CSS (giro de monedas)
+                coinGiroElements.forEach(el => { if(el) el.classList.add('stop-animation'); });
+
+                // 2. Modificar el stage para usar menos GPU (Color sólido en vez de repetir imagen larga)
+                stage.style.backgroundImage = "none";
+                stage.style.backgroundColor = "#111";
+
+                // 3. Reducir variables de renderizado de NPCs en tiempo real
+                maxNPCs = 5;
+                distanceBetweenNPCs = 600; 
+                
+                if (gameStarted) {
+                    // Si está en una partida activa, reorganizar dinámicamente para evitar lags
+                    clearAllNPCs();
+                    for(let i = 0; i < maxNPCs; i++) { spawnNPC(i); }
+                }
+            } else {
+                // DESACTIVAR MODO RLU (VOLVER AL DISEÑO TRADICIONAL)
+                rluToggleBtn.textContent = "RLU: APAGADO ❌";
+                rluToggleBtn.className = "rlu-btn rlu-off";
+                
+                coinGiroElements.forEach(el => { if(el) el.classList.remove('stop-animation'); });
+                stage.style.backgroundImage = "url('Fondo.PNG')";
+                
+                maxNPCs = 10;
+                distanceBetweenNPCs = 350;
+
+                if (gameStarted) {
+                    clearAllNPCs();
+                    for(let i = 0; i < maxNPCs; i++) { spawnNPC(i); }
+                }
+            }
+            if(currentUsername !== "") {
+                localStorage.setItem('cs_rlu_' + currentUsername, isRLUEnabled ? "true" : "false");
+            }
+        });
+
+        musicBtnNormal.addEventListener('click', () => { playSoundBoton(); changeMusicTrack("normal"); });
+        musicBtn2.addEventListener('click', () => { playSoundBoton(); changeMusicTrack("2.0"); });
+        musicBtnVoice.addEventListener('click', () => { playSoundBoton(); changeMusicTrack("voice"); });
+
+        menuProfileBtn.addEventListener('click', () => {
+            playSoundBoton();
+            settingsPanel.style.display = "none"; 
+            resatsPanel.style.display = "none";
+            reportMainPanel.style.display = "none";
+            reportCodePanel.style.display = "none";
+            profilePanel.style.display = (profilePanel.style.display === "none" || profilePanel.style.display === "") ? "flex" : "none";
+        });
+
+        closeProfilePanelBtn.addEventListener('click', () => {
+            playSoundBoton();
+            profilePanel.style.display = "none";
+        });
+
+        editPfpBtn.addEventListener('click', () => {
+            playSoundBoton();
+            pfpFileInput.click();
+        });
+
+        pfpFileInput.addEventListener('change', () => {
+            const file = pfpFileInput.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    profilePic.src = e.target.result;
+                    menuAvatarPreview.src = e.target.result;
+                    menuMainAvatarImg.src = e.target.result; 
+                    if(currentUsername !== "") {
+                        localStorage.setItem('cs_pfp_' + currentUsername, e.target.result);
+                    }
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // --- 🎲 SISTEMA DE NOMBRES ALEATORIOS 🎲 ---
+        const listaNombres = [
+            "🐔 JostinPro777 🐔", "🧙‍♂️ TavitoGamer99 🧙‍♂️", "🐥 PepeStriker10 🐥", "🐔 ChickenLegend 🐔", "🔥 PolloMaster 🔥", "🐣 EggKnight 🐣", "🔫 GunPro99 🔫", "🐔 ChickenSquad 🐔", "🐥 PolloGamer 🐥", "🐔 FeatherForce 🐔",
+            "🎶 OrenBeats 🎶", "🎧 RaddyMix 🎧", "🥁 ClukrDrum 🥁", "🤖 FunBotPro 🤖", "🍷 VineriaElite 🍷", "🩶 GrayLegend 🩶", "🔨 BrudMaster 🔨", "🦁 GarnoldPro 🦁", "🌀 OwakcxRhythm 🌀", "☁️ SkyGamer ☁️",
+            "☀️ SunLegend ☀️", "🟣 DurplePro 🟣", "🌳 TreeMaster 🌳", "🧠 SimonGamer 🧠", "⚙️ TunnerPro ⚙️", "💻 FunCompLegend 💻", "🎀 WendaElite 🎀", "🌸 PinkiGamer 🌸", "💎 JevinMaster 💎", "🖤 BlackStriker 🖤",
+            "🌙 AstroPro 🌙", "⚙️ DandyGamer ⚙️", "🪨 PebbleStriker 🪨", "🐚 ShellyMaster 🐚", "🌱 SproutPro 🌱", "📺 VeeGamer 📺", "📦 BoxtenLegend 📦", "🌸 PoppyStriker 🌸", "💧 BlotPro 💧", "💡 BrightneyGamer 💡",
+            "🖌️ BrushaMaster 🖌️", "🧵 ConnieElite 🧵", "✨ CosmoLegend ✨", "🦊 FinnPro 🦊", "🦋 FlutterGamer 🦋", "✨ GigiMaster ✨", "💎 GlistenPro 💎", "🫠 GoobStriker 🫠", "🦆 LooeyLegend 🦆", "🎭 RodgerMaster 🎭",
+            "⚡ RazzlePro ⚡", "✂️ ScrapsGamer ✂️", "🦐 ShrimpoLegend 🦐", "🌀 SquirmPro 🌀", "🎀 TeaganMaster 🎀", "🔔 TishaElite 🔔", "🧸 ToodlesPro 🧸", "🌟 YattaGamer 🌟", "🐻 BassieLegend 🐻", "🎃 GourdyMaster 🎃",
+            "🧢 BobettePro 🧢", "🌑 CoalGamer 🌑", "🍫 CocoaLegend 🍫", "🌌 EclipseMaster 🌌", "🥚 EggsonPro 🥚", "✈️ FlyteGamer ✈️", "GingerLegend", "🖋️ RibeccaMaster 🖋️", "🔴 RudiePro 🔴", "🌌 SoulvesterGamer 🌌", "⚡ DyleLegend ⚡",
+            "ProPlayer1 🎮", "GamerMaster2 🕹️", "EliteChicken99 🐔", "SprunkiPro77 🎵", "DandyWorldPro10 🎩", "OrenPro100 🎵", "RaddyGamer777 🎙️", "ClukrLegend10 🐔", "FunBotMaster0 🤖", "VineriaPro99 🍷",
+            "GrayStriker88 🩶", "BrudGamer12 🔨", "GarnoldMaster5 🦁", "OwakcxPro33 🌀", "SkyGamer11 ☁️", "SunLegend99 ☀️", "DurplePro44 🟣", "TreeMaster0 🌳", "SimonGamer1 🧠", "TunnerPro8 ⚙️",
+            "FunCompLegend7 💻", "WendaPro9 🎀", "PinkiGamer2 🌸", "JevinMaster6 💎", "BlackPro10 🖤", "AstroPro99 🌙", "DandyGamer77 ⚙️", "PebbleStriker10 🪨", "ShellyMaster55 🐚", "SproutPro11 🌱",
+            "VeeGamer22 📺", "BoxtenLegend33 📦", "PoppyStriker44 🌸", "BlotPro66 💧", "BrightneyGamer77 💡", "BrushaPro 🖌️", "ConnieGamer 🧵", "CosmoLegend ✨", "FinnPro 🦊", "FlutterGamer 🦋",
+            "GigiMaster ✨", "GlistenPro 💎", "GoobStriker 🫠", "LooeyLegend 🦆", "RodgerMaster 🎭", "RazzlePro ⚡", "ScrapsGamer ✂️", "ShrimpoLegend 🦐", "SquirmPro 🌀", "TeaganMaster 🎀",
+            "OrenPro01 🎵", "OrenPro02 🎵", "OrenPro03 🎵", "Raddy01 🎙️", "Raddy02 🎙️", "Raddy03 🎙️", "Clukr01 🐔", "Clukr02 🐔", "Clukr03 🐔", "FunBot01 🤖",
+            "FunBot02 🤖", "FunBot03 🤖", "Vineria01 🍷", "Vineria02 🍷", "Vineria03 🍷", "Gray01 🩶", "Gray02 🩶", "Gray03 🩶", "Brud01 🔨", "Brud02 🔨",
+            "Brud03 🔨", "Garnold01 🦁", "Garnold02 🦁", "Garnold03 🦁", "Owakcx01 🌀", "Owakcx02 🌀", "Owakcx03 🌀", "Sky01 ☁️", "Sky02 ☁️", "Sky03 ☁️",
+            "Sun01 ☀️", "Sun02 ☀️", "Sun03 ☀️", "Durple01 🟣", "Durple02 🟣", "Durple03 🟣", "Tree01 🌳", "Tree02 🌳", "Tree03 🌳", "Simon01 🧠",
+            "Simon02 🧠", "Simon03 🧠", "Tunner01 ⚙️", "Tunner02 ⚙️", "Tunner03 ⚙️", "FunComp01 💻", "FunComp02 💻", "FunComp03 💻", "Wenda01 🎀", "Wenda02 🎀",
+            "Wenda03 🎀", "Pinki01 🌸", "Pinki02 🌸", "Pinki03 🌸", "Jevin01 💎", "Jevin02 💎", "Jevin03 💎", "Black01 🖤", "Black02 🖤", "Black03 🖤",
+            "Astro01 🌙", "Astro02 🌙", "Astro03 🌙", "Dandy01 ⚙️", "Dandy02 ⚙️", "Dandy03 ⚙️", "Pebble01 🪨", "Pebble02 🪨", "Pebble03 🪨", "Shelly01 🐚",
+            "Shelly02 🐚", "Shelly03 🐚", "Sprout01 🌱", "Sprout02 🌱", "Sprout03 🌱", "Vee01 📺", "Vee02 📺", "Vee03 📺", "Boxten01 📦", "Boxten02 📦",
+            "Boxten03 📦", "Poppy01 🌸", "Poppy02 🌸", "Poppy03 🌸", "Blot01 💧", "Blot02 💧", "Blot03 💧", "Brightney01 💡", "Brightney02 💡", "Brightney03 💡",
+            "Brusha01 🖌️", "Brusha02 🖌️", "Brusha03 🖌️", "Connie01 🧵", "Connie02 🧵", "Connie03 🧵", "Cosmo01 ✨", "Cosmo02 ✨", "Cosmo03 ✨", "Finn01 🦊",
+            "Finn02 🦊", "Finn03 🦊", "Flutter01 🦋", "Flutter02 🦋", "Flutter03 🦋", "Gigi01 ✨", "Gigi02 ✨", "Gigi03 ✨", "Glisten01 💎", "Glisten02 💎",
+            "Glisten03 💎", "Goob01 🫠", "Goob02 🫠", "Goob03 🫠", "Looey01 🦆", "Looey02 🦆", "Looey03 🦆", "Rodger01 🎭", "Rodger02 🎭", "Rodger03 🎭",
+            "Razzle01 ⚡", "Razzle02 ⚡", "Razzle03 ⚡", "Scraps01 ✂️", "Scraps02 ✂️", "Scraps03 ✂️", "Shrimpo01 🦐", "Shrimpo02 🦐", "Shrimpo03 🦐", "Squirm01 🌀",
+            "Squirm02 🌀", "Squirm03 🌀", "Teagan01 🎀", "Teagan02 🎀", "Teagan03 🎀", "Tisha01 🔔", "Tisha02 🔔", "Tisha03 🔔", "Toodles01 🧸", "Toodles02 🧸",
+            "Toodles03 🧸", "Yatta01 🌟", "Yatta02 🌟", "Yatta03 🌟", "Bassie01 🐻", "Bassie02 🐻", "Bassie03 🐻", "Gourdy01 🎃", "Gourdy02 🎃", "Gourdy03 🎃",
+            "Bobette01 🧢", "Bobette02 🧢", "Bobette03 🧢", "Coal01 🌑", "Coal02 🌑", "Coal03 🌑", "Cocoa01 🍫", "Cocoa02 🍫", "Cocoa03 🍫", "Eclipse01 🌌",
+            "Eclipse02 🌌", "Eclipse03 🌌", "Eggson01 🥚", "Eggson02 🥚", "Eggson03 🥚", "Flyte01 ✈️", "Flyte02 ✈️", "Flyte03 ✈️", "Ginger01 Ginger", "Ginger02 Ginger",
+            "Ginger03 Ginger", "Ribecca01 🖋️", "Ribecca02 🖋️", "Ribecca03 🖋️", "Rudie01 🔴", "Rudie02 🔴", "Rudie03 🔴", "Soulvester01 🌌", "Soulvester02 🌌", "Soulvester03 🌌",
+            "Dyle01 ⚡", "Dyle02 ⚡", "Dyle03 ⚡", "Jostin01 🐔", "Jostin02 🐔", "Jostin03 🐔", "Tavito01 🧙‍♂️", "Tavito02 🧙‍♂️", "Tavito03 🧙‍♂️", "Pepe01 🐥",
+            "Pepe02 🐥", "Pepe03 🐥", "ProGamer01 🎮", "ProGamer02 🎮", "ProGamer03 🎮", "Legendary01 🌟", "Legendary02 🌟", "Legendary03 🌟", "Epic01 💥", "Epic02 💥"
+        ];
+
+        diceBtn.addEventListener('click', () => {
+            playSoundBoton();
+            let nombreElegido = listaNombres[Math.floor(Math.random() * listaNombres.length)];
+            usernameInput.value = nombreElegido;
+            
+            // ¡Truco Ninja de Programación! 🥷 
+            // Esto le avisa al juego que el nombre cambió para que el sistema de ABG Productions lo guarde de inmediato
+            usernameInput.dispatchEvent(new Event('input'));
+        });
+        // --- FIN DEL SISTEMA 🎲 ---
+
+        usernameInput.addEventListener('input', () => {
+            let name = usernameInput.value.trim();
+            let lowerName = name.toLowerCase();
+
+            if (lowerName === "abg" || lowerName === "abg productions" || lowerName === "abg productions®" || (lowerName === "mr.jostin" && name !== "Mr.Jostin")) {
+                alert("❌ ¡Este nombre está protegido por derechos de autor!");
+                usernameInput.value = "";
+                creatorBadge.style.display = "none";
+                return;
+            }
+
+            if (name === "Mr.Jostin") {
+                creatorBadge.style.display = "block";
+            } else {
+                creatorBadge.style.display = "none";
+            }
+
+            if (name !== "") {
+                currentUsername = name;
+                menuMainNameTxt.textContent = currentUsername; 
+                localStorage.setItem('cs_saved_username', currentUsername);
+                loadPlayerProgress(currentUsername);
+            }
+        });
+
+        if(localStorage.getItem('cs_saved_username')) {
+            currentUsername = localStorage.getItem('cs_saved_username');
+            usernameInput.value = currentUsername;
+            menuMainNameTxt.textContent = currentUsername; 
+            if(currentUsername === "Mr.Jostin") creatorBadge.style.display = "block";
+            loadPlayerProgress(currentUsername);
+        } else {
+            actualizarTextoMonedas();
+        }
+
+        function loadPlayerProgress(name) {
+            let savedScore = localStorage.getItem('cs_score_' + name);
+            let savedCoinCG = localStorage.getItem('cs_coincg_' + name);
+            let savedMaxLevel = localStorage.getItem('cs_max_level_' + name);
+            let savedEmail = localStorage.getItem('cs_email_' + name);
+            let savedPfp = localStorage.getItem('cs_pfp_' + name);
+            let savedRLU = localStorage.getItem('cs_rlu_' + name);
+            
+            if(savedScore !== null) score = parseInt(savedScore);
+            else score = 0;
+
+            if (savedScore !== null) {
+    score = parseInt(savedScore, 10);
+
+    // Reiniciar monedas excesivas a 50 000, excepto el creador
+    if (name !== "Mr.Jostin" && score >= 1000000) {
+        score = 50000;
+        localStorage.setItem('cs_score_' + name, score);
+    }
+
+} else {
+    score = 0;
+}
+
+if (savedCoinCG !== null) coinCG = parseInt(savedCoinCG, 10);
+else coinCG = 0;
+
+if (savedEmail !== null) emailInput.value = savedEmail;
+else emailInput.value = "";
+
+if (savedPfp !== null) {
+    profilePic.src = savedPfp;
+    menuAvatarPreview.src = savedPfp;
+    menuMainAvatarImg.src = savedPfp;
+} else {
+    profilePic.src = "Foto.PNG";
+    menuAvatarPreview.src = "Foto.PNG";
+    menuMainAvatarImg.src = "Foto.PNG";
+}
+
+actualizarTextoMonedas();
+
+if (savedMaxLevel !== null) maxUnlockedLevel = parseInt(savedMaxLevel, 10);
+else maxUnlockedLevel = 1;
+
+for (let id = 1; id <= 6; id++) {
+    let savedUpgrade = localStorage.getItem(`cs_upgrade_${id}_` + name);
+    upgradesOwned[id] = (savedUpgrade === "true");
+}
+
+            updateLevelButtonsUI();
+            updateShopButtonsUI();
+            checkSubscriptionTrigger();
+        }
+
+        function savePlayerProgress() {
+            if (currentUsername !== "") {
+                localStorage.setItem('cs_score_' + currentUsername, score);
+                localStorage.setItem('cs_coincg_' + currentUsername, coinCG);
+                localStorage.setItem('cs_max_level_' + currentUsername, maxUnlockedLevel);
+                localStorage.setItem('cs_email_' + currentUsername, emailInput.value.trim());
+                localStorage.setItem('cs_rlu_' + currentUsername, isRLUEnabled ? "true" : "false");
+                for (let id = 1; id <= 6; id++) {
+                    localStorage.setItem(`cs_upgrade_${id}_` + currentUsername, upgradesOwned[id]);
+                }
+            }
+            checkSubscriptionTrigger();
+        }
+
+        function updateLevelButtonsUI() {
+            levelButtons.forEach(btn => {
+                let lvl = parseInt(btn.dataset.lvl);
+                if(lvl <= maxUnlockedLevel) {
+                    btn.classList.remove('locked');
+                    btn.removeAttribute('disabled');
+                } else {
+                    btn.classList.add('locked');
+                    btn.setAttribute('disabled', 'true');
+                }
+            });
+        }
+
+        function updateShopButtonsUI() {
+            for(let id = 1; id <= 6; id++) {
+                const btn = document.getElementById(`buy-upgrade-${id}`);
+                if (btn) {
+                    if (upgradesOwned[id]) {
+                        btn.textContent = "Comprado";
+                        btn.classList.add('owned');
+                    } else {
+                        btn.classList.remove('owned');
+                        if(id === 1) btn.textContent = "1100 🟡 + 10 🟣";
+                        if(id === 2) btn.textContent = "2200 🟡 + 20 🟣";
+                        if(id === 3) btn.textContent = "3300 🟡 + 30 🟣";
+                        if(id === 4) btn.textContent = "4400 🟡 + 40 🟣";
+                        if(id === 5) btn.textContent = "5500 🟡 + 50 🟣";
+                        if(id === 6) btn.textContent = "6600 🟡 + 60 🟣";
+                    }
+                }
+            }
+        }
+
+        function buyUpgrade(id, costCoins, costCoinCG) {
+            playSoundBoton();
+            if (currentUsername === "") {
+                alert("Por favor, ingresa tu nombre primero en el botón de perfil.");
+                return;
+            }
+            if (upgradesOwned[id]) {
+                alert("¡Ya posees esta mejora!");
+                return;
+            }
+            if (score >= costCoins && coinCG >= costCoinCG) {
+                score -= costCoins;
+                coinCG -= costCoinCG;
+                upgradesOwned[id] = true;
+                actualizarTextoMonedas();
+                savePlayerProgress();
+                updateShopButtonsUI();
+                alert(`🎉 ¡Súper Mejora activada con éxito de calidad Trillonaria!`);
+            } else {
+                alert("❌ No tienes suficientes Monedas o CoinCG.");
+            }
+        }
+
+        function resetShopUpgrades() {
+            playSoundBoton();
+            if (currentUsername === "") return;
+
+            let refundCoins = 0;
+            let refundCoinCG = 0;
+            if (upgradesOwned[1]) { refundCoins += 1100; refundCoinCG += 10; }
+            if (upgradesOwned[2]) { refundCoins += 2200; refundCoinCG += 20; }
+            if (upgradesOwned[3]) { refundCoins += 3300; refundCoinCG += 30; }
+            if (upgradesOwned[4]) { refundCoins += 4400; refundCoinCG += 40; }
+            if (upgradesOwned[5]) { refundCoins += 5500; refundCoinCG += 50; }
+            if (upgradesOwned[6]) { refundCoins += 6600; refundCoinCG += 60; }
+
+            let confirmReset = confirm(`¿Quieres reiniciar tus mejoras? Se te devolverá lo invertido.`);
+            if (confirmReset) {
+                score += refundCoins;
+                coinCG += refundCoinCG;
+                actualizarTextoMonedas();
+                
+                for(let id=1; id<=6; id++) upgradesOwned[id] = false;
+                
+                weaponImage.src = 'Manos.PNG';
+                shootCooldown = 400;
+
+                savePlayerProgress();
+                updateShopButtonsUI();
+                alert("🔄 ¡Compras reiniciadas!");
+            }
+        }
+
+        readyCheckbox.addEventListener('change', () => {
+            playSoundBoton();
+            if (readyCheckbox.checked) {
                 startButton.style.opacity = "1";
                 startButton.style.pointerEvents = "auto";
             } else {
@@ -1415,541 +2066,426 @@
             }
         });
 
-        startButton.addEventListener('click', () => {
-            playButtonSound();
-            welcomeScreen.style.display = 'none';
-            playMenuScreen.style.display = 'flex';
-            updateWalletUI();
-            
-            // Iniciar música automáticamente si no está silenciada
-            if(!isMuted) {
-                audioMusic.play().catch(()=>{});
-            }
+        exitButton.addEventListener('click', () => {
+            playSoundBoton();
+            window.location.reload();
         });
 
-        // ACTUALIZACIÓN DE BILLETERAS EN LA UI
-        function updateWalletUI() {
-            document.getElementById('menu-coins-txt').textContent = globalCoins;
-            document.getElementById('menu-coincg-txt').textContent = globalCoinCG;
-            document.getElementById('score-txt').textContent = globalCoins;
-            document.getElementById('coincg-txt').textContent = globalCoinCG;
-            
-            localStorage.setItem('cs_coins', globalCoins);
-            localStorage.setItem('cs_coincg', globalCoinCG);
-            localStorage.setItem('cs_owned', JSON.stringify(itemsOwned));
-        }
-
-        // SISTEMA DE REPORTES Y CÓDIGOS DE BUG DE VERIFICACIÓN
-        const btnMainReport = document.getElementById('menu-report-bugs-btn');
-        const reportMainPanel = document.getElementById('report-main-panel');
-        const reportCodePanel = document.getElementById('report-code-panel');
-        const btnGoBugs = document.getElementById('report-go-bugs-btn');
-        const btnCloseMain = document.getElementById('report-close-main-btn');
-        const btnCloseCode = document.getElementById('report-close-code-btn');
-        const txtAssignedCode = document.getElementById('assigned-code-txt');
-        const inputBugDigit = document.getElementById('bug-digit-input');
-        const btnSubmitReport = document.getElementById('bug-code-submit-btn');
-
-        let currentGeneratedBugCode = "";
-
-        btnMainReport.addEventListener('click', () => {
-            playButtonSound();
-            reportMainPanel.style.display = 'flex';
-        });
-
-        btnCloseMain.addEventListener('click', () => {
-            playButtonSound();
-            reportMainPanel.style.display = 'none';
-        });
-
-        btnGoBugs.addEventListener('click', () => {
-            playButtonSound();
-            reportMainPanel.style.display = 'none';
-            
-            // Generar un código aleatorio de 4 dígitos para verificar
-            let codeNum = Math.floor(1000 + Math.random() * 9000);
-            currentGeneratedBugCode = codeNum.toString();
-            txtAssignedCode.textContent = "Código: " + currentGeneratedBugCode;
-            inputBugDigit.value = "";
-            
-            reportCodePanel.style.display = 'flex';
-        });
-
-        btnCloseCode.addEventListener('click', () => {
-            playButtonSound();
-            reportCodePanel.style.display = 'none';
-        });
-
-        btnSubmitReport.addEventListener('click', () => {
-            playButtonSound();
-            if(inputBugDigit.value === currentGeneratedBugCode) {
-                alert("🐛 ¡Reporte enviado con éxito! El equipo de ABG Productions revisará el bug.");
-                reportCodePanel.style.display = 'none';
-            } else {
-                alert("❌ Código incorrecto. Verifica el número asignado en pantalla.");
-            }
-        });
-
-        // GESTIÓN DE PERFIL FLOTANTE Y AVATAR
-        const menuProfileBtn = document.getElementById('menu-profile-btn');
-        const profilePanel = document.getElementById('profile-panel');
-        const closeProfileBtn = document.getElementById('close-profile-panel-btn');
-        const emailInput = document.getElementById('email-input');
-        const usernameInput = document.getElementById('username-input');
-        const creatorBadge = document.getElementById('creator-badge');
-        const diceBtn = document.getElementById('dice-btn');
-        const pfpFileInput = document.getElementById('pfp-file-input');
-        const editPfpBtn = document.getElementById('edit-pfp-btn');
-        const profilePic = document.getElementById('profile-pic');
-        const menuAvatarPreview = document.getElementById('menu-avatar-preview');
-        const menuAvatarLarge = document.getElementById('menu-avatar-large');
-        const menuUsernameLarge = document.getElementById('menu-username-large');
-
-        // Cargar datos del perfil guardados
-        usernameInput.value = localStorage.getItem('cs_user_name') || "";
-        emailInput.value = localStorage.getItem('cs_user_email') || "";
-        if(localStorage.getItem('cs_user_pfp')) {
-            profilePic.src = localStorage.getItem('cs_user_pfp');
-            menuAvatarPreview.src = localStorage.getItem('cs_user_pfp');
-            menuAvatarLarge.src = localStorage.getItem('cs_user_pfp');
-        }
-        checkCreatorBadge();
-
-        menuProfileBtn.addEventListener('click', () => {
-            playButtonSound();
-            profilePanel.style.display = 'flex';
-        });
-
-        closeProfileBtn.addEventListener('click', () => {
-            playButtonSound();
-            let finalName = usernameInput.value.trim() || "Jugador";
-            localStorage.setItem('cs_user_name', finalName);
-            localStorage.setItem('cs_user_email', emailInput.value.trim());
-            menuUsernameLarge.textContent = finalName;
-            profilePanel.style.display = 'none';
-            checkCreatorBadge();
-        });
-
-        function checkCreatorBadge() {
-            let lower = usernameInput.value.toLowerCase();
-            if(lower.includes("mr.jostin") || lower.includes("jostin") || lower.includes("abg")) {
-                creatorBadge.style.display = "block";
-            } else {
-                creatorBadge.style.display = "none";
-            }
-        }
-
-        // Generador Aleatorio de Nombres por Dados
-        diceBtn.addEventListener('click', () => {
-            const randomNames = ["ChickenPro", "StrikerNPC", "BetaTester", "TimeGamer", "SuperBear", "SprunkiFan", "TavitoMagic", "PixelHunter"];
-            let randomSelection = randomNames[Math.floor(Math.random() * randomNames.length)] + Math.floor(Math.random() * 99);
-            usernameInput.value = randomSelection;
-        });
-
-        // Cambiar foto desde archivo local
-        editPfpBtn.addEventListener('click', () => { pfpFileInput.click(); });
-        pfpFileInput.addEventListener('change', function() {
-            const file = this.files[0];
-            if(file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    profilePic.src = e.target.result;
-                    menuAvatarPreview.src = e.target.result;
-                    menuAvatarLarge.src = e.target.result;
-                    localStorage.setItem('cs_user_pfp', e.target.result);
-                }
-                reader.readAsDataURL(file);
-            }
-        });
-
-        // PESTAÑAS RESATS Y TIENDA
-        const btnResatsMain = document.getElementById('resats-main-btn');
-        const resatsPanel = document.getElementById('resats-panel');
-        const btnCloseResats = document.getElementById('close-resats-panel-btn');
-        const btnTiendaMain = document.getElementById('tienda-main-btn');
-        const shopScreen = document.getElementById('shop-screen');
-        const btnCloseShop = document.getElementById('close-shop-btn');
-        const btnResetShop = document.getElementById('reset-shop-btn');
-
-        btnResatsMain.addEventListener('click', () => {
-            playButtonSound();
-            resatsPanel.style.display = 'flex';
-        });
-        btnCloseResats.addEventListener('click', () => {
-            playButtonSound();
-            resatsPanel.style.display = 'none';
-        });
-
-        btnTiendaMain.addEventListener('click', () => {
-            playButtonSound();
-            shopScreen.style.display = 'flex';
-            updateShopButtons();
-        });
-        btnCloseShop.addEventListener('click', () => {
-            playButtonSound();
-            shopScreen.style.display = 'none';
-        });
-
-        // Configuración e Inicialización de Tienda
-        function updateShopButtons() {
-            document.querySelectorAll('.shop-buy-btn').forEach(btn => {
-                let item = btn.getAttribute('data-item');
-                if(itemsOwned[item]) {
-                    btn.textContent = "ADQUIRIDO ✓";
-                    btn.classList.add('owned');
-                } else {
-                    let cost = btn.getAttribute('data-cost');
-                    let curr = btn.getAttribute('data-currency') === 'coins' ? ' Monedas' : ' CoinCG 🟣';
-                    btn.textContent = cost + curr;
-                    btn.classList.remove('owned');
-                }
-            });
-        }
-
-        document.querySelectorAll('.shop-buy-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                let item = this.getAttribute('data-item');
-                if(itemsOwned[item]) return;
-
-                let cost = parseInt(this.getAttribute('data-cost'));
-                let currency = this.getAttribute('data-currency');
-
-                if(currency === 'coins') {
-                    if(globalCoins >= cost) {
-                        globalCoins -= cost;
-                        itemsOwned[item] = true;
-                        alert("🛒 ¡Compra realizada con éxito!");
-                    } else {
-                        alert("❌ No tienes suficientes monedas del juego.");
-                    }
-                } else {
-                    if(globalCoinCG >= cost) {
-                        globalCoinCG -= cost;
-                        itemsOwned[item] = true;
-                        alert("🛒 ¡Articulo comprado con tus CoinCG 🟣!");
-                    } else {
-                        // Activar la ventana promocional si no tiene suficientes CoinCG
-                        openSubscribePopup();
-                    }
-                }
-                updateWalletUI();
-                updateShopButtons();
-            });
-        });
-
-        btnResetShop.addEventListener('click', () => {
-            playButtonSound();
-            if(confirm("¿Quieres reiniciar todas tus compras de personalización de armas?")) {
-                itemsOwned = { laser: false, rifle: false, mira: false };
-                updateWalletUI();
-                updateShopButtons();
-            }
-        });
-
-        // VENTANA FLOTANTE DE SUSCRIPCIÓN (PROMO CANAL)
-        const subPopup = document.getElementById('subscribe-popup');
-        const subYesBtn = document.getElementById('sub-yes-btn');
-        const subNoBtn = document.getElementById('sub-no-btn');
-
-        function openSubscribePopup() {
-            subPopup.style.transform = "translate(-50%, -50%) scale(1)";
-        }
-        function closeSubscribePopup() {
-            subPopup.style.transform = "translate(-50%, -50%) scale(0)";
-        }
-
-        subYesBtn.addEventListener('click', () => {
-            playButtonSound();
-            if(globalCoins >= 3600) {
-                globalCoins -= 3600;
-                globalCoinCG += 3; // Recompensa de CoinCG otorgada por apoyar al creador
-                alert("🎉 ¡Gracias por suscribirte al canal de Mr.Jostin! Se sumaron 3 CoinCG 🟣.");
-                closeSubscribePopup();
-                updateWalletUI();
-            } else {
-                alert("❌ Necesitas al menos 3,600 monedas para simular esta suscripción.");
-            }
-        });
-        subNoBtn.addEventListener('click', () => {
-            playButtonSound();
-            closeSubscribePopup();
-        });
-
-        // SISTEMA DE SELECCIÓN DE NIVEL Y JUEGO ACTIVO
-        const btnJugarMain = document.getElementById('jugar-main-btn');
-        const levelScreen = document.getElementById('level-selection-screen');
-        const btnBackToMenu = document.getElementById('back-to-menu-btn');
-        const gameContainer = document.getElementById('game-container');
-        const stage = document.getElementById('stage');
-        const btnSalirMain = document.getElementById('salir-main-btn');
-
-        btnJugarMain.addEventListener('click', () => {
-            playButtonSound();
-            levelScreen.style.display = 'flex';
-        });
-
-        btnBackToMenu.addEventListener('click', () => {
-            playButtonSound();
-            levelScreen.style.display = 'none';
-        });
-
-        btnSalirMain.addEventListener('click', () => {
-            playButtonSound();
-            playMenuScreen.style.display = 'none';
-            welcomeScreen.style.display = 'flex';
-        });
-
-        // Iniciar un nivel de mapa interactivo
-        document.querySelectorAll('.level-select-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                if(this.classList.contains('locked')) return;
-                playButtonSound();
-                levelScreen.style.display = 'none';
-                playMenuScreen.style.display = 'none';
-                gameContainer.style.display = 'block';
-                setupActiveLevel();
-            });
-        });
-
-        // CONFIGURACIONES Y MODO RENDIMIENTO EXTREMO (RLU)
-        const settingsToggleBtn = document.getElementById('settings-toggle-btn');
-        const settingsPanel = document.getElementById('settings-panel');
-        const closeSettingsBtn = document.getElementById('close-settings-panel-btn');
-        const settingsMusicToggle = document.getElementById('settings-music-toggle');
-        const settingsRluToggle = document.getElementById('settings-rlu-toggle');
-        const codeInput = document.getElementById('code-input');
-        const codeSubmitBtn = document.getElementById('code-submit-btn');
-
-        // Hacer visible el engranaje de ajustes en el menú de juego
-        startButton.addEventListener('click', () => { settingsToggleBtn.style.display = 'flex'; });
-        btnSalirMain.addEventListener('click', () => { settingsToggleBtn.style.display = 'none'; });
-
+        // MANEJO DE CONFIGURACIÓN DEL MENÚ PRINCIPAL INTERMEDIO
         settingsToggleBtn.addEventListener('click', () => {
-            playButtonSound();
-            // Cargar estados actuales de interfaz
-            if(isMuted) {
-                settingsMusicToggle.textContent = "DESACTIVADA";
-                settingsMusicToggle.className = "music-panel-btn music-btn-inactive";
-            } else {
-                settingsMusicToggle.textContent = "ACTIVADA";
-                settingsMusicToggle.className = "music-panel-btn music-btn-active";
-            }
-            updateRluButtonUI();
-            settingsPanel.style.display = 'flex';
+            playSoundBoton();
+            profilePanel.style.display = "none"; 
+            resatsPanel.style.display = "none";
+            reportMainPanel.style.display = "none";
+            reportCodePanel.style.display = "none";
+            settingsPanel.style.display = (settingsPanel.style.display === "none" || settingsPanel.style.display === "") ? "flex" : "none";
         });
 
         closeSettingsBtn.addEventListener('click', () => {
-            playButtonSound();
-            settingsPanel.style.display = 'none';
+            playSoundBoton();
+            settingsPanel.style.display = "none";
         });
 
-        settingsMusicToggle.addEventListener('click', () => {
-            playButtonSound();
-            if(isMuted) {
-                isMuted = false;
-                settingsMusicToggle.textContent = "ACTIVADA";
-                settingsMusicToggle.className = "music-panel-btn music-btn-active";
-                audioMusic.play().catch(()=>{});
-            } else {
-                isMuted = true;
-                settingsMusicToggle.textContent = "DESACTIVADA";
-                settingsMusicToggle.className = "music-panel-btn music-btn-inactive";
-                audioMusic.pause();
-            }
+        // EVENTOS DEL NUEVO BOTÓN RESATS 📕
+        resatsMainBtn.addEventListener('click', () => {
+            playSoundBoton();
+            profilePanel.style.display = "none";
+            settingsPanel.style.display = "none";
+            reportMainPanel.style.display = "none";
+            reportCodePanel.style.display = "none";
+            resatsPanel.style.display = "flex";
         });
 
-        settingsRluToggle.addEventListener('click', () => {
-            rluMode = !rluMode;
-            localStorage.setItem('cs_rlu', rluMode);
-            updateRluButtonUI();
-            
-            if(!isMuted) {
-                audioRLU.currentTime = 0;
-                audioRLU.play().catch(()=>{});
-            }
-            
-            // Aplicar detención de elementos visuales cíclicos pesados
-            const coinsImg = document.querySelector('.coin-spin');
-            if(rluMode) {
-                if(coinsImg) coinsImg.classList.add('stop-animation');
-            } else {
-                if(coinsImg) coinsImg.classList.remove('stop-animation');
-            }
+        closeResatsBtn.addEventListener('click', () => {
+            playSoundBoton();
+            resatsPanel.style.display = "none";
         });
 
-        function updateRluButtonUI() {
-            if(rluMode) {
-                settingsRluToggle.textContent = "RLU: ACTIVADO";
-                settingsRluToggle.className = "rlu-btn rlu-on";
-            } else {
-                settingsRluToggle.textContent = "RLU: DESACTIVADO";
-                settingsRluToggle.className = "rlu-btn rlu-off";
-            }
-        }
-
-        // Canje de códigos promocionales de recompensa
         codeSubmitBtn.addEventListener('click', () => {
-            playButtonSound();
-            let typed = codeInput.value.trim().toUpperCase();
-            if(typed === 'FREECOINS') {
-                globalCoins += 500;
-                alert("🎁 ¡Código válido! +500 Monedas añadidas.");
-            } else if(typed === 'SPRUNKI') {
-                globalCoinCG += 2;
-                alert("🎁 ¡Código válido! +2 CoinCG 🟣 añadidas.");
-            } else {
-                alert("❌ Código no válido o caducado en la beta actual.");
-            }
-            codeInput.value = "";
-            updateWalletUI();
-        });
+            playSoundBoton();
+            let inputCode = codeInput.value.trim().toUpperCase();
+            if(currentUsername === "") return;
 
-        // PAUSA EN EL NIVEL DE JUEGO ACTIVO
-        const ingamePauseBtn = document.getElementById('ingame-pause-btn');
-        const pauseOverlayScreen = document.getElementById('pause-overlay-screen');
-        const pauseContinueBtn = document.getElementById('pause-continue-btn');
-        const pauseQuitBtn = document.getElementById('pause-quit-btn');
-        const pauseMusicToggle = document.getElementById('pause-music-toggle');
+            let rewards = { 
+                "328": { amount: 50, type: "coins" }, "589": { amount: 200, type: "coins" }, 
+                "194": { amount: 70, type: "coins" }, "MJ8": { amount: 800, type: "coins" },
+                "M18": { amount: 1000, type: "coins" }, "184": { amount: 500, type: "coins" }, 
+                "900": { amount: 9000, type: "coins" }, "50M": { amount: 50000000, type: "coins" },
+                "MRT": { amount: 60, type: "coincg" }, "ABG": { amount: 100, type: "coincg" },
+                "15A": { amount: 15, type: "coincg" }, "67X": { amount: 67, type: "coincg" },
+                // CÓDIGOS NUEVOS ESPECIALES
+                "MRJ": { amount: 5000, type: "coins", req: "lvl4" },
+                "123": { amount: 123000000, type: "coins", req: "upgrade1" },
+                "456": { amount: 500, type: "coincg", req: "lvl10" }
+            };
 
-        let isGamePaused = false;
-
-        ingamePauseBtn.addEventListener('click', () => {
-            playButtonSound();
-            isGamePaused = true;
-            pauseOverlayScreen.style.display = 'flex';
-            
-            if(isMuted) {
-                pauseMusicToggle.textContent = "MÚSICA: NO";
-                pauseMusicToggle.className = "audio-toggle-btn audio-muted";
-            } else {
-                pauseMusicToggle.textContent = "MÚSICA: SÍ";
-                pauseMusicToggle.className = "audio-toggle-btn audio-active";
-            }
-        });
-
-        pauseContinueBtn.addEventListener('click', () => {
-            playButtonSound();
-            isGamePaused = false;
-            pauseOverlayScreen.style.display = 'none';
-        });
-
-        pauseQuitBtn.addEventListener('click', () => {
-            playButtonSound();
-            isGamePaused = false;
-            pauseOverlayScreen.style.display = 'none';
-            gameContainer.style.display = 'none';
-            playMenuScreen.style.display = 'flex';
-            clearActiveTargets();
-        });
-
-        pauseMusicToggle.addEventListener('click', () => {
-            playButtonSound();
-            if(isMuted) {
-                isMuted = false;
-                pauseMusicToggle.textContent = "MÚSICA: SÍ";
-                pauseMusicToggle.className = "audio-toggle-btn audio-active";
-                audioMusic.play().catch(()=>{});
-            } else {
-                isMuted = true;
-                pauseMusicToggle.textContent = "MÚSICA: NO";
-                pauseMusicToggle.className = "audio-toggle-btn audio-muted";
-                audioMusic.pause();
-            }
-        });
-
-        // SIMULACIÓN DE MAPA EN MOVIMIENTO CON OBJETIVOS (NPC)
-        let gameScrollX = 0;
-        let targetList = [];
-        let scoreCounter = 0;
-        const weaponContainer = document.getElementById('weapon-container');
-        const announcement = document.getElementById('announcement');
-
-        function setupActiveLevel() {
-            gameScrollX = 0;
-            stage.style.transform = `translateX(0px)`;
-            clearActiveTargets();
-            
-            // Generar algunos objetivos aleatorios sobre el lienzo extendido
-            for(let i = 0; i < 15; i++) {
-                let npc = document.createElement('img');
-                npc.src = 'Pollo.PNG'; // Gráfico de personaje de pollo NPC de Chicken Gun
-                npc.className = 'target';
-                npc.style.top = (35 + Math.random() * 40) + "%";
-                npc.style.left = (400 + (i * 350)) + "px";
-                stage.appendChild(npc);
-                targetList.push(npc);
-            }
-        }
-
-        function clearActiveTargets() {
-            targetList.forEach(t => { if(t.parentNode) t.parentNode.removeChild(t); });
-            targetList = [];
-        }
-
-        // Manejo de clicks en pantalla / Disparar y mover escenario de la plataforma
-        window.addEventListener('pointerdown', (e) => {
-            // Cancelar disparos si se interactúa sobre elementos de la interfaz de menú superior
-            if(e.target.closest('#ingame-pause-btn') || e.target.closest('#pause-overlay-screen') || gameContainer.style.display !== 'block') return;
-            if(isGamePaused) return;
-
-            // Reproducir sonido de disparo
-            if(!isMuted) {
-                audioPistola.currentTime = 0;
-                audioPistola.play().catch(()=>{});
-            }
-
-            // Efecto de retroceso visual en el arma
-            weaponContainer.style.transform = "translateX(-50%) scale(0.9) translateY(10px)";
-            setTimeout(() => { weaponContainer.style.transform = "translateX(-50%) scale(1) translateY(0px)"; }, 50);
-
-            // Verificar impacto sobre los objetivos visibles del stage
-            let crosshairX = window.innerWidth / 2;
-            let crosshairY = window.innerHeight / 2;
-            let targetHitIndex = -1;
-
-            for(let i = 0; i < targetList.length; i++) {
-                let rect = targetList[i].getBoundingClientRect();
-                if(crosshairX >= rect.left && crosshairX <= rect.right && crosshairY >= rect.top && crosshairY <= rect.bottom) {
-                    targetHitIndex = i;
-                    break;
+            if(rewards[inputCode] !== undefined) {
+                let rData = rewards[inputCode];
+                
+                // Validación de condiciones especiales
+                if (rData.req === "lvl4" && maxUnlockedLevel < 5 && currentLevel < 4) {
+                    alert("❌ Bloqueado: Debes completar primero el Nivel 4.");
+                    return;
                 }
-            }
+                if (rData.req === "upgrade1" && !upgradesOwned[1]) {
+                    alert("❌ Bloqueado: Debes comprar primero la Mejora 10.1.");
+                    return;
+                }
+                if (rData.req === "lvl10" && maxUnlockedLevel < 10 && kills < levelsConfig[10].targets) {
+                    // Si no ha superado el 10 ni está en estado completado
+                    let savedProgress10 = localStorage.getItem('cs_max_level_' + currentUsername);
+                    if (parseInt(savedProgress10) <= 10 && currentLevel !== 10) {
+                        alert("❌ Bloqueado: Debes completar primero el Nivel 10.");
+                        return;
+                    }
+                }
 
-            if(targetHitIndex !== -1) {
-                let hitTarget = targetList[targetHitIndex];
-                if(hitTarget.parentNode) hitTarget.parentNode.removeChild(hitTarget);
-                targetList.splice(targetHitIndex, 1);
-                
-                // Bonificación financiera añadida
-                globalCoins += 100;
-                updateWalletUI();
-                
-                // Mostrar cartel de eliminación
-                announcement.style.transform = "translate(-50%, -50%) scale(1)";
-                setTimeout(() => { announcement.style.transform = "translate(-50%, -50%) scale(0)"; }, 800);
-            } else {
-                // Si falla el tiro, avanza el escenario simulando caminar por el mapa
-                let step = rluMode ? 180 : 120; // Avanzar más rápido en modo optimizado de rendimiento
-                gameScrollX -= step;
-                if(gameScrollX < -window.innerWidth * 5) {
-                    // Fin del mapa alcanzado
-                    alert("¡Felicidades! Has completado el recorrido experimental del mapa.");
-                    gameContainer.style.display = 'none';
-                    playMenuScreen.style.display = 'flex';
-                    clearActiveTargets();
+                if(currentUsername === "Mr.Jostin") {
+                    if (rData.type === "coins") score += rData.amount;
+                    else coinCG += rData.amount;
+                    alert("👑 ¡Acceso Creador concedido!");
+                    actualizarTextoMonedas(); savePlayerProgress(); codeInput.value = "";
                 } else {
-                    stage.style.transform = `translateX(${gameScrollX}px)`;
+                    let used = localStorage.getItem(`cs_code_${inputCode}_` + currentUsername);
+                    if(used === "true") alert("❌ Código ya usado.");
+                    else {
+                        if (rData.type === "coins") score += rData.amount;
+                        else coinCG += rData.amount;
+                        localStorage.setItem(`cs_code_${inputCode}_` + currentUsername, "true");
+                        actualizarTextoMonedas(); savePlayerProgress(); codeInput.value = "";
+                        alert("✅ Código Aceptado.");
+                    }
                 }
+            } else {
+                alert("❌ Código inválido.");
             }
         });
 
-        // Botón de salir de la app de bienvenida (Simulación de cierre)
-        document.getElementById('exit-button').addEventListener('click', () => {
-            playButtonSound();
-            if(confirm("¿Quieres cerrar la sesión de pruebas de Chicken Strike NPC?")) {
-                alert("Sesión cerrada. Desarrollado para la plataforma independiente MrTube.");
+        function checkSubscriptionTrigger() {
+            if (score >= 3600 && coinCG >= 3 && !popupTriggered) {
+                popupTriggered = true;
+                subscribePopup.style.transform = "translate(-50%, -50%) scale(1)";
+            }
+        }
+
+        subYesBtn.addEventListener('click', () => {
+            playSoundBoton();
+            if (score >= 3600 && coinCG >= 3) {
+                score -= 3600; coinCG -= 3;
+                actualizarTextoMonedas(); savePlayerProgress();
+                subscribePopup.style.transform = "translate(-50%, -50%) scale(0)";
+                        // Lógica del botón de reporte de bugs
+        botonReportarBug.addEventListener('click', () => {
+            playSoundBoton();
+            // ... (aquí iría tu lógica de validación de reporte) ...
+            
+            alert("Reporte enviado con éxito.");
+            window.open("https://youtube.com/@mr.jostin_oficial?si=JB-zmX5c7fRFRtq0", "_blank");
+        });
+
+        subNoBtn.addEventListener('click', () => { playSoundBoton(); subscribePopup.style.transform = "translate(-50%, -50%) scale(0)"; });
+
+        startButton.addEventListener('click', () => {
+            playSoundBoton();
+            let finalName = usernameInput.value.trim();
+            if(finalName === "") {
+                alert("Por favor abre tu foto de perfil arriba a la izquierda e introduce un nombre válido para continuar.");
+                profilePanel.style.display = "flex";
+                return;
+            }
+            if (!readyCheckbox.checked) return;
+
+            if (!isMusicMuted) audioMusic.play().catch(e => {});
+            savePlayerProgress();
+            welcomeScreen.style.display = 'none';
+            playMenuScreen.style.display = 'flex'; 
+            menuProfileBtn.style.display = 'none'; 
+            menuReportBugsBtn.style.display = 'none'; // Se oculta el botón al iniciar partida
+            settingsToggleBtn.style.display = 'flex';
+        });
+
+        jugarMainBtn.addEventListener('click', () => { playSoundBoton(); playMenuScreen.style.display = 'none'; settingsToggleBtn.style.display = 'none'; levelSelectionScreen.style.display = 'flex'; });
+        tiendaMainBtn.addEventListener('click', () => { playSoundBoton(); playMenuScreen.style.display = 'none'; settingsToggleBtn.style.display = 'none'; shopScreen.style.display = 'flex'; });
+        closeShopBtn.addEventListener('click', () => { playSoundBoton(); shopScreen.style.display = 'none'; playMenuScreen.style.display = 'flex'; settingsToggleBtn.style.display = 'flex'; });
+        salirMainBtn.addEventListener('click', () => { window.location.reload(); });
+        backToMenuBtn.addEventListener('click', () => { playSoundBoton(); levelSelectionScreen.style.display = 'none'; playMenuScreen.style.display = 'flex'; settingsToggleBtn.style.display = 'flex'; });
+
+        levelButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                playSoundBoton();
+                startLevel(parseInt(btn.dataset.lvl));
+            });
+        });
+
+        function startLevel(lvl) {
+            levelSelectionScreen.style.display = 'none';
+            settingsToggleBtn.style.display = 'none';
+            currentLevel = lvl;
+            kills = 0;
+            gamePaused = false;
+            
+            let totalTargets = levelsConfig[lvl].targets;
+            scrollSpeed = levelsConfig[lvl].speed;
+
+            if (currentLevel === 1 && upgradesOwned[5]) {
+                totalTargets = 10; 
+                scrollSpeed = 9.5;  
+            }
+            if (currentLevel === 8 && upgradesOwned[4]) {
+                totalTargets = 10; 
+            }
+            if (currentLevel === 10 && upgradesOwned[6]) {
+                totalTargets = 5;  
+                scrollSpeed = 16.0; 
+            }
+
+            if (upgradesOwned[6]) { weaponImage.src = 'Manos_Mejora6.PNG'; }
+            else if (upgradesOwned[5]) { weaponImage.src = 'Manos_Mejora5.PNG'; }
+            else if (upgradesOwned[4]) { weaponImage.src = 'Manos_Mejora4.PNG'; }
+            else if (upgradesOwned[3]) { weaponImage.src = 'Manos_Mejora3.PNG'; }
+            else if (upgradesOwned[2]) { weaponImage.src = 'Manos_Mejora2.PNG'; }
+            else if (upgradesOwned[1]) { weaponImage.src = 'Manos_Mejora1.PNG'; }
+            else { weaponImage.src = 'Manos.PNG'; }
+
+            shootCooldown = upgradesOwned[1] ? 60 : 400;
+            
+            levelText.textContent = currentLevel;
+            killsText.textContent = `0/${totalTargets}`;
+            lastCoinsText.textContent = "0"; 
+            
+            clearAllNPCs();
+            audioMusic.play().catch(e => {});
+
+            gameStarted = true;
+            for(let i = 0; i < maxNPCs; i++) {
+                spawnNPC(i);
+            }
+        }
+
+        function clearAllNPCs() {
+            activeNPCIntervals.forEach(intervalId => clearInterval(intervalId));
+            activeNPCIntervals = [];
+            document.querySelectorAll('.target').forEach(t => t.remove());
+        }
+
+        function updateCamera() {
+            if (!gameStarted || gamePaused) {
+                requestAnimationFrame(updateCamera);
+                return;
+            }
+            stageX -= scrollSpeed;
+            if (stageX <= -window.innerWidth * 4) {
+                stageX = 0;
+                document.querySelectorAll('.target').forEach(npc => {
+                    let currentLeft = parseFloat(npc.style.left);
+                    npc.style.left = (currentLeft - window.innerWidth * 4) + 'px';
+                });
+            }
+            stage.style.transform = `translateX(${stageX}px)`;
+            requestAnimationFrame(updateCamera);
+        }
+        requestAnimationFrame(updateCamera);
+
+        function fireWeapon() {
+            if (!gameStarted || gamePaused) return; 
+            let currentTime = Date.now();
+            if (currentTime - lastShotTime < shootCooldown) return; 
+            lastShotTime = currentTime;
+
+            playSoundPistola();
+            weaponContainer.style.transform = 'translateX(-50%) translateY(20px) scale(0.95)';
+            setTimeout(() => { weaponContainer.style.transform = 'translateX(-50%) translateY(0) scale(1)'; }, 100);
+
+            const centerX = window.innerWidth / 2;
+            const centerY = window.innerHeight / 2;
+            
+            document.querySelectorAll('.target').forEach((npc) => {
+                if (npc.dataset.dead === "true") return;
+                const rect = npc.getBoundingClientRect();
+                
+                if (centerX >= rect.left && centerX <= rect.right && centerY >= rect.top && centerY <= rect.bottom) {
+                    if (npc.dataset.groupId) {
+                        let gid = npc.dataset.groupId;
+                        document.querySelectorAll(`.target[data-group-id='${gid}']`).forEach(member => {
+                            if (member.dataset.dead !== "true") eliminateNPC(member, true);
+                        });
+                    } else {
+                        eliminateNPC(npc, false);
+                    }
+                }
+            });
+        }
+
+        weaponContainer.addEventListener('touchstart', (e) => { e.stopPropagation(); e.preventDefault(); fireWeapon(); });
+        weaponContainer.addEventListener('mousedown', (e) => { e.stopPropagation(); fireWeapon(); });
+
+        function spawnNPC(index) {
+            if (!gameStarted || gamePaused) return;
+            
+            if (currentLevel === 8 && upgradesOwned[4]) {
+                let groupId = "group8_" + Date.now() + "_" + index;
+                for (let k = 0; k < 2; k++) {
+                    createNPCElement(index, groupId, k * 55);
+                }
+            } else {
+                createNPCElement(index, null, 0);
+            }
+        }
+
+        function createNPCElement(index, groupId, clusterOffset) {
+            const npc = document.createElement('img');
+            npc.src = 'NPC.PNG';
+            npc.className = 'target';
+            if (groupId) npc.dataset.groupId = groupId;
+
+            const screenOffset = -stageX;
+            const spawnX = screenOffset + window.innerWidth + 100 + (index * distanceBetweenNPCs) + clusterOffset;
+            const spawnY = window.innerHeight / 2 + 30; 
+
+            npc.style.left = spawnX + 'px';
+            npc.style.top = spawnY + 'px';
+            stage.appendChild(npc);
+
+            let checkInterval = setInterval(() => {
+                if (gamePaused) return; 
+                const rect = npc.getBoundingClientRect();
+                if (rect.right < 0) {
+                    clearInterval(checkInterval);
+                    npc.remove();
+                    if (!groupId || clusterOffset === 0) spawnNPC(maxNPCs - 1); 
+                }
+            }, 1000);
+            
+            activeNPCIntervals.push(checkInterval);
+            npc.dataset.intervalIndex = activeNPCIntervals.length - 1;
+        }
+
+        function eliminateNPC(npc, isGroupKill) {
+            npc.dataset.dead = "true";
+            let idx = npc.dataset.intervalIndex;
+            if(idx !== undefined && activeNPCIntervals[idx]) clearInterval(activeNPCIntervals[idx]);
+
+            npc.src = 'Disparado.PNG';
+            
+            let config = levelsConfig[currentLevel];
+            let rawCoins = config.coinsPerKill;
+            let currentLevelMaxTargets = config.targets;
+
+            if (currentLevel === 1) {
+                if (upgradesOwned[5]) {
+                     rawCoins = 36000;
+                    coinCG += 20;                 
+                    currentLevelMaxTargets = 10;
+                }
+            }
+            if (currentLevel === 2 && upgradesOwned[2]) {
+                rawCoins = rawCoins * 7;
+            }
+            if (currentLevel === 8) {
+                if (upgradesOwned[4]) {
+                    rawCoins = 10000; 
+                    coinCG += 25;   
+                    currentLevelMaxTargets = 10;
+                } else {
+                    rawCoins = 300 * 30;
+                }
+            }
+            if (currentLevel === 10) {
+                if (upgradesOwned[6]) {
+                    rawCoins = 4000;
+                    coinCG += 90;          
+                    currentLevelMaxTargets = 5;
+                }
+            }
+
+            score += rawCoins;
+            lastCoinsText.textContent = formatearMonedas(rawCoins);
+            actualizarTextoMonedas(); 
+            
+            kills++;
+            killsText.textContent = `${kills}/${currentLevelMaxTargets}`;
+            savePlayerProgress();
+
+            if (kills >= currentLevelMaxTargets) {
+                gameStarted = false;
+                setTimeout(() => { triggerLevelReward(); }, 150);
+            }
+
+            setTimeout(() => {
+                npc.remove();
+                if (gameStarted && !gamePaused && !npc.dataset.groupId) spawnNPC(maxNPCs - 1);
+            }, 300);
+        }
+
+        function triggerLevelReward() {
+            clearAllNPCs();
+            let currentConfig = levelsConfig[currentLevel];
+            score += currentConfig.reward;
+            
+            let earnedCoinCG = currentLevel; 
+            coinCG += earnedCoinCG;
+            actualizarTextoMonedas();
+            
+            let message = `¡NIVEL ${currentLevel} COMPLETADO!<br><span style='color: #ffcc00;'>🎁 MONEDAS: +${earnedCoinCG}</span>`;
+
+            if (currentLevel >= maxUnlockedLevel && maxUnlockedLevel < 10) {
+                maxUnlockedLevel = currentLevel + 1;
+            }
+            savePlayerProgress();
+            if (typeof updateLevelButtonsUI === 'function') {
+                updateLevelButtonsUI(); 
+            }
+
+            announcement.innerHTML = message;
+            announcement.style.transform = "translate(-50%, -50%) scale(1)";
+            
+            setTimeout(() => {
+                announcement.style.transform = "translate(-50%, -50%) scale(0)";
+                if (currentLevel === 10) {
+                    setTimeout(() => {
+                        announcement.innerHTML = "<span style='color: #ffcc00; font-size: 20px;'>¡BETA COMPLETADA v1.6!<br><br><span style='color: #00ff00; font-size: 16px;'>Actualizaciones listas en MrTube de la mano de ABG Productions®.</span></span>";
+                        announcement.style.transform = "translate(-50%, -50%) scale(1)";
+                        setTimeout(() => { announcement.style.transform = "translate(-50%, -50%) scale(0)"; levelSelectionScreen.style.display = 'flex'; }, 4000);
+                    }, 500);
+                } else {
+                    levelSelectionScreen.style.display = 'flex';
+                }
+            }, 3000);
+        }
+
+        ingamePauseBtn.addEventListener('click', (e) => {
+            e.stopPropagation(); if (!gameStarted) return;
+            playSoundBoton(); gamePaused = true; savedSpeedBeforePause = scrollSpeed; scrollSpeed = 0; 
+            pauseOverlayScreen.style.display = "flex"; 
+        });
+
+        pauseContinueBtn.addEventListener('click', (e) => { e.stopPropagation(); playSoundBoton(); gamePaused = false; scrollSpeed = savedSpeedBeforePause; pauseOverlayScreen.style.display = "none"; });
+        pauseQuitBtn.addEventListener('click', (e) => {
+            e.stopPropagation(); isMusicMuted = false; isSoundMuted = false; audioMusic.muted = false;
+            gameStarted = false; gamePaused = false; clearAllNPCs();
+            pauseOverlayScreen.style.display = "none"; levelSelectionScreen.style.display = "flex"; 
+            actualizarTextoMonedas(); audioMusic.play().catch(e => {});
+        });
+
+        toggleMusicBtn.addEventListener('click', (e) => {
+            e.stopPropagation(); isMusicMuted = !isMusicMuted;
+            if (isMusicMuted) {
+                audioMusic.muted = true; toggleMusicBtn.textContent = "Música Silenciada"; toggleMusicBtn.className = "audio-toggle-btn audio-muted";
+            } else {
+                audioMusic.muted = false; toggleMusicBtn.textContent = "Silenciar Música"; toggleMusicBtn.className = "audio-toggle-btn audio-active"; audioMusic.play().catch(o => {});
             }
         });
+
+        toggleSoundBtn.addEventListener('click', (e) => {
+            e.stopPropagation(); isSoundMuted = !isSoundMuted;
+            if (isSoundMuted) {
+                toggleSoundBtn.textContent = "Sonidos Silenciados"; toggleSoundBtn.className = "audio-toggle-btn audio-muted";
+            } else {
+                toggleSoundBtn.textContent = "Silenciar Sonido"; toggleSoundBtn.className = "audio-toggle-btn audio-active";
+            }
+        });
+
+        document.addEventListener('gesturestart', function (e) { e.preventDefault(); });
     </script>
 </body>
 </html>
